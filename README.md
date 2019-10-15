@@ -26,5 +26,6 @@ Collaborators
 
 Design
 
-Message icon by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar)
+Message icon by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar)  
+Close icon by [Chanut](https://www.flaticon.com/authors/chanut)
 
