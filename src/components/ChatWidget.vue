@@ -6,8 +6,13 @@
           <div class="close-icon" v-on:click="toggle">
           </div>
         </div>
+
+        <MessageBubble msg='Hola, soy tu asistente virtual. ¿En qué puedo ayudarte?'></MessageBubble>
+
         <div class="chat-footer">
           <input id="text-input" class="chat-text-input" type="text" placeholder="Escribe tu mensaje aquí"/>
+          <!--<img src="../assets/send-button.svg" class="send-button"/>-->
+          <div class="send-button"></div>
         </div>
       </div>
     </div>
@@ -19,8 +24,12 @@
 </template>
 
 <script>
+import MessageBubble from './MessageBubble.vue';
 export default {
   name: "ChatWidget",
+  components: { 
+    MessageBubble 
+  },
   data: function() {
     return {
       opened: false
@@ -65,7 +74,7 @@ export default {
   transition: 0.5s;
   height: 80vh;
   width: 40rem; /* Width of the chat-box */
-  background-color: lavender;
+  background-color: rgb(242, 242, 252);
   margin-left: auto;
   margin-right: 0;
 }
@@ -117,6 +126,7 @@ export default {
 }
 
 .chat-icon {
+  display: inline-block;
   margin: 0px;
   padding: 0px;
   vertical-align: text-bottom;
@@ -182,6 +192,22 @@ export default {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+/*.send-button {
+  display: inline-block;
+  width:2rem;
+}*/
+
+.send-button {
+  position: absolute;
+  height: 3rem;
+  padding: 1rem;
+  right: 10px; 
+  display: inline-block;
+  background-image: url('../assets/send-button.svg') ;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 @media (max-width: 450px) {
   .chat-box {
     right: 0;
@@ -194,7 +220,7 @@ export default {
     bottom: 0;
     height: auto;
     width: 100vw; /* Ancho del chat-box */
-    background-color: lavender;
+    background-color: rgb(255, 255, 255);
     margin-left: auto;
     margin-right: 0;
   }
