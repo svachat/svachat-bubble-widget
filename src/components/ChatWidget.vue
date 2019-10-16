@@ -6,6 +6,9 @@
           <div class="close-icon" v-on:click="toggle">
           </div>
         </div>
+        <div class="chat-footer">
+          <input id="text-input" class="chat-text-input" type="text" placeholder="Escribe tu mensaje aquí"/>
+        </div>
       </div>
     </div>
     <div class="bottom">
@@ -60,8 +63,8 @@ export default {
 
 .chat-box.opened {
   transition: 0.5s;
-  height: 80vh;;
-  width: 20rem; /* Width of the chat-box */
+  height: 80vh;
+  width: 40rem; /* Width of the chat-box */
   background-color: lavender;
   margin-left: auto;
   margin-right: 0;
@@ -81,7 +84,7 @@ export default {
   color: rgb(255, 255, 255);
   margin-right: 0rem;
   margin-left: auto;
-  background-image: url('../assets/chat.svg') ;
+  background-image: url('../assets/chat.svg');
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
@@ -158,6 +161,27 @@ export default {
   background-color: rgb(0, 108, 255);
 }
 
+.chat-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: left;
+}
+
+.chat-text-input {
+  height: 3rem;
+  padding: 1rem;
+  font-size: 18px;
+  outline: none;
+  color: rgb(67, 67, 67);
+  border: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 @media (max-width: 450px) {
   .chat-box {
     right: 0;
@@ -166,13 +190,19 @@ export default {
   }
   .chat-box.opened {
     transition: 0.5s;
-    height: 100vh;
+    top: 0;
+    bottom: 0;
+    height: auto;
     width: 100vw; /* Ancho del chat-box */
     background-color: lavender;
     margin-left: auto;
     margin-right: 0;
   }
   .chat-header {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  .chat-footer {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
