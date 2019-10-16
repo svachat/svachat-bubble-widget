@@ -1,18 +1,15 @@
 <template>
-  <div id="app">
-    <div id="chat" class="chat">
-      <div id="chat-box" class="chat-box closed">
-        <div id="chat-content" class="chat-content hidden">
+  <div id="chat-widget">
+    <div id="chat-box" class="chat-box closed">
+      <div id="chat-content" class="chat-content hidden">
+        <div class="chat-header" :class="opened ? 'open' : 'hidden'">
           <div class="close-icon" v-on:click="toggle">
-          </div>
-          <div class="chat-header">
           </div>
         </div>
       </div>
     </div>
     <div class="bottom">
         <div id="chat-button" class="chat-button opened" v-on:click="toggle"> 
-          
         </div>
     </div>
   </div>
@@ -20,7 +17,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "ChatWidget",
   data: function() {
     return {
       opened: false
@@ -28,18 +25,18 @@ export default {
   },
   methods: {
     toggle: function () {
+
+      // If the chat-box is open, we want to close it
       if (this.opened) {
-        document.getElementById("chat-button").className = "chat-button opened";
-        
-        document.getElementById("chat-box").className = "chat-box closed";
+        document.getElementById("chat-button").className = "chat-button opened"; // Then, open the button 
+
+        document.getElementById("chat-box").className = "chat-box closed"; // And close the box and its content
         document.getElementById("chat-content").className = "chat-content hidden";
-        document.getElementById("chat").className = "chat";
       } else {
         document.getElementById("chat-button").className = "chat-button closed";
 
         document.getElementById("chat-box").className = "chat-box opened";
         document.getElementById("chat-content").className = "chat-content";
-        document.getElementById("chat").className = "chat opened";
       }
       this.opened = !this.opened;
     }
@@ -48,12 +45,31 @@ export default {
 </script>
 
 <style scoped>
-.chat {
+
+.chat-box{
+  padding: 0;
   position: absolute;
   right: 2rem;
   bottom: 2rem;
   z-index: 9999;
-  min-width: 400px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
+  -moz-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
+  box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
+}
+
+.chat-box.opened {
+  transition: 0.5s;
+  height: 80vh;;
+  width: 20rem; /* Width of the chat-box */
+  background-color: lavender;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.chat-box.closed {
+  transition: 0.5s;
+  visibility: hidden;
 }
 
 .chat-button {
@@ -83,27 +99,18 @@ export default {
   height: 0;
 }
 
+.bottom {
+  width: 100%;
+  text-align: right;
+}
+
 .chat-button.opened {
   transition: 0.5s;
 }
 
 .chat-button:hover {
-  /*border-radius: 50%;
-  padding: 1rem;
-  background: rgb(80, 148, 245);
-  color: rgb(255, 255, 255);
-  
-  background-image: url('../assets/chat.svg') ;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;*/
   background-color: rgb(80, 148, 245);
   cursor: pointer;
-}
-
-.bottom {
-  width: 100%;
-  text-align: right;
 }
 
 .chat-icon {
@@ -111,21 +118,6 @@ export default {
   padding: 0px;
   vertical-align: text-bottom;
   width: 3rem;
-}
-
-.chat-box.opened {
-  transition: 0.5s;
-  height: 40rem;
-  width: 20rem; /* Width of the chat-box */
-  padding: 1rem;
-  background-color: lavender;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.chat-box.closed {
-  transition: 0.5s;
-  visibility: hidden;
 }
 
 .hidden {
@@ -152,29 +144,39 @@ export default {
 }
 
 .chat-header {
-  top: -4rem;
-  left: -1rem;
-  width: 110%;
-  position: relative;
+  top: 0;
+  right: auto;
+  left: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.chat-header.open {
+  transition: 0.5s;
+  width: 100%;
   height: 10rem;
   background-color: rgb(0, 108, 255);
 }
 
 @media (max-width: 450px) {
+  .chat-box {
+    right: 0;
+    bottom: 0;
+    border-radius: 0px;
+  }
   .chat-box.opened {
     transition: 0.5s;
-    height: 97vh;
+    height: 100vh;
     width: 100vw; /* Ancho del chat-box */
-    padding: 1rem;
     background-color: lavender;
     margin-left: auto;
     margin-right: 0;
   }
-  .chat.opened {
-    transition: 0.5s;
-    right: 0;
-    bottom: 0;
+  .chat-header {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
   }
+  
 }
 
 </style>

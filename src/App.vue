@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld />
+    <ChatWidget />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChatWidget from './components/ChatWidget.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ChatWidget
   }
 }
 </script>
