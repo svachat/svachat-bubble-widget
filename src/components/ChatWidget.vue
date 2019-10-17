@@ -65,6 +65,7 @@ export default {
   bottom: 2rem;
   z-index: 9999;
   border-radius: 10px;
+  background-color: white;
   -webkit-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
   -moz-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
   box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
@@ -97,7 +98,7 @@ export default {
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
-
+  z-index: 999;
   /* Styles due to remove the button from the chat-box */
   bottom: 2rem;
   right:2rem;
