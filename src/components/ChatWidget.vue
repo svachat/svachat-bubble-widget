@@ -3,6 +3,10 @@
     <div id="chat-box" class="chat-box closed">
       <div id="chat-content" class="chat-content hidden" >
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
+          <div class="chat-profile-icon">
+          </div>
+          <div class="chat-profile-status"></div>
+          <h1 class="chat-profile-name">Svachat</h1>
           <div class="close-icon" v-on:click="toggle">
           </div>
         </div>
@@ -38,6 +42,14 @@ export default {
     return {
       opened: false,
       message: ''
+    }
+  },
+  created: {
+    create() {
+      /*this.$el.querySelector("#msg-container").onscroll = function() {scrollFunction()};
+      function scrollFunction() {
+        alert("Yikes");
+      }*/
     }
   },
   methods: {
@@ -106,7 +118,7 @@ export default {
 .chat-box.opened {
   transition: 0.5s;
   height: 80vh;
-  width: 40rem; /* Width of the chat-box */
+  width: 38rem; /* Width of the chat-box */
   background-color: white;
   margin-left: auto;
   margin-right: 0;
@@ -122,7 +134,7 @@ export default {
   height: 3rem;
   border-radius: 50%;
   padding: 1rem;
-  background: rgb(0, 108, 255);
+  background: rgb(87,120,180); /*rgb(0, 108, 255);*/
   color: rgb(255, 255, 255);
   margin-right: 0rem;
   margin-left: auto;
@@ -173,6 +185,7 @@ export default {
   left: 0;
   bottom: 4.5rem;
   overflow: scroll;
+  vertical-align: bottom;
 }
 
 .chat-message-container::-webkit-scrollbar { width: 0 !important }
@@ -212,7 +225,7 @@ export default {
   transition: 0.5s;
   width: 100%;
   height: 10rem;
-  background-color: rgb(0, 108, 255);
+  background-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
 }
 
 .chat-footer {
@@ -228,7 +241,7 @@ export default {
 
 .chat-text-input {
   height: 3rem;
-  width: 21rem;
+  width: 18rem;
   padding: 1rem;
   font-size: 18px;
   outline: none;
@@ -241,11 +254,46 @@ export default {
   position: absolute;
   height: 3rem;
   padding: 1rem;
-  right: 10px; 
+  right: 15px; 
   display: inline-block;
   background-image: url('../assets/send-button.svg') ;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.chat-profile-icon {
+  position: absolute;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 50%;
+  background-image: url('../assets/icon-profile.jpg');
+  background-size: cover;               
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.chat-profile-name {
+  position: absolute;
+  padding: 0;
+  margin-left: 7rem;
+  margin-top: 2rem;
+  color: white;
+}
+
+.chat-profile-status {
+  position: absolute;
+  margin-top: 4.3rem;
+  margin-left: 4.7rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: rgb(0, 211, 0);
+  border-radius: 50%;
+  border-width: 2px;
+  border-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
+  border-style: solid;
 }
 
 @media (max-width: 450px) {

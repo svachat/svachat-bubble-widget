@@ -17,7 +17,7 @@ export default {
 <style scoped>
 .message-bubble {
     position: relative;
-	border-radius: .4em;
+	border-radius: 1rem;
     margin-top:  .5rem;
     margin-bottom: .5rem;
     padding: 1rem;
@@ -26,15 +26,17 @@ export default {
 }
 
 .message-bubble.they {
-	background: #e1e0e0;
+	background: #e8e8e8;
     margin-left: 1rem;
     margin-right: 5rem;
+    border-top-left-radius: 0px;
 }
 
 .message-bubble.mine {
-    background: #cce1ff;
+    background: rgb(217, 225, 242);
     margin-left: 5rem;
     margin-right: 1rem;
+    border-top-right-radius: 0px;
 }
 
 </style>>
