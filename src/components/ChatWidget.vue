@@ -7,15 +7,16 @@
           </div>
           <div class="chat-profile-status"></div>
           <h1 class="chat-profile-name">Svachat</h1>
+          <h2 class="chat-profile-status-text">Online</h2>
           <div class="close-icon" v-on:click="toggle">
           </div>
         </div>
         <div id="msg-container" class="chat-message-container" ref="container">
-          <MessageBubble msg='Hola, soy tu asistente virtual. ¿En qué puedo ayudarte?'></MessageBubble>
+          <MessageBubble msg="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants."></MessageBubble>
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
-            <input id="text-input" class="chat-text-input" type="text" v-model="message" placeholder="Escribe tu mensaje aquí"/>
+            <input id="text-input" class="chat-text-input" type="text" v-model="message" placeholder="Start typing here..."/>
           <div class="send-button" v-on:click="sendMessage"></div>
 
           </form>
@@ -168,7 +169,7 @@ export default {
 
 .chat-message-container {
   position: absolute;
-  max-height: calc(80vh - 14.5rem);
+  max-height: calc(80vh - 11.5rem);
   right: 0;
   left: 0;
   bottom: 4.5rem;
@@ -207,12 +208,13 @@ export default {
   left: 0;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  z-index: 9999;
 }
 
 .chat-header.open {
   transition: 0.5s;
   width: 100%;
-  height: 10rem;
+  height: 7rem;
   background-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
 }
 
@@ -268,6 +270,7 @@ export default {
   padding: 0;
   margin-left: 7rem;
   margin-top: 2rem;
+  font-size: 26px;
   color: white;
 }
 
@@ -282,6 +285,14 @@ export default {
   border-width: 2px;
   border-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
   border-style: solid;
+}
+
+h2.chat-profile-status-text {
+  position: absolute;
+  margin-top: 4rem;
+  margin-left: 7.2rem;
+  font-size: 16px;
+  color: #eee;
 }
 
 @media (max-width: 450px) {
@@ -318,7 +329,7 @@ export default {
     border-top-right-radius: 0px;
   }
   .chat-message-container {
-    max-height: calc(80vh - 12rem);
+    max-height: calc(80vh - 9rem);
   }
   
 }
