@@ -8,7 +8,6 @@
 Welcome to our first open source project! This widget is intended to be a Vue.js app that could be embbeded in any website with just a JS/HTML/CSS file. We will publish more details whenever we can! Meanwhile, feel free to give any feedback you want by opening issues.
 
 ## Demo
-![]()
 [Widget live site](https://svachat-demo.netlify.com/)
 
 ## Contributing
