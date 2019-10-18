@@ -44,14 +44,6 @@ export default {
       message: ''
     }
   },
-  created: {
-    create() {
-      /*this.$el.querySelector("#msg-container").onscroll = function() {scrollFunction()};
-      function scrollFunction() {
-        alert("Yikes");
-      }*/
-    }
-  },
   methods: {
     toggle: function () {
 
@@ -143,10 +135,6 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   z-index: 999;
-  /* Styles due to remove the button from the chat-box */
-  bottom: 2rem;
-  right:2rem;
-  position: absolute;
 }
 
 .chat-button.closed {
@@ -180,7 +168,7 @@ export default {
 
 .chat-message-container {
   position: absolute;
-  top: 10rem;
+  max-height: calc(80vh - 14.5rem);
   right: 0;
   left: 0;
   bottom: 4.5rem;
@@ -297,6 +285,15 @@ export default {
 }
 
 @media (max-width: 450px) {
+
+  .bottom {
+    position: fixed;
+    bottom: 0vh;
+    left: auto;
+    right: 2rem;
+    bottom: 2rem;
+  }
+
   .chat-box {
     right: 0;
     bottom: 0;
@@ -320,7 +317,20 @@ export default {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
+  .chat-message-container {
+    max-height: calc(80vh - 12rem);
+  }
   
+}
+
+@media (min-width: 450px) {
+  #chat-widget {
+    position: fixed;
+    bottom: 0vh;
+    left: auto;
+    right: 2rem;
+    bottom: 2rem;
+  }
 }
 
 /* Mozilla Firefox only*/
