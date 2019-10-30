@@ -17,12 +17,6 @@
             </p>
           </div>
           <MessageBubble v-bind:msg="this.welcome" :color="this.color"></MessageBubble>
-          <GalleryMessage :color="this.color"></GalleryMessage>
-          <MessageBubble
-            msg="Choose from the options below:"
-            :options="['Option 1','Option 2', 'Option 3', 'Cancel']"
-            :color="this.color"
-          ></MessageBubble>
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -49,6 +43,7 @@ import MessageBubble from "./MessageBubble.vue";
 import WritingBadge from "./WritingBadge.vue";
 import GalleryMessage from "./GalleryMessage.vue";
 import Vue from "vue";
+import axios from 'axios'
 
 export default {
   name: "ChatWidget",
@@ -59,8 +54,9 @@ export default {
   data: function() {
     return {
       opened: false,
+      sessionStarted: false,
+      message: ''
       writing: false,
-      message: ""
     };
   },
   props: {
@@ -99,6 +95,9 @@ export default {
         document.getElementById("chat-content").className = "chat-content";
       }
       this.opened = !this.opened;
+
+      this.startSession();
+
     },
     sendMessage: function(event, message) {
       var inputString;
@@ -135,14 +134,47 @@ export default {
 
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
+
+        setTimeout(() => {
+          axios.post('http://localhost:8000/bot/13').then(response => {
+            this.receiveMessage(response.data.message);
+          });
+        }, 1000);
       }
+
     },
-    beginWriting: function() {
-      var WritingBadgeClass = Vue.extend(WritingBadge);
-      var writingBadgeInstance = new WritingBadgeClass();
-      writingBadgeInstance.$mount();
-      this.$refs.container.appendChild(writingBadgeInstance.$el);
-      this.writing = true;
+    receiveMessage: function(text) {
+      var inputString = text;
+      
+
+      var validInput = inputString != '';
+
+      if (validInput) {
+        var MessageClass = Vue.extend(MessageBubble);
+        var msgInstance = new MessageClass({
+          propsData: { 
+            mine: false, 
+            msg: inputString
+          }
+        });
+        this.message = "";
+
+        msgInstance.$mount();
+        this.$refs.container.appendChild(msgInstance.$el);
+        event.preventDefault();
+        event.returnValue = false;
+
+        var container = this.$el.querySelector("#msg-container");
+        container.scrollTop = container.scrollHeight;
+      }
+     } ,
+    startSession: function () {
+      if (!this.sessionStarted) {
+        axios.get('http://localhost:8000/bot/13').then(response => {
+          this.receiveMessage(response.data.message);
+          this.sessionStarted = true;
+        });
+      } 
     }
   }
 };
