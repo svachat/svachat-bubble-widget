@@ -39,4 +39,4 @@ export default {
     border-top-right-radius: 0px;
 }
 
-</style>>
+</style>

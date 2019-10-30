@@ -12,7 +12,11 @@
           </div>
         </div>
         <div id="msg-container" class="chat-message-container" ref="container">
+          <div class="powered-badge">
+            Powered by Svachat
+          </div>
           <MessageBubble msg="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants."></MessageBubble>
+          <WritingBadge></WritingBadge>
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -32,12 +36,14 @@
 
 <script>
 import MessageBubble from './MessageBubble.vue';
+import WritingBadge from './WritingBadge.vue';
 import Vue from 'vue'
 
 export default {
   name: "ChatWidget",
   components: { 
-    MessageBubble 
+    MessageBubble,
+    WritingBadge
   },
   data: function() {
     return {
@@ -168,6 +174,7 @@ export default {
 }
 
 .chat-message-container {
+  transition: 0.5s;
   position: absolute;
   max-height: calc(80vh - 11.5rem);
   right: 0;
@@ -238,6 +245,7 @@ export default {
   color: rgb(67, 67, 67);
   border: 0;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  
 }
 
 .send-button {
@@ -249,6 +257,7 @@ export default {
   background-image: url('../assets/send-button.svg') ;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 .chat-profile-icon {
@@ -295,7 +304,7 @@ h2.chat-profile-status-text {
   color: #eee;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 700px) {
 
   .bottom {
     position: fixed;
@@ -329,12 +338,13 @@ h2.chat-profile-status-text {
     border-top-right-radius: 0px;
   }
   .chat-message-container {
-    max-height: calc(80vh - 9rem);
+    transition: 0s;
+    max-height: calc(100vh - 12.5rem);
   }
   
 }
 
-@media (min-width: 450px) {
+@media (min-width: 700px) {
   #chat-widget {
     position: fixed;
     bottom: 0vh;
@@ -347,11 +357,6 @@ h2.chat-profile-status-text {
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
     .chat-message-container {
-      position: absolute;
-      top: 10rem;
-      right: 0;
-      left: 0;
-      bottom: 4rem;
       scrollbar-width: none
     }
 }
