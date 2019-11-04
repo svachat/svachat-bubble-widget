@@ -14,10 +14,10 @@
         <div id="msg-container" class="chat-message-container" ref="container">
           <div class="powered-badge">
             <p class="statement">⚡ Powered ⚡ by <a class="powered-link" href="https://svachat.com">Svachat</a></p>
-            <p class="bullet">	&bull; </p>
           </div>
           <MessageBubble v-bind:msg="this.welcome"></MessageBubble>
           <GalleryMessage></GalleryMessage>
+          <MessageBubble msg="Choose from the options below:" :options="['Option 1','Option 2', 'Option 3', 'Cancel']"></MessageBubble>
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -57,6 +57,13 @@ export default {
   props: {
     welcome: String
   },
+  mounted(){
+        // This is to call the sendMessage function in the MessageBubble component
+        // This creates coupling between the components, but it is acceptable and 
+        this.$root.$on('sendMessage', (e, message) => {
+            this.sendMessage(e,message);
+        });
+  },
   methods: {
     toggle: function () {
 
@@ -74,9 +81,16 @@ export default {
       }
       this.opened = !this.opened;
     },
-    sendMessage: function(event) {
+    sendMessage: function(event, message) {
       
-      var inputString = this.message;
+      var inputString;
+
+      if (message == null) {
+        inputString = this.message;
+      } else {
+        inputString = message;
+      }
+       
       
 
       var validInput = inputString != '';

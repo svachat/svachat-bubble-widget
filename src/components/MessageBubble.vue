@@ -1,15 +1,33 @@
 <template>
+<div>
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
       <p>{{msg}}</p>
   </div>
+  <div class="options" v-if="optionClicked == false">
+      <p v-for="option in options" :key="option" class="option" v-on:click="sendOption( $event, option)">{{option}}</p>
+  </div>
+</div>
 </template>
 
 <script>
 export default {
     name: 'MessageBubble',
+    data: function() {
+        return {
+            optionClicked: false
+        }
+    },
     props: {
         msg: String,
-        mine: Boolean
+        mine: Boolean,
+        options: [String]
+    },
+    methods: {
+        sendOption: function (event, option) {
+            this.$root.$emit('sendMessage', event, option);
+            this.optionClicked = true;
+        }
+        
     }
 }
 </script>
@@ -43,4 +61,23 @@ p {
     margin: 0;
 }
 
+.options {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-align: center;
+}
+
+.option {
+    background-color: rgb(87,120,180); 
+    border-radius: 30px;
+    width: auto;
+    display:inline-block;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bolder;
+    min-width: 4rem;
+}
 </style>

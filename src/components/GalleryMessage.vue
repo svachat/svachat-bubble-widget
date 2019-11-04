@@ -1,8 +1,6 @@
 <template>
+<div>
   <div class="horizontal-container" ref="containerhor">
-    <div class="next-button" @click.prevent="sideScroll('right',25,100,10)">
-        <img class="next-arrow" src="/images/arrow-gallery.png" />
-    </div>
     <div v-for="item in items" :key="item.index" class="card">
       <div class="image">
         <img class="photo" :src="item.image" />
@@ -17,10 +15,8 @@
         <a class="link-btn" :href="item.url">More info...</a>
       </div>
     </div>
-    <div>
-        <button></button>
-    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -52,7 +48,7 @@ export default {
   },
   methods: {
       sideScroll: function(){
-            this.$refs.containerhor.scrollLeft += 10;
+            this.$refs.containerhor.scrollLeft += 30;
         }
   }
 };
@@ -101,28 +97,7 @@ p {
     margin: 5px;
 }
 
-.next-button {
-    transition: 3s;
-    position: absolute;
-    display: inline-block;
-    height: 100%;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    background-color: black;
-    opacity: 10%;
-}
-
-.next-button:hover {
-    transition: 3s;
-    opacity: 80%;
-}
-
-
-.next-arrow {
-    position: relative;
-    width: 5rem;
-    height: 5rem;
-    top: 40%;
+.buttons {
+  margin-bottom: 1rem;
 }
 </style>
