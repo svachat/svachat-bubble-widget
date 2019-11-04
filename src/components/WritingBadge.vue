@@ -14,7 +14,7 @@ export default {
 .writing-badge {
     position: relative;
     text-align: left;
-    left:0;
+    left: 20px;
 }
 
 .writing-badge-gif {

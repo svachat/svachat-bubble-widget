@@ -10,7 +10,7 @@
       <h2><p class="color">3.-</p> HTML/CSS/JS Exportable</h2>
     </div>
     <img class="click-demo" src="./assets/click.png">
-    <ChatWidget class="chat"/>
+    <ChatWidget class="chat" welcome="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants." />
     <div class="footer">
       &copy; Svachat Technologies 2019
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
-      {{msg}}
+      <p>{{msg}}</p>
   </div>
 </template>
 
@@ -37,6 +37,10 @@ export default {
     margin-left: 5rem;
     margin-right: 1rem;
     border-top-right-radius: 0px;
+}
+
+p {
+    margin: 0;
 }
 
 </style>

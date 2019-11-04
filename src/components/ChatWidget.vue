@@ -13,10 +13,11 @@
         </div>
         <div id="msg-container" class="chat-message-container" ref="container">
           <div class="powered-badge">
-            Powered by Svachat
+            <p class="statement">⚡ Powered ⚡ by <a class="powered-link" href="https://svachat.com">Svachat</a></p>
+            <p class="bullet">	&bull; </p>
           </div>
-          <MessageBubble msg="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants."></MessageBubble>
-          <WritingBadge></WritingBadge>
+          <MessageBubble v-bind:msg="this.welcome"></MessageBubble>
+          <GalleryMessage></GalleryMessage>
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -37,19 +38,24 @@
 <script>
 import MessageBubble from './MessageBubble.vue';
 import WritingBadge from './WritingBadge.vue';
+import GalleryMessage from './GalleryMessage.vue';
 import Vue from 'vue'
 
 export default {
   name: "ChatWidget",
   components: { 
     MessageBubble,
-    WritingBadge
+    GalleryMessage
   },
   data: function() {
     return {
       opened: false,
-      message: ''
+      writing: false,
+      message: '',
     }
+  },
+  props: {
+    welcome: String
   },
   methods: {
     toggle: function () {
@@ -85,15 +91,28 @@ export default {
         });
         this.message = "";
 
+        if (this.writing) {
+          this.$refs.container.removeChild(this.$refs.container.lastChild);
+        }
+
         msgInstance.$mount();
         this.$refs.container.appendChild(msgInstance.$el);
         event.preventDefault();
         event.returnValue = false;
 
+        this.beginWriting();
+
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
       }
 
+    },
+    beginWriting: function() {
+      var WritingBadgeClass = Vue.extend(WritingBadge);
+      var writingBadgeInstance = new WritingBadgeClass();
+      writingBadgeInstance.$mount();
+      this.$refs.container.appendChild(writingBadgeInstance.$el);
+      this.writing = true;
     }
   }
 };
@@ -302,6 +321,24 @@ h2.chat-profile-status-text {
   margin-left: 7.2rem;
   font-size: 16px;
   color: #eee;
+}
+
+.powered-badge {
+  color: lightslategray;
+  font-size: 12px;
+}
+
+.statement {
+  margin-bottom: 0;
+}
+
+.bullet {
+  margin-top: 0;
+  font-size: 9px;
+}
+
+.powered-link {
+  color:lightslategray;
 }
 
 @media (max-width: 700px) {
