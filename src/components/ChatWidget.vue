@@ -366,6 +366,7 @@ h2.chat-profile-status-text {
   }
 
   .chat-box {
+    position: fixed;
     right: 0;
     bottom: 0;
     border-radius: 0px;
@@ -389,6 +390,7 @@ h2.chat-profile-status-text {
     border-top-right-radius: 0px;
   }
   .chat-message-container {
+    overflow-x: hidden;
     transition: 0s;
     max-height: calc(100% - 11.5rem);
     /*max-height: calc(100vh - 12.5rem);*/
