@@ -209,7 +209,7 @@ export default {
 .chat-message-container {
   transition: 0.5s;
   position: absolute;
-  max-height: calc(80vh - 11.5rem);
+  max-height: calc(80vh - 11.5rem); /*-webkit-fill-available*/
   right: 0;
   left: 0;
   bottom: 4.5rem;
@@ -390,7 +390,8 @@ h2.chat-profile-status-text {
   }
   .chat-message-container {
     transition: 0s;
-    max-height: calc(100vh - 12.5rem);
+    max-height: calc(100% - 11.5rem);
+    /*max-height: calc(100vh - 12.5rem);*/
   }
   
 }
