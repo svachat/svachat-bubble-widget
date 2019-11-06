@@ -4,4 +4,4 @@ import App from './App.vue'
 import vueCustomElement from 'vue-custom-element'
 
 Vue.use(vueCustomElement)
-Vue.customElement('vue-widget', App)
+Vue.customElement('svachat-widget', App)
