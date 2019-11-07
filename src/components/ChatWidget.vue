@@ -358,6 +358,7 @@ h2.chat-profile-status-text {
 .powered-badge {
   color: lightslategray;
   font-size: 12px;
+  text-align: center;
 }
 
 .statement {
