@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>Svachat's Webchat Widget</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <vue-widget></vue-widget>
-    <!-- built files will be auto injected -->
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="<%= BASE_URL %>styles.css">
+  <title>Svachat's Webchat Widget</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <h1>This is Svachat's Widget!</h1>
+  <a href=""><img class="github" src="https://img.shields.io/badge/-View%20code-lightgrey/?color=555&logo=github"></a>
+  <a href="https://twitter.com/Svachat?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="true">Follow
+    @Svachat</a>
+  <br>
+  <div class="features">
+    <h2>
+      <p class="color">1.-</p> Open Source
+    </h2>
+    <h2>
+      <p class="color">2.-</p> Backend Agnostic
+    </h2>
+    <h2>
+      <p class="color">3.-</p> HTML/CSS/JS Exportable
+    </h2>
+  </div>
+  <img class="click-demo" src="/images/click.png">
+  <div class="footer">
+    &copy; Svachat Technologies 2019
+  </div>
+  <svachat-widget color="rgb(85,120,180)" name="Svachat" icon="/images/logo-classic.png" ></svachat-widget>
+  <!-- built files will be auto injected -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+
 </html>
