@@ -1,5 +1,5 @@
 <template>
-<div>
+<div :style="cssProps">
   <div class="horizontal-container" ref="containerhor">
     <div v-for="item in items" :key="item.index" class="card">
       <div class="image">
@@ -46,6 +46,15 @@ export default {
       ]
     };
   },
+  props: {
+    color: String
+  },
+  computed: {
+    cssProps() { return {
+        '--main-color': this.color
+      }
+    }
+  },
   methods: {
       sideScroll: function(){
             this.$refs.containerhor.scrollLeft += 30;
@@ -73,7 +82,7 @@ export default {
 }
 .link-btn {
     text-decoration-line: none;
-    background-color: rgb(87,120,180);
+    background-color: var(--main-color);
     left:0;
     right:0;
     width: auto;

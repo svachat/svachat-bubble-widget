@@ -1,5 +1,5 @@
 <template>
-<div class="container" :class="mine ? 'mine' : 'they'">
+<div class="container" :class="mine ? 'mine' : 'they'" :style="cssProps">
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
       <p>{{msg}}</p>
   </div>
@@ -20,7 +20,16 @@ export default {
     props: {
         msg: String,
         mine: Boolean,
-        options: Array
+        options: Array,
+        color: String
+    },
+    computed: {
+        cssProps() { 
+            return {
+            '--main-color': this.color,
+            '--light-color': this.color
+        }   
+        }
     },
     methods: {
         sendOption: function (event, option) {
@@ -57,8 +66,9 @@ export default {
 }
 
 .message-bubble.mine {
-    
-    background: rgb(217, 225, 242);
+    color: white;
+    font-weight: 800;
+    background: var(--light-color);/*rgb(217, 225, 242);*/
     margin-left: auto;
     margin-right: 1rem;
     border-top-right-radius: 0px;
@@ -76,7 +86,7 @@ p {
 }
 
 .option {
-    background-color: rgb(87,120,180); 
+    background-color: var(--main-color);
     border-radius: 30px;
     width: auto;
     display:inline-block;
