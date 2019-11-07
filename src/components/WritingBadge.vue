@@ -1,12 +1,18 @@
 <template>
   <div class="writing-badge">
-      <img class="writing-badge-gif" src='@/assets/writing.gif'/>
+      <img class="writing-badge-gif" :src="this.url"/>
   </div>
 </template>
 
 <script>
+import someImage from '../assets/writing.gif'
 export default {
-    name: 'WritingBadge'
+    name: 'WritingBadge',
+    data() {
+        return {
+            url: someImage
+        }
+    }
 }
 </script>
 
