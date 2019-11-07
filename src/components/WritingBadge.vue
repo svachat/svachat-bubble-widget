@@ -10,7 +10,7 @@ export default {
     name: 'WritingBadge',
     data() {
         return {
-            url: someImage
+            url: process.env.VUE_APP_HOST + someImage
         }
     }
 }
