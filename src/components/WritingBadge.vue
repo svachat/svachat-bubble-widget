@@ -1,6 +1,6 @@
 <template>
   <div class="writing-badge">
-      <img class="writing-badge-gif" src='../assets/writing.gif'/>
+      <img class="writing-badge-gif" src='@/assets/writing.gif'/>
   </div>
 </template>
 

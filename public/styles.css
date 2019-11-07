@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Pangolin&display=swap');
+
+html {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 50px;
+}
+
+body {
+    display: block;
+    margin: 8px;
+}
+
+div {
+      display: block;
+}
+
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.features h2 {
+  font-family: 'Pangolin', cursive;
+}
+
+img.click-demo {
+    position: absolute;
+    width:  8rem;
+    bottom: 3.5rem;
+    right: 8rem;
+}
+
+img.github {
+    margin-right: 1rem;
+}
+  
+.features {
+    margin-top: 1rem;
+    text-align:left;
+    display: inline-block;
+}
+  
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 99vw;
+    text-align: center;
+}
+
+.color {
+    display: inline;
+    color: #B36170;
+}
+  
