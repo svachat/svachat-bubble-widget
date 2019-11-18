@@ -16,7 +16,7 @@
               <a class="powered-link" href="https://svachat.com">Svachat</a>
             </p>
           </div>
-          <MessageBubble v-bind:msg="this.welcome" :color="this.color"></MessageBubble>
+          
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -55,7 +55,7 @@ export default {
     return {
       opened: false,
       sessionStarted: false,
-      message: ''
+      message: '',
       writing: false,
     };
   },
@@ -136,7 +136,7 @@ export default {
         container.scrollTop = container.scrollHeight;
 
         setTimeout(() => {
-          axios.post('http://localhost:8000/bot/13').then(response => {
+          axios.post('http://localhost:8000/bot/intent/').then(response => {
             this.receiveMessage(response.data.message);
           });
         }, 1000);
