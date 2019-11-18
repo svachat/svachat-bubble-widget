@@ -63,7 +63,8 @@ export default {
     welcome: String,
     color: String,
     icon: String,
-    titleName: String
+    titleName: String,
+    client: String,
   },
   computed: {
     cssProps() { return {
@@ -119,7 +120,7 @@ export default {
             color: this.color
           }
         });
-        this.message = "";
+        
 
         if (this.writing) {
           this.$refs.container.removeChild(this.$refs.container.lastChild);
@@ -135,11 +136,11 @@ export default {
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
 
-        setTimeout(() => {
-          axios.post('http://localhost:8000/bot/intent/').then(response => {
-            this.receiveMessage(response.data.message);
-          });
-        }, 1000);
+        axios.get('http://localhost:8000/bot/' + this.client + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(response.data.text);
+        });
+
+        this.message = "";
       }
 
     },
@@ -159,6 +160,10 @@ export default {
         });
         this.message = "";
 
+        if (this.writing) {
+          this.$refs.container.removeChild(this.$refs.container.lastChild);
+        }
+
         msgInstance.$mount();
         this.$refs.container.appendChild(msgInstance.$el);
         event.preventDefault();
@@ -166,6 +171,7 @@ export default {
 
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
+        this.writing = false;
       }
      } ,
     startSession: function () {
@@ -175,6 +181,13 @@ export default {
           this.sessionStarted = true;
         });
       } 
+    },
+     beginWriting: function() {
+      var WritingBadgeClass = Vue.extend(WritingBadge);
+      var writingBadgeInstance = new WritingBadgeClass();
+      writingBadgeInstance.$mount();
+      this.$refs.container.appendChild(writingBadgeInstance.$el);
+      this.writing = true;
     }
   }
 };
