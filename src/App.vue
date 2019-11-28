@@ -13,7 +13,7 @@ export default {
     color: String,
     icon: String,
     name: String,
-    client: String,
+    client: Number,
   },
   components: {
     ChatWidget

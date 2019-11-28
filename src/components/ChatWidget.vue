@@ -25,7 +25,7 @@
               class="chat-text-input"
               type="text"
               v-model="message"
-              placeholder="Start typing here..."
+              placeholder="Escribe una respuesta..."
             />
             <div class="send-button" v-on:click="sendMessage"></div>
           </form>
@@ -64,7 +64,7 @@ export default {
     color: String,
     icon: String,
     titleName: String,
-    client: String,
+    client: Number,
   },
   computed: {
     cssProps() { return {
@@ -223,7 +223,7 @@ export default {
   visibility: hidden;
 }
 
-.chat-button {
+.chat-button.opened {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -232,7 +232,7 @@ export default {
   color: rgb(255, 255, 255);
   margin-right: 0rem;
   margin-left: auto;
-  background-image: url("../assets/chat.svg");
+  background-image: url('../assets/chat.svg');
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
@@ -242,9 +242,9 @@ export default {
 .chat-button.closed {
   transition: 0.5s;
   width: 0;
-  padding: 0;
   height: 0;
-}
+  border-radius: 50%;
+  }
 
 .bottom {
   width: 100%;
@@ -253,10 +253,18 @@ export default {
 
 .chat-button.opened {
   transition: 0.5s;
+  width: 3rem;
+  height: 3rem;
+  padding: 1rem;
+  background-image: url('../assets/chat.svg');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 999;
 }
 
 .chat-button:hover {
-  transition: 1s;
+  transition: 0.5s;
   opacity: 0.6; 
   cursor: pointer;
 }
