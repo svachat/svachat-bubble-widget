@@ -136,7 +136,8 @@ export default {
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
 
-        axios.get('http://localhost:8000/bot/' + this.client + '/query?message=' + this.message).then(response => {
+        // TODO: Make env param friendly
+        axios.get('https://api.app.svachat.com/bot/' + this.client + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);
         });
 
