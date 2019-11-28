@@ -11,11 +11,11 @@ Welcome to our first open source project! This widget is intended to be a Vue.js
 [Widget live site](https://svachat-demo.netlify.com/)
 
 ## Contributing
-Any help is welcomed. Even opinions on the project itself. We don't have any nonsense rule about contributing, just fork the development branch, commit changes in that branch and then, make a pull request to the original development branch. We will review it and merged it.
+Any help is welcomed. Even opinions on the project itself. Just fork the development branch, commit changes in that branch and then, make a pull request to the original development branch. We will review it and merged it.
 
 If you want to fix an issue, we recommend you to add a comment on that specific issue you are working on, to avoid duplicate pull requests (and wasting your time). Obviusly, feel free to open as many issues as you like, just make sure to use the right label.
 
-You can see this is not a huge project, so not be afraid to contribute, it's perfect for begginers.
+You can see this is not a huge project, so don't be afraid to contribute.
 
 If this is your first open source contribution check out this links first:  
 [Creating a pull request](https://help.github.com/en/articles/creating-a-pull-request)  

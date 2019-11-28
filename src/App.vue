@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-    <ChatWidget :color="this.color" :icon="this.icon" :titleName="this.name" welcome="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants." />
+    <ChatWidget :color="this.color" :icon="this.icon" :titleName="this.name" :client="this.client" />
 </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
   props: {
     color: String,
     icon: String,
-    name: String
+    name: String,
+    client: String,
   },
   components: {
     ChatWidget
