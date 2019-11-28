@@ -1,59 +1,94 @@
 <template>
-  <div id="chat-widget">
+  <div id="chat-widget" :style="cssProps">
     <div id="chat-box" class="chat-box closed">
-      <div id="chat-content" class="chat-content hidden" >
+      <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
-          <div class="chat-profile-icon">
-          </div>
+          <div class="chat-profile-icon"></div>
           <div class="chat-profile-status"></div>
-          <h1 class="chat-profile-name">Svachat</h1>
+          <h1 class="chat-profile-name">{{this.titleName}}</h1>
           <h2 class="chat-profile-status-text">Online</h2>
-          <div class="close-icon" v-on:click="toggle">
-          </div>
+          <div class="close-icon" v-on:click="toggle"></div>
         </div>
         <div id="msg-container" class="chat-message-container" ref="container">
-          <MessageBubble msg="Hello! This is Svachat Technologies. Glad to meet you. We're a startup focused on smart virtual assistants."></MessageBubble>
+          <div class="powered-badge">
+            <p class="statement">
+              ⚡ Powered ⚡ by
+              <a class="powered-link" href="https://svachat.com">Svachat</a>
+            </p>
+          </div>
+          
         </div>
         <div class="chat-footer">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
-            <input id="text-input" class="chat-text-input" type="text" v-model="message" placeholder="Start typing here..."/>
-          <div class="send-button" v-on:click="sendMessage"></div>
-
+            <input
+              id="text-input"
+              class="chat-text-input"
+              type="text"
+              v-model="message"
+              placeholder="Start typing here..."
+            />
+            <div class="send-button" v-on:click="sendMessage"></div>
           </form>
         </div>
       </div>
     </div>
     <div class="bottom">
-        <div id="chat-button" class="chat-button opened" v-on:click="toggle"> 
-        </div>
+      <div id="chat-button" class="chat-button opened" v-on:click="toggle"></div>
     </div>
   </div>
 </template>
 
 <script>
-import MessageBubble from './MessageBubble.vue';
-import Vue from 'vue'
+import MessageBubble from "./MessageBubble.vue";
+import WritingBadge from "./WritingBadge.vue";
+import GalleryMessage from "./GalleryMessage.vue";
+import Vue from "vue";
+import axios from 'axios'
 
 export default {
   name: "ChatWidget",
-  components: { 
-    MessageBubble 
+  components: {
+    MessageBubble,
+    GalleryMessage
   },
   data: function() {
     return {
       opened: false,
-      message: ''
+      sessionStarted: false,
+      message: '',
+      writing: false,
+    };
+  },
+  props: {
+    welcome: String,
+    color: String,
+    icon: String,
+    titleName: String,
+    client: String,
+  },
+  computed: {
+    cssProps() { return {
+        '--main-color': this.color,
+        '--icon-url': "url(" + this.icon + ")"
+      }
     }
   },
+  mounted() {
+    // This is to call the sendMessage function in the MessageBubble component
+    // This creates coupling between the components, but it is acceptable and
+    this.$root.$on("sendMessage", (e, message) => {
+      this.sendMessage(e, message);
+    });
+  },
   methods: {
-    toggle: function () {
-
+    toggle: function() {
       // If the chat-box is open, we want to close it
       if (this.opened) {
-        document.getElementById("chat-button").className = "chat-button opened"; // Then, open the button 
+        document.getElementById("chat-button").className = "chat-button opened"; // Then, open the button
 
         document.getElementById("chat-box").className = "chat-box closed"; // And close the box and its content
-        document.getElementById("chat-content").className = "chat-content hidden";
+        document.getElementById("chat-content").className =
+          "chat-content hidden";
       } else {
         document.getElementById("chat-button").className = "chat-button closed";
 
@@ -61,10 +96,57 @@ export default {
         document.getElementById("chat-content").className = "chat-content";
       }
       this.opened = !this.opened;
+
+      this.startSession();
+
     },
-    sendMessage: function(event) {
-      
-      var inputString = this.message;
+    sendMessage: function(event, message) {
+      var inputString;
+
+      if (message == null) {
+        inputString = this.message;
+      } else {
+        inputString = message;
+      }
+
+      var validInput = inputString != "";
+
+      if (validInput) {
+        var MessageClass = Vue.extend(MessageBubble);
+        var msgInstance = new MessageClass({
+          propsData: {
+            mine: true,
+            msg: inputString,
+            color: this.color
+          }
+        });
+        
+
+        if (this.writing) {
+          this.$refs.container.removeChild(this.$refs.container.lastChild);
+        }
+
+        msgInstance.$mount();
+        this.$refs.container.appendChild(msgInstance.$el);
+        event.preventDefault();
+        event.returnValue = false;
+
+        this.beginWriting();
+
+        var container = this.$el.querySelector("#msg-container");
+        container.scrollTop = container.scrollHeight;
+
+        // TODO: Make env param friendly
+        axios.get('https://api.app.svachat.com/bot/' + this.client + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(response.data.text);
+        });
+
+        this.message = "";
+      }
+
+    },
+    receiveMessage: function(text) {
+      var inputString = text;
       
 
       var validInput = inputString != '';
@@ -73,11 +155,15 @@ export default {
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
           propsData: { 
-            mine: true, 
+            mine: false, 
             msg: inputString
           }
         });
         this.message = "";
+
+        if (this.writing) {
+          this.$refs.container.removeChild(this.$refs.container.lastChild);
+        }
 
         msgInstance.$mount();
         this.$refs.container.appendChild(msgInstance.$el);
@@ -86,16 +172,31 @@ export default {
 
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
+        this.writing = false;
       }
-
+     } ,
+    startSession: function () {
+      if (!this.sessionStarted) {
+        // TODO: Make env param friendly
+        axios.get('https://api.app.svachat.com/bot/' + this.client).then(response => {
+          this.receiveMessage(response.data.message);
+          this.sessionStarted = true;
+        });
+      } 
+    },
+     beginWriting: function() {
+      var WritingBadgeClass = Vue.extend(WritingBadge);
+      var writingBadgeInstance = new WritingBadgeClass();
+      writingBadgeInstance.$mount();
+      this.$refs.container.appendChild(writingBadgeInstance.$el);
+      this.writing = true;
     }
   }
 };
 </script>
 
 <style scoped>
-
-.chat-box{
+.chat-box {
   padding: 0;
   position: absolute;
   right: 2rem;
@@ -103,9 +204,9 @@ export default {
   z-index: 9999;
   border-radius: 10px;
   background-color: white;
-  -webkit-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
-  -moz-box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
-  box-shadow: 2px 4px 32px -14px rgba(0,0,0,0.45);
+  -webkit-box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
+  box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
 }
 
 .chat-box.opened {
@@ -127,11 +228,11 @@ export default {
   height: 3rem;
   border-radius: 50%;
   padding: 1rem;
-  background: rgb(87,120,180); /*rgb(0, 108, 255);*/
+  background: var(--main-color);
   color: rgb(255, 255, 255);
   margin-right: 0rem;
   margin-left: auto;
-  background-image: url('../assets/chat.svg');
+  background-image: url("../assets/chat.svg");
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
@@ -155,7 +256,8 @@ export default {
 }
 
 .chat-button:hover {
-  background-color: rgb(80, 148, 245);
+  transition: 1s;
+  opacity: 0.6; 
   cursor: pointer;
 }
 
@@ -168,6 +270,7 @@ export default {
 }
 
 .chat-message-container {
+  transition: 0.5s;
   position: absolute;
   max-height: calc(80vh - 11.5rem);
   right: 0;
@@ -177,7 +280,9 @@ export default {
   vertical-align: bottom;
 }
 
-.chat-message-container::-webkit-scrollbar { width: 0 !important }
+.chat-message-container::-webkit-scrollbar {
+  width: 0 !important;
+}
 
 .hidden {
   display: none;
@@ -189,7 +294,7 @@ export default {
   margin-top: 0;
   margin-right: 0rem;
   margin-left: auto;
-  background-image: url('../assets/close.svg') ;
+  background-image: url("../assets/close.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 30%;
@@ -215,7 +320,7 @@ export default {
   transition: 0.5s;
   width: 100%;
   height: 7rem;
-  background-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
+  background-color: var(--main-color);
 }
 
 .chat-footer {
@@ -237,18 +342,20 @@ export default {
   outline: none;
   color: rgb(67, 67, 67);
   border: 0;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  border-bottom-left-radius: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .send-button {
   position: absolute;
   height: 3rem;
   padding: 1rem;
-  right: 15px; 
+  right: 15px;
   display: inline-block;
-  background-image: url('../assets/send-button.svg') ;
+  background-image: url("../assets/send-button.svg");
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 .chat-profile-icon {
@@ -259,8 +366,8 @@ export default {
   height: 4rem;
   background-color: white;
   border-radius: 50%;
-  background-image: url('../assets/icon-profile.jpg');
-  background-size: cover;               
+  background-image: var(--icon-url);
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -283,7 +390,7 @@ export default {
   background-color: rgb(0, 211, 0);
   border-radius: 50%;
   border-width: 2px;
-  border-color: rgb(87,120,180); /*rgb(0, 108, 255);*/ /* Main color */
+  border-color: var(--main-color);
   border-style: solid;
 }
 
@@ -295,8 +402,26 @@ h2.chat-profile-status-text {
   color: #eee;
 }
 
-@media (max-width: 450px) {
+.powered-badge {
+  color: lightslategray;
+  font-size: 12px;
+  text-align: center;
+}
 
+.statement {
+  margin-bottom: 0;
+}
+
+.bullet {
+  margin-top: 0;
+  font-size: 9px;
+}
+
+.powered-link {
+  color: lightslategray;
+}
+
+@media (max-width: 700px) {
   .bottom {
     position: fixed;
     bottom: 0vh;
@@ -306,6 +431,7 @@ h2.chat-profile-status-text {
   }
 
   .chat-box {
+    position: fixed;
     right: 0;
     bottom: 0;
     border-radius: 0px;
@@ -329,12 +455,14 @@ h2.chat-profile-status-text {
     border-top-right-radius: 0px;
   }
   .chat-message-container {
-    max-height: calc(80vh - 9rem);
+    overflow-x: hidden;
+    transition: 0s;
+    max-height: calc(100% - 11.5rem);
+    /*max-height: calc(100vh - 12.5rem);*/
   }
-  
 }
 
-@media (min-width: 450px) {
+@media (min-width: 700px) {
   #chat-widget {
     position: fixed;
     bottom: 0vh;
@@ -346,14 +474,8 @@ h2.chat-profile-status-text {
 
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
-    .chat-message-container {
-      position: absolute;
-      top: 10rem;
-      right: 0;
-      left: 0;
-      bottom: 4rem;
-      scrollbar-width: none
-    }
+  .chat-message-container {
+    scrollbar-width: none;
+  }
 }
-
 </style>
