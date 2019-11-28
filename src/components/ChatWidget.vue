@@ -177,7 +177,8 @@ export default {
      } ,
     startSession: function () {
       if (!this.sessionStarted) {
-        axios.get('http://localhost:8000/bot/13').then(response => {
+        // TODO: Make env param friendly
+        axios.get('https://api.app.svachat.com/bot/' + this.client).then(response => {
           this.receiveMessage(response.data.message);
           this.sessionStarted = true;
         });
