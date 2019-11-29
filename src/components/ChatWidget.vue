@@ -25,7 +25,7 @@
               class="chat-text-input"
               type="text"
               v-model="message"
-              placeholder="Escribe una respuesta..."
+              placeholder="Escribe una pregunta..."
             />
             <div class="send-button" v-on:click="sendMessage"></div>
           </form>
