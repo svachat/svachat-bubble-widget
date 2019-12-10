@@ -212,7 +212,7 @@ export default {
 .chat-box.opened {
   transition: 0.5s;
   height: 80vh;
-  width: 38rem; /* Width of the chat-box */
+  width: 30rem; /* Width of the chat-box */
   background-color: white;
   margin-left: auto;
   margin-right: 0;
