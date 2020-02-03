@@ -81,7 +81,8 @@ export default {
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
-    this.showWidget();
+
+    //this.showWidget();
   },
   methods: {
     toggle: function() {
