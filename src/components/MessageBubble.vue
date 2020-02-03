@@ -52,7 +52,7 @@ export default {
     margin-bottom: .5rem;
     padding: 1rem;
     font-size: 16px;   
-    width: fit-content;
+    width: max-content;
     max-width: 25rem;
     text-align: left;
 }

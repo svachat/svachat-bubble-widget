@@ -1,6 +1,7 @@
 <template>
   <div id="chat-widget" :style="cssProps">
-    <div id="chat-box" class="chat-box closed">
+    <!--<div id="chat-box" class="chat-box closed">-->
+      <div id="chat-box" :class="'chat-box' + this.look + 'closed'">
       <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
           <div class="chat-profile-icon"></div>
@@ -61,6 +62,7 @@ export default {
   },
   props: {
     welcome: String,
+    look: String,
     color: String,
     icon: String,
     titleName: String,
@@ -344,7 +346,7 @@ export default {
 
 .chat-text-input {
   height: 3rem;
-  width: 18rem;
+  width: 80%;
   padding: 1rem;
   font-size: 18px;
   outline: none;
