@@ -81,6 +81,7 @@ export default {
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
+    this.showWidget();
   },
   methods: {
     toggle: function() {
@@ -145,7 +146,6 @@ export default {
 
         this.message = "";
       }
-
     },
     receiveMessage: function(text) {
       var inputString = text;
@@ -192,6 +192,16 @@ export default {
       writingBadgeInstance.$mount();
       this.$refs.container.appendChild(writingBadgeInstance.$el);
       this.writing = true;
+    },
+    showWidget() {
+      this.startSession();
+      this.opened = true;
+      setTimeout(function(){ 
+        document.getElementById("chat-button").className = "chat-button closed";
+        document.getElementById("chat-box").className = "chat-box opened";
+        document.getElementById("chat-content").className = "chat-content";
+        this.opened = !this.opened;
+      }, 30000);
     }
   }
 };
