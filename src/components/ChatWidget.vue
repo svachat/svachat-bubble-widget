@@ -81,8 +81,7 @@ export default {
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
-
-    //this.showWidget();
+    setTimeout(() => { this.toggle() }, 30000);
   },
   methods: {
     toggle: function() {
@@ -193,15 +192,6 @@ export default {
       writingBadgeInstance.$mount();
       this.$refs.container.appendChild(writingBadgeInstance.$el);
       this.writing = true;
-    },
-    showWidget() {
-      setTimeout(function(){ 
-        document.getElementById("chat-button").className = "chat-button closed";
-        document.getElementById("chat-box").className = "chat-box opened";
-        document.getElementById("chat-content").className = "chat-content";
-      }, 30000);
-      this.opened = !this.opened;
-      this.startSession();
     }
   }
 };
