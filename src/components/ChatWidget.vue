@@ -81,7 +81,11 @@ export default {
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
-    setTimeout(() => { this.toggle() }, 30000);
+    setTimeout(() => { 
+      if (!this.opened) {
+        this.toggle() 
+      }
+    }, 30000);
   },
   methods: {
     toggle: function() {
