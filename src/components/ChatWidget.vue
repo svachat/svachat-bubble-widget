@@ -489,7 +489,7 @@ h2.chat-profile-status-text {
 }
 
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 478px) {
   /* For mobile phones: */
   [class*="col-"] {
     width: 100%;
@@ -508,8 +508,15 @@ h2.chat-profile-status-text {
     width: 85vw; /* Ancho del chat-box */
     background-color: rgb(255, 255, 255);
     margin-left: auto;
-    margin-right: 8% !important;
+    margin-right: 8%;
     max-height: calc(100% - 9.5rem);
+
+    /* prueba */
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 10%);
   }
 
   .chat-profile-icon {
