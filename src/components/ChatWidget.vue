@@ -510,6 +510,7 @@ h2.chat-profile-status-text {
     margin-left: auto;
     margin-right: 8%;
     max-height: calc(100% - 9.5rem);
+    min-height: 200px !important;
 
     /* prueba */
     margin: 0;
