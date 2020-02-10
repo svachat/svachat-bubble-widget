@@ -230,6 +230,7 @@ export default {
 }
 
 .chat-button.opened {
+  transition: 0.5s;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -255,18 +256,6 @@ export default {
 .bottom {
   width: 100%;
   text-align: right;
-}
-
-.chat-button.opened {
-  transition: 0.5s;
-  width: 3rem;
-  height: 3rem;
-  padding: 1rem;
-  background-image: url('../assets/chat.svg');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 999;
 }
 
 .chat-button:hover {
@@ -477,6 +466,7 @@ h2.chat-profile-status-text {
 }
 
 @media (min-width: 700px) {
+
   #chat-widget {
     position: fixed;
     bottom: 0vh;
@@ -484,6 +474,11 @@ h2.chat-profile-status-text {
     right: 2rem;
     bottom: 2rem;
   }
+
+  div.container {
+    width: 60% !important;
+  }
+
 }
 
 /* Mozilla Firefox only*/
@@ -491,5 +486,70 @@ h2.chat-profile-status-text {
   .chat-message-container {
     scrollbar-width: none;
   }
+}
+
+
+  @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  .chat-button.opened {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .chat-box.opened {
+    transition: 0.5s;
+    top: 10%;
+    bottom: 0;
+    height: auto;
+    width: 85vw; /* Ancho del chat-box */
+    background-color: rgb(255, 255, 255);
+    margin-left: auto;
+    margin-right: 8% !important;
+    max-height: calc(100% - 9.5rem);
+  }
+
+  .chat-profile-icon {
+    position: absolute;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border-radius: 50%;
+    background-image: var(--icon-url);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.chat-profile-status {
+    position: absolute;
+    margin-top: 2.7rem;
+    margin-left: 3rem;
+    width: .7rem;
+    height: 0.7rem;
+    background-color: rgb(0, 211, 0);
+    border-radius: 50%;
+    border-width: 2px;
+    border-color: var(--main-color);
+    border-style: solid;
+}
+.chat-profile-name {
+    margin-left: 6rem;
+    margin-top: 1rem;
+}
+
+.chat-profile-status-text {
+  margin-top: 3rem !important;
+  margin-left: 7.2rem !important;
+}
+.chat-header.open {
+  height: 5rem;
+}
+  
 }
 </style>
