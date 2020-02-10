@@ -1,7 +1,7 @@
 <template>
 <div class="container" :class="mine ? 'mine' : 'they'" :style="cssProps">
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
-      <p>{{msg}}</p>
+      <p v-html="msg">dsdsds{{msg}}</p>
   </div>
   <div class="options" v-if="optionClicked == false">
       <p v-for="option in options" :key="option" class="option" v-on:click="sendOption( $event, option)">{{option}}</p>
