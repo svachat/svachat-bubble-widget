@@ -505,10 +505,10 @@ h2.chat-profile-status-text {
     top: 10%;
     bottom: 0;
     height: auto;
-    width: 85vw; /* Ancho del chat-box */
+    width: 100%; /* Ancho del chat-box */
     background-color: rgb(255, 255, 255);
-    margin-left: auto;
-    margin-right: 8%;
+    margin-left: 0;
+    margin-right: 0;
     max-height: calc(100% - 9.5rem);
     min-height: 200px !important;
 
