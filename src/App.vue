@@ -1,5 +1,6 @@
 <template>
-<div id="app" style="min-height:250px !important">
+<div id="app">
+<!-- <div id="app" style="min-height:250px !important"> -->
     <ChatWidget :color="this.color" :icon="this.icon" :titleName="this.name" :client="this.client" />
 </div>
 </template>
