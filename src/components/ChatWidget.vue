@@ -504,7 +504,7 @@ h2.chat-profile-status-text {
     transition: 0.5s;
     top: 0;
     bottom: 0;
-    height: 100%;
+    height: 90%;
     width: 100%; /* Ancho del chat-box */
     background-color: rgb(255, 255, 255);
     margin-left: 0;
