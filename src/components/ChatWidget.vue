@@ -509,7 +509,7 @@ h2.chat-profile-status-text {
     background-color: rgb(255, 255, 255);
     margin-left: 0;
     margin-right: 0;
-    max-height: calc(100% - 9.5rem);
+    /*max-height: calc(100% - 9.5rem);*/
     min-height: 200px !important;
 
     /* prueba */
