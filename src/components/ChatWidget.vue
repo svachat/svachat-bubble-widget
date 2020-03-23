@@ -514,7 +514,7 @@ h2.chat-profile-status-text {
 
     /* prueba */
     margin: 0;
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 50%;
     transform: translate(-50%, 10%);
