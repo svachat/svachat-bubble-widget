@@ -6,7 +6,7 @@
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
           <div class="chat-profile-icon"></div>
           <div class="chat-profile-status"></div>
-          <h1 class="chat-profile-name">{{this.titleName}}</h1>
+          <h1 class="chat-profile-name">{{this.titleName}}2</h1>
           <h2 class="chat-profile-status-text">Online</h2>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
