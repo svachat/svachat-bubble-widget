@@ -1,17 +1,17 @@
 <template>
   <div id="chat-widget" :style="cssProps">
     <!--<div id="chat-box" class="chat-box closed">-->
-      <div id="chat-box" :class="'chat-box' + this.look + 'closed'">
+      <div id="chat-box" class="'chat-box closed'">
       <div id="chat-content" class="chat-content hidden">
-        <div class="chat-header" :class="opened ? 'open' : 'hidden'">
+        <div class="chat-header" :class="[opened ? 'open' : 'hidden', this.look]">
           <div class="chat-profile-icon"></div>
           <div class="chat-profile-status"></div>
-          <h1 class="chat-profile-name">{{this.titleName}}2</h1>
+          <h1 class="chat-profile-name">{{this.titleName}}</h1>
           <h2 class="chat-profile-status-text">Online</h2>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
-        <div id="msg-container" class="chat-message-container" ref="container">
-          <div class="powered-badge">
+        <div id="msg-container" class="chat-message-container" :class="[look == 'classic' ? 'classic-text' : '']" ref="container">
+          <div class="powered-badge" :class="[this.look]">
             <p class="statement">
               ⚡ Powered ⚡ by
               <a class="powered-link" href="https://svachat.com">Svachat</a>
@@ -19,11 +19,12 @@
           </div>
           
         </div>
-        <div class="chat-footer">
+        <div class="chat-footer" :class="[this.look]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
             <input
               id="text-input"
               class="chat-text-input"
+              :class="[this.look]"
               type="text"
               v-model="message"
               placeholder="Escribe una pregunta..."
@@ -58,6 +59,7 @@ export default {
       sessionStarted: false,
       message: '',
       writing: false,
+      headerClasses: ""
     };
   },
   props: {
@@ -243,7 +245,7 @@ export default {
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
-  z-index: 999;
+  z-index: 99999999999;
 }
 
 .chat-button.closed {
@@ -489,7 +491,7 @@ h2.chat-profile-status-text {
 }
 
 
-  @media only screen and (max-width: 478px) {
+@media only screen and (max-width: 478px) {
   /* For mobile phones: */
   [class*="col-"] {
     width: 100%;
@@ -532,32 +534,44 @@ h2.chat-profile-status-text {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-}
+  }
 
-.chat-profile-status {
-    position: absolute;
-    margin-top: 2.7rem;
-    margin-left: 3rem;
-    width: .7rem;
-    height: 0.7rem;
-    background-color: rgb(0, 211, 0);
-    border-radius: 50%;
-    border-width: 2px;
-    border-color: var(--main-color);
-    border-style: solid;
-}
-.chat-profile-name {
-    margin-left: 6rem;
-    margin-top: 1rem;
-}
+  .chat-profile-status {
+      position: absolute;
+      margin-top: 2.7rem;
+      margin-left: 3rem;
+      width: .7rem;
+      height: 0.7rem;
+      background-color: rgb(0, 211, 0);
+      border-radius: 50%;
+      border-width: 2px;
+      border-color: var(--main-color);
+      border-style: solid;
+  }
+  .chat-profile-name {
+      margin-left: 6rem;
+      margin-top: 1rem;
+  }
 
-.chat-profile-status-text {
-  margin-top: 3rem !important;
-  margin-left: 7.2rem !important;
-}
-.chat-header.open {
-  height: 5rem;
-}
+  .chat-profile-status-text {
+    margin-top: 3rem !important;
+    margin-left: 7.2rem !important;
+  }
+  .chat-header.open {
+    height: 5rem;
+  }
   
 }
+.classic {
+  border-radius: 0px !important;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.classic-text {
+    font-family: "Times New Roman",Times,serif;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 </style>
