@@ -10,7 +10,7 @@
           <h2 class="chat-profile-status-text">Online</h2>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
-        <div id="msg-container" class="chat-message-container" :class="[look == 'classic' ? 'classic-text' : '']" ref="container">
+        <div id="msg-container" :class="[look == 'sport' ? 'sport-text chat-message-container' : 'chat-message-container']" ref="container">
           <div class="powered-badge" :class="[this.look]">
             <p class="statement">
               ⚡ Powered ⚡ by
@@ -562,12 +562,12 @@ h2.chat-profile-status-text {
   }
   
 }
-.classic {
+.sport {
   border-radius: 0px !important;
   font-family: "Times New Roman", Times, serif;
 }
 
-.classic-text {
+.sport-text {
     font-family: "Times New Roman",Times,serif;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
