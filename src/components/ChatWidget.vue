@@ -1,7 +1,7 @@
 <template>
   <div id="chat-widget" :style="cssProps">
     <!--<div id="chat-box" class="chat-box closed">-->
-      <div id="chat-box" :class="'chat-box ' + this.look + ' closed'">
+      <div id="chat-box" :class="'chat-box ' + this.titleName + ' closed'">
       <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
           <div class="chat-profile-icon"></div>
