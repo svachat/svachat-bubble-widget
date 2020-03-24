@@ -1,7 +1,7 @@
 <template>
   <div id="chat-widget" :style="cssProps">
     <!--<div id="chat-box" class="chat-box closed">-->
-      <div id="chat-box" :class="'chat-box' + this.look + 'closed'">
+      <div id="chat-box" :class="'chat-box ' + this.look + ' closed'">
       <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="opened ? 'open' : 'hidden'">
           <div class="chat-profile-icon"></div>
@@ -424,6 +424,10 @@ h2.chat-profile-status-text {
   color: lightslategray;
 }
 
+.classic {
+  border-radius: 0 !important;
+}
+
 @media (max-width: 700px) {
   .bottom {
     position: fixed;
@@ -489,7 +493,7 @@ h2.chat-profile-status-text {
 }
 
 
-  @media only screen and (max-width: 478px) {
+@media only screen and (max-width: 478px) {
   /* For mobile phones: */
   [class*="col-"] {
     width: 100%;
@@ -532,32 +536,32 @@ h2.chat-profile-status-text {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-}
+  } 
 
-.chat-profile-status {
-    position: absolute;
-    margin-top: 2.7rem;
-    margin-left: 3rem;
-    width: .7rem;
-    height: 0.7rem;
-    background-color: rgb(0, 211, 0);
-    border-radius: 50%;
-    border-width: 2px;
-    border-color: var(--main-color);
-    border-style: solid;
-}
-.chat-profile-name {
-    margin-left: 6rem;
-    margin-top: 1rem;
-}
+  .chat-profile-status {
+      position: absolute;
+      margin-top: 2.7rem;
+      margin-left: 3rem;
+      width: .7rem;
+      height: 0.7rem;
+      background-color: rgb(0, 211, 0);
+      border-radius: 50%;
+      border-width: 2px;
+      border-color: var(--main-color);
+      border-style: solid;
+  }
+  .chat-profile-name {
+      margin-left: 6rem;
+      margin-top: 1rem;
+  }
 
-.chat-profile-status-text {
-  margin-top: 3rem !important;
-  margin-left: 7.2rem !important;
-}
-.chat-header.open {
-  height: 5rem;
-}
+  .chat-profile-status-text {
+    margin-top: 3rem !important;
+    margin-left: 7.2rem !important;
+  }
+  .chat-header.open {
+    height: 5rem;
+  }
   
 }
 </style>
