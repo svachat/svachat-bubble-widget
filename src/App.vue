@@ -1,7 +1,7 @@
 <template>
 <div id="app">
 <!-- <div id="app" style="min-height:250px !important"> -->
-    <ChatWidget :color="this.color" :icon="this.icon" :titleName="this.name" :client="this.client" />
+    <ChatWidget :color="this.color" :look="this.look" :icon="this.icon" :titleName="this.name" :client="this.client" />
 </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
     icon: String,
     name: String,
     client: Number,
+    look: String
   },
   components: {
     ChatWidget
