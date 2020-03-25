@@ -104,7 +104,7 @@ p {
     width: 100%;
   }
   p {
-      font-size: .6rem;
+      font-size: .9rem;
   }
   .message-bubble {
       max-width: 75%;
