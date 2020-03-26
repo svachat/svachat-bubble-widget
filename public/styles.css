@@ -55,4 +55,7 @@ img.github {
     display: inline;
     color: #B36170;
 }
-  
+
+ul {
+  list-style-type: disc !important;
+}
