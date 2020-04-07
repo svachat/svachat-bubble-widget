@@ -207,9 +207,9 @@ export default {
 .chat-box {
   padding: 0;
   position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  z-index: 9999;
+  right: 0;
+  bottom: 0;
+  z-index: 9999999999999999999999999999999999999999999999999999 !important;
   border-radius: 10px;
   background-color: white;
   -webkit-box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
@@ -219,7 +219,7 @@ export default {
 
 .chat-box.opened {
   transition: 0.5s;
-  height: 80vh;
+  height: 75vh;
   width: 30rem; /* Width of the chat-box */
   background-color: white;
   margin-left: auto;
