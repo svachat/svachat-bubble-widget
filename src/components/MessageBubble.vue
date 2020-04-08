@@ -51,7 +51,7 @@ export default {
     margin-top:  .5rem;
     margin-bottom: .5rem;
     padding: 1rem;
-    font-size: 16px;   
+    font-size: .9rem;   
     width: max-content;
     max-width: 25rem;
     text-align: left;

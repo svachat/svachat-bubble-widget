@@ -204,6 +204,7 @@ export default {
 </script>
 
 <style scoped>
+
 .chat-box {
   padding: 0;
   position: absolute;
@@ -306,6 +307,8 @@ export default {
   padding: 1rem;
   z-index: 9999;
   position: relative;
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
 .close-icon:hover {
@@ -343,7 +346,7 @@ export default {
   height: 3rem;
   width: 80%;
   padding: 1rem;
-  font-size: 18px;
+  font-size: 1.1rem;
   outline: none;
   color: rgb(67, 67, 67);
   border: 0;
