@@ -278,7 +278,7 @@ export default {
 .chat-message-container {
   transition: 0.5s;
   position: absolute;
-  max-height: calc(80vh - 11.5rem);
+  max-height: calc(75vh - 11.5rem);
   right: 0;
   left: 0;
   bottom: 4.5rem;
