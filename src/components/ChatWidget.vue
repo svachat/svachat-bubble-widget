@@ -307,11 +307,11 @@ export default {
   padding: 1rem;
   z-index: 9999;
   position: relative;
-  border: 1px solid white;
-  border-radius: 10px;
 }
 
 .close-icon:hover {
+  border: 1px solid white;
+  border-radius: 10px;
   cursor: pointer;
 }
 
