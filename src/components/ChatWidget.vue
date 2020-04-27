@@ -186,7 +186,7 @@ export default {
     startSession: function () {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
-        axios.get('svachat-backend.eu-de.mybluemix.net/bot/' + this.client).then(response => {
+        axios.get('https://svachat-backend.eu-de.mybluemix.net/bot/' + this.client).then(response => {
           this.receiveMessage(response.data.message);
           this.sessionStarted = true;
         });
