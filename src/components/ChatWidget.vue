@@ -146,7 +146,7 @@ export default {
         container.scrollTop = container.scrollHeight;
 
         // TODO: Make env param friendly
-        axios.get('https://api.app.svachat.com/bot/' + this.client + '/query?message=' + this.message).then(response => {
+        axios.get('https://svachat-backend.eu-de.mybluemix.net/bot/' + this.client + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);
         });
 
@@ -186,7 +186,7 @@ export default {
     startSession: function () {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
-        axios.get('https://api.app.svachat.com/bot/' + this.client).then(response => {
+        axios.get('svachat-backend.eu-de.mybluemix.net/bot/' + this.client).then(response => {
           this.receiveMessage(response.data.message);
           this.sessionStarted = true;
         });
