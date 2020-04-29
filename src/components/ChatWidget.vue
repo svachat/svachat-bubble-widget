@@ -36,7 +36,7 @@
     </div>
     <div class="bottom">
       <div id="chat-button" class="chat-button opened" v-on:click="toggle">
-        <img src="../assets/chat.svg" class="svgBubble"> 
+        <img :src="require('@/assets/chat.svg')" class="svgBubble"> 
         <p id="bubbleText">Chat</p>
       </div>
     </div>
@@ -448,6 +448,7 @@ export default {
 } */
 
 .powered-badge {
+  padding-top:2px ;
   color: lightslategray;
   font-size: 12px;
   text-align: center;
