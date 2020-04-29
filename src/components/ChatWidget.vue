@@ -448,7 +448,6 @@ export default {
 } */
 
 .powered-badge {
-  margin-top: -12px;
   color: lightslategray;
   font-size: 12px;
   text-align: center;
