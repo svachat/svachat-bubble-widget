@@ -36,7 +36,8 @@
     </div>
     <div class="bottom">
       <div id="chat-button" class="chat-button opened" v-on:click="toggle">
-        <img :src="require('@/assets/chat.svg')" class="svgBubble"> 
+        <div class="sp"></div>
+        <!-- <img :src="require('@/assets/chat.svg')" class="svgBubble">  -->
         <p id="bubbleText">Chat</p>
       </div>
     </div>
@@ -256,7 +257,19 @@ export default {
   background-position: center; */
   z-index: 99999999999;
 }
-
+.sp {
+  height: 2px;
+  margin-left:-3px ;
+  margin-top: 6px;
+  padding: 1rem;
+  background: var(--main-color);
+  color: rgb(255, 255, 255);
+  background-image: url('../assets/chat.svg');
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 99999999999;
+}
 .svgBubble {
   height: 26px;
   margin-top: 9px;
@@ -267,7 +280,7 @@ export default {
   font-weight: 600;
   font-size: 18px;
   margin-top: 12px;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 
 .chat-button.closed {
