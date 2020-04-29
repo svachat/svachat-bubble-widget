@@ -51,9 +51,12 @@ export default {
     margin-top:  .5rem;
     margin-bottom: .5rem;
     padding: 1rem;
-    font-size: .9rem;   
+    font-size: .9rem;       
+    white-space: pre-wrap;
     width: max-content;
-    max-width: 25rem;
+    text-align:justify;
+    max-width: 262px;
+        /* max-width: 25rem; */
     text-align: left;
 }
 

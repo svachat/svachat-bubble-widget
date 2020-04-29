@@ -5,19 +5,19 @@
       <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="[opened ? 'open' : 'hidden', this.look]">
           <div class="chat-profile-icon"></div>
-          <div class="chat-profile-status"></div>
+          <!-- <img :src="icon" class="chat-profile-icon" style="marginLeft:5px"> -->
+          <!-- <div class="chat-profile-status"></div> -->
           <h1 class="chat-profile-name">{{this.titleName}}</h1>
-          <h2 class="chat-profile-status-text">Online</h2>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
-        <div id="msg-container" :class="[this.look == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
-          <div class="powered-badge" :class="[this.look]">
+        <div class="powered-badge" :class="[this.look]">
             <p class="statement">
               ⚡ Powered ⚡ by
               <a class="powered-link" href="https://svachat.com">Svachat</a>
             </p>
           </div>
-          
+        <div id="msg-container" :class="[this.look == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
+
         </div>
         <div class="chat-footer" :class="[this.look]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
@@ -35,7 +35,10 @@
       </div>
     </div>
     <div class="bottom">
-      <div id="chat-button" class="chat-button opened" v-on:click="toggle"></div>
+      <div id="chat-button" class="chat-button opened" v-on:click="toggle">
+        <img src="../assets/chat.svg" class="svgBubble"> 
+        <p id="bubbleText">Chat</p>
+      </div>
     </div>
   </div>
 </template>
@@ -94,13 +97,13 @@ export default {
       // If the chat-box is open, we want to close it
       if (this.opened) {
         document.getElementById("chat-button").className = "chat-button opened"; // Then, open the button
-
+        document.getElementById("bubbleText").style.color = "white";
         document.getElementById("chat-box").className = "chat-box closed"; // And close the box and its content
         document.getElementById("chat-content").className =
           "chat-content hidden";
       } else {
         document.getElementById("chat-button").className = "chat-button closed";
-
+        document.getElementById("bubbleText").style.color = "transparent";
         document.getElementById("chat-box").className = "chat-box opened";
         document.getElementById("chat-content").className = "chat-content";
       }
@@ -172,7 +175,7 @@ export default {
         if (this.writing) {
           this.$refs.container.removeChild(this.$refs.container.lastChild);
         }
-
+      
         msgInstance.$mount();
         this.$refs.container.appendChild(msgInstance.$el);
         event.preventDefault();
@@ -207,7 +210,7 @@ export default {
 
 .chat-box {
   padding: 0;
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   z-index: 9999999999999999999999999999999999999999999999999999 !important;
@@ -220,11 +223,14 @@ export default {
 
 .chat-box.opened {
   transition: 0.5s;
-  height: 75vh;
-  width: 30rem; /* Width of the chat-box */
+  /* height: 75vh; */
+  height: 565px ;
+  /*width: 30rem;  Width of the chat-box */
+  width: 340px; /* Width of the chat-box */
   background-color: white;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 20px;
+  bottom: 50px;
 }
 
 .chat-box.closed {
@@ -234,19 +240,34 @@ export default {
 
 .chat-button.opened {
   transition: 0.5s;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  padding: 1rem;
+  width: 110px;
+  height: 45px;
+  border-radius: 999rem;
+  /* padding: 1rem; */
   background: var(--main-color);
   color: rgb(255, 255, 255);
   margin-right: 0rem;
   margin-left: auto;
-  background-image: url('../assets/chat.svg');
+  display: flex;
+  justify-content: center;
+  /* background-image: url('../assets/chat.svg');
   background-size: 60%;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
   z-index: 99999999999;
+}
+
+.svgBubble {
+  height: 26px;
+  margin-top: 9px;
+}
+
+#bubbleText {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 12px;
+  margin-left: 4px;
 }
 
 .chat-button.closed {
@@ -257,7 +278,9 @@ export default {
   }
 
 .bottom {
-  width: 100%;
+  position: fixed;
+  right: 20px;
+  bottom: 50px;
   text-align: right;
 }
 
@@ -278,10 +301,11 @@ export default {
 .chat-message-container {
   transition: 0.5s;
   position: absolute;
-  max-height: calc(75vh - 11.5rem);
+  max-height: 445px;
+  /* max-height: calc(75vh - 11.5rem); */
   right: 0;
   left: 0;
-  bottom: 4.5rem;
+  bottom: 3rem;
   overflow: scroll;
   vertical-align: bottom;
 }
@@ -295,23 +319,24 @@ export default {
 }
 
 .close-icon {
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0;
-  margin-right: 0rem;
+  /* width: 1rem;
+  height: 1rem; */
+  margin-top: 0px;
+  margin-right: 15px;
   margin-left: auto;
-  background-image: url("../assets/close.svg");
+  background-image: url("../assets/line.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30%;
-  padding: 1rem;
+  background-size: 85%;
+  padding: 0.5rem;
   z-index: 9999;
+  transition: 0.3s;
   position: relative;
 }
 
 .close-icon:hover {
-  border: 1px solid white;
-  border-radius: 10px;
+  /* border: 1px solid white;
+  border-radius: 10px; */
   cursor: pointer;
 }
 
@@ -319,6 +344,8 @@ export default {
   top: 0;
   right: auto;
   left: 0;
+  display: flex;
+  justify-content: center;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   z-index: 9999;
@@ -327,7 +354,7 @@ export default {
 .chat-header.open {
   transition: 0.5s;
   width: 100%;
-  height: 7rem;
+  height: 50px;
   background-color: var(--main-color);
 }
 
@@ -343,22 +370,31 @@ export default {
 }
 
 .chat-text-input {
-  height: 3rem;
-  width: 80%;
+  height: 15px;
+  width: 250px;
+  border: 1px solid #d8dcde;
   padding: 1rem;
-  font-size: 1.1rem;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-size: 1rem;
   outline: none;
   color: rgb(67, 67, 67);
-  border: 0;
   border-bottom-left-radius: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.chat-text-input:hover {
+  transition: 0.5s;
+  border-color: rgb(104, 115, 125) !important;
+}
+
 .send-button {
   position: absolute;
-  height: 3rem;
+  height: 22px;
+  /* height: 3rem; */
   padding: 1rem;
-  right: 15px;
+  right: 11px;
+  /* right: 15px; */
   display: inline-block;
   background-image: url("../assets/send-button.svg");
   background-repeat: no-repeat;
@@ -366,13 +402,11 @@ export default {
   cursor: pointer;
 }
 
-.chat-profile-icon {
-  position: absolute;
-  margin-top: 1.5rem;
-  margin-left: 2rem;
-  width: 4rem;
-  height: 4rem;
-  background-color: white;
+.chat-profile-icon, .chat-profile-icon2 {
+  width: 35px;
+  height: 35px;
+  margin: 0 9px;
+  margin-top: 7px;
   border-radius: 50%;
   background-image: var(--icon-url);
   background-size: cover;
@@ -381,15 +415,18 @@ export default {
 }
 
 .chat-profile-name {
-  position: absolute;
+  /* position: absolute;
   padding: 0;
   margin-left: 7rem;
   margin-top: 2rem;
-  font-size: 26px;
+  font-size: 26px; */
+  font-size: 22px;
+  margin: 0;
+  margin-top: 14px;
   color: white;
 }
 
-.chat-profile-status {
+/* .chat-profile-status {
   position: absolute;
   margin-top: 4.3rem;
   margin-left: 4.7rem;
@@ -400,17 +437,18 @@ export default {
   border-width: 2px;
   border-color: var(--main-color);
   border-style: solid;
-}
+} */
 
-h2.chat-profile-status-text {
+/* h2.chat-profile-status-text {
   position: absolute;
   margin-top: 4rem;
   margin-left: 7.2rem;
   font-size: 16px;
   color: #eee;
-}
+} */
 
 .powered-badge {
+  margin-top: -12px;
   color: lightslategray;
   font-size: 12px;
   text-align: center;
@@ -426,11 +464,12 @@ h2.chat-profile-status-text {
 }
 
 .powered-link {
-  color: lightslategray;
+  color: #008afe;
+  text-decoration: none;
 }
 
-@media (max-width: 700px) {
-  .bottom {
+/*@media (max-width: 700px) {
+   .bottom {
     position: fixed;
     bottom: 0vh;
     left: auto;
@@ -443,13 +482,13 @@ h2.chat-profile-status-text {
     right: 0;
     bottom: 0;
     border-radius: 0px;
-  }
-  .chat-box.opened {
+  }*/
+  /*.chat-box.opened {
     transition: 0.5s;
     top: 0;
     bottom: 0;
     height: auto;
-    width: 100vw; /* Ancho del chat-box */
+    width: 100vw; /* Ancho del chat-box *//*
     background-color: rgb(255, 255, 255);
     margin-left: auto;
     margin-right: 0;
@@ -466,13 +505,13 @@ h2.chat-profile-status-text {
     overflow-x: hidden;
     transition: 0s;
     max-height: calc(100% - 11.5rem);
-    /*max-height: calc(100vh - 12.5rem);*/
-  }
-}
+    /*max-height: calc(100vh - 12.5rem);
+  } 
+}*/
 
-@media (min-width: 700px) {
+/*@media (min-width: 700px) {
 
-  #chat-widget {
+   #chat-widget {
     position: fixed;
     bottom: 0vh;
     left: auto;
@@ -482,9 +521,9 @@ h2.chat-profile-status-text {
 
   div.container {
     width: 60% !important;
-  }
+  } 
 
-}
+}*/
 
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
@@ -500,11 +539,17 @@ h2.chat-profile-status-text {
     width: 100%;
   }
 
-  .chat-button.opened {
+  /* .chat-button.opened {
     width: 2rem;
     height: 2rem;
+  } */
+  .chat-message-container {
+    bottom: 8%;
+    max-height: 80%;
   }
-
+.send-button {
+  right: 2.5%;
+}
   .chat-box.opened {
     transition: 0.5s;
     top: 0;
@@ -514,32 +559,19 @@ h2.chat-profile-status-text {
     background-color: rgb(255, 255, 255);
     margin-left: 0;
     margin-right: 0;
-    /*max-height: calc(100% - 9.5rem);*/
-    min-height: 200px !important;
-
-    /* prueba */
     margin: 0;
     position: fixed;
     top: 0%;
-    /*left: 50%;
-    transform: translate(-50%, 10%);*/
   }
 
-  .chat-profile-icon {
-    position: absolute;
-    margin-top: 0.5rem;
-    margin-left: 1rem;
-    width: 3rem;
-    height: 3rem;
-    background-color: white;
-    border-radius: 50%;
-    background-image: var(--icon-url);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+  .chat-header {
+    border-radius: 0;
   }
 
-  .chat-profile-status {
+  
+
+
+  /* .chat-profile-status {
       position: absolute;
       margin-top: 2.7rem;
       margin-left: 3rem;
@@ -550,19 +582,17 @@ h2.chat-profile-status-text {
       border-width: 2px;
       border-color: var(--main-color);
       border-style: solid;
-  }
-  .chat-profile-name {
+  } */
+  
+  /* .chat-profile-name {
       margin-left: 6rem;
       margin-top: 1rem;
-  }
+  } */
 
-  .chat-profile-status-text {
+  /* .chat-profile-status-text {
     margin-top: 3rem !important;
     margin-left: 7.2rem !important;
-  }
-  .chat-header.open {
-    height: 5rem;
-  }
+  } */
   
 }
 .classic {
