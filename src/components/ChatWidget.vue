@@ -214,7 +214,7 @@ export default {
   position: fixed;
   right: 0;
   bottom: 0;
-  z-index: 9999999999999999999999999999999999999999999999999999 !important;
+  z-index: 99999 !important;
   border-radius: 10px;
   background-color: white;
   -webkit-box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
@@ -232,7 +232,7 @@ export default {
   margin-left: auto;
   margin-right: 20px;
   bottom: 50px;
-  z-index: 999999999999999999999999999999999;
+  z-index: 99999 !important;
 }
 
 .chat-box.closed {
@@ -256,7 +256,7 @@ export default {
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center; */
-  z-index: 99999999999;
+  z-index: 99999 !important;
 }
 .sp {
   height: 2px;
@@ -269,7 +269,7 @@ export default {
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;
-  z-index: 99999999999;
+  z-index: 999999 !important;
 }
 .svgBubble {
   height: 26px;
