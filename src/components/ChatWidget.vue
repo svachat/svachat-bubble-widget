@@ -36,7 +36,7 @@
     </div>
     <div class="bottom">
       <div id="chat-button" class="chat-button opened" v-on:click="toggle">
-        <div class="sp"></div>
+        <div id="sp" class="sp"></div>
         <!-- <img :src="require('@/assets/chat.svg')" class="svgBubble">  -->
         <p id="bubbleText">Chat</p>
       </div>
@@ -99,12 +99,13 @@ export default {
       if (this.opened) {
         document.getElementById("chat-button").className = "chat-button opened"; // Then, open the button
         document.getElementById("bubbleText").style.color = "white";
+        document.getElementById("sp").style.display = "flex";
         document.getElementById("chat-box").className = "chat-box closed"; // And close the box and its content
-        document.getElementById("chat-content").className =
-          "chat-content hidden";
+        document.getElementById("chat-content").className = "chat-content hidden";
       } else {
         document.getElementById("chat-button").className = "chat-button closed";
         document.getElementById("bubbleText").style.color = "transparent";
+        document.getElementById("sp").style.display = "none";
         document.getElementById("chat-box").className = "chat-box opened";
         document.getElementById("chat-content").className = "chat-content";
       }
