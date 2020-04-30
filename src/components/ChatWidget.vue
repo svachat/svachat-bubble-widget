@@ -296,6 +296,7 @@ export default {
   right: 20px;
   bottom: 50px;
   text-align: right;
+  z-index: 999999 !important;
 }
 
 .chat-button:hover {
