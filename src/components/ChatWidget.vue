@@ -13,7 +13,7 @@
         <div class="powered-badge" :class="[this.look]">
             <p class="statement">
               ⚡ Powered ⚡ by
-              <a class="powered-link" href="https://svachat.com">Svachat</a>
+              <a class="powered-link" href="https://svachat.com" target="_blank">Svachat</a>
             </p>
           </div>
         <div id="msg-container" :class="[this.look == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
@@ -232,6 +232,7 @@ export default {
   margin-left: auto;
   margin-right: 20px;
   bottom: 50px;
+  z-index: 999999999999999999999999999999999;
 }
 
 .chat-box.closed {
@@ -469,6 +470,7 @@ export default {
 
 .statement {
   margin-bottom: 0;
+  margin-top: 3px;
 }
 
 .bullet {

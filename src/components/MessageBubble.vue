@@ -48,9 +48,9 @@ export default {
 
 .message-bubble {
 	border-radius: 1rem;
-    margin-top:  .5rem;
-    margin-bottom: .5rem;
-    padding: 1rem;
+    margin-top:  10px;
+    margin-bottom: 10px;
+    padding: 16px;
     font-size: .9rem;       
     white-space: pre-wrap;
     width: max-content;
@@ -63,8 +63,7 @@ export default {
 .message-bubble.they {
    
 	background: #e8e8e8;
-    margin-left: 1rem;
-    margin-right: 8rem;
+    margin-left: 20px;
     border-top-left-radius: 0px;
 }
 
@@ -73,7 +72,7 @@ export default {
     font-weight: 800;
     background: var(--light-color);/*rgb(217, 225, 242);*/
     margin-left: auto;
-    margin-right: 1rem;
+    margin-right: 20px;
     border-top-right-radius: 0px;
 }
 
