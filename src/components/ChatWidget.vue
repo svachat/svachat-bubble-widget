@@ -3,28 +3,26 @@
     <!--<div id="chat-box" class="chat-box closed">-->
       <div id="chat-box" class="'chat-box closed'">
       <div id="chat-content" class="chat-content hidden">
-        <div class="chat-header" :class="[opened ? 'open' : 'hidden', this.look]">
+        <div class="chat-header" :class="[opened ? 'open' : 'hidden', currentLook]">
           <div class="chat-profile-icon"></div>
-          <!-- <img :src="icon" class="chat-profile-icon" style="marginLeft:5px"> -->
-          <!-- <div class="chat-profile-status"></div> -->
-          <h1 class="chat-profile-name">{{this.titleName}}</h1>
+          <h1 class="chat-profile-name">{{currentTitleName}}</h1>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
-        <div class="powered-badge" :class="[this.look]">
+        <div class="powered-badge" :class="[currentLook]">
             <p class="statement">
               ⚡ Powered ⚡ by
               <a class="powered-link" href="https://svachat.com" target="_blank">Svachat</a>
             </p>
           </div>
-        <div id="msg-container" :class="[this.look == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
+        <div id="msg-container" :class="[currentLook == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
 
         </div>
-        <div class="chat-footer" :class="[this.look]">
+        <div class="chat-footer" :class="[currentLook]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
             <input
               id="text-input"
               class="chat-text-input"
-              :class="[this.look]"
+              :class="[currentLook]"
               type="text"
               v-model="message"
               :placeholder="placeHolder" />
@@ -64,27 +62,39 @@ export default {
       message: '',
       userLang: String,
       writing: false,
-      headerClasses: ""
+      assitent:{},
+      placeHolder: "Escribe una pregunta...",
+      headerClasses: "",
+      currentWelcome: String,
+      currentLook: String,
+      currentColor: String,
+      currentIcon: String,
+      currentTitleName: String,
+      currentClient: Number,
+      userLang: String,
+      apiUrl: 'https://svachat-backend.eu-de.mybluemix.net/bot/'
     };
   },
   props: {
-    welcome: String,
-    look: String,
-    color: String,
-    icon: String,
-    titleName: String,
-    client: Number,
+    // welcome: String,
+    // look: String,
+    // color: String,
+    // icon: String,
+    // titleName: String,
+    // client: Number,
+    token: String
   },
   computed: {
-    cssProps() { return {
-        '--main-color': this.color,
-        '--icon-url': "url(" + this.icon + ")"
+    cssProps() { 
+      return {
+        '--main-color': this.currentColor,
+        '--icon-url': "url(" + this.currentIcon + ")"
       }
     }
   },
   mounted() {
+    this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage; 
-    
     if ("es-ES" != this.userLang) {
       this.placeHolder = "Write your question"
     }
@@ -98,6 +108,16 @@ export default {
     }, 30000);
   },
   methods: {
+    chargeAgent() {
+      axios.get('https://svachat-backend.eu-de.mybluemix.net/chatbot/' + this.token).then(response => {
+          this.assitent = response.data;
+          this.currentLook=  response.data.look;
+          this.currentColor=  response.data.brand_color;
+          this.currentIcon=  response.data.logo;
+          this.currentTitleName=  response.data.name;
+          this.currentClient=  response.data.user;
+        });
+    },
     toggle: function() {
       // If the chat-box is open, we want to close it
       if (this.opened) {
@@ -135,7 +155,7 @@ export default {
           propsData: {
             mine: true,
             msg: inputString,
-            color: this.color
+            color: this.currentColor
           }
         });
         
@@ -155,7 +175,7 @@ export default {
         container.scrollTop = container.scrollHeight;
 
         // TODO: Make env param friendly
-        axios.get('https://svachat-backend.eu-de.mybluemix.net/bot/' + this.client + '/query?message=' + this.message).then(response => {
+        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);
         });
 
@@ -195,7 +215,7 @@ export default {
     startSession: function () {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
-        axios.get('https://svachat-backend.eu-de.mybluemix.net/bot/' + this.client).then(response => {
+        axios.get(this.apiUrl + this.currentClient).then(response => {
           this.receiveMessage(response.data.message);
           this.sessionStarted = true;
         });
@@ -325,7 +345,7 @@ export default {
   /* max-height: calc(75vh - 11.5rem); */
   right: 0;
   left: 0;
-  bottom: 3rem;
+  /* bottom: 3rem; TODO: quitado para que las burbujas salgan arriba del chat*/ 
   overflow: scroll;
   vertical-align: bottom;
 }
