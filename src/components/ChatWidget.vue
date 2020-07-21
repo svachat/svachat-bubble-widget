@@ -27,8 +27,7 @@
               :class="[this.look]"
               type="text"
               v-model="message"
-              placeholder="Escribe una pregunta..."
-            />
+              :placeholder="placeHolder" />
             <div class="send-button" v-on:click="sendMessage"></div>
           </form>
         </div>
@@ -61,7 +60,9 @@ export default {
     return {
       opened: false,
       sessionStarted: false,
+      placeHolder: "Escribe una pregunta...",
       message: '',
+      userLang: String,
       writing: false,
       headerClasses: ""
     };
@@ -82,8 +83,11 @@ export default {
     }
   },
   mounted() {
-    // This is to call the sendMessage function in the MessageBubble component
-    // This creates coupling between the components, but it is acceptable and
+    this.userLang = navigator.language || navigator.userLanguage; 
+    alert(this.userLang)
+    if ("es-ES" != this.userLang) {
+      this.placeHolder = "Write your question"
+    }
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
