@@ -32,12 +32,16 @@
     </h2>
   </div>
   <img class="click-demo" src="/images/click.png">
-  <svachat-widget name="Svachat" color="#008afe" icon="https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/74933639_558141321681816_7294103457982578688_n.png?_nc_cat=104&_nc_sid=85a577&_nc_ohc=du5yABbwE10AX-lSkEg&_nc_ht=scontent-mad1-1.xx&oh=4f43d409076cad2c0f03b89eb2ba6430&oe=5EBAD612" look="sport" client="340" ></svachat-widget>
+  <!-- <svachat-widget token="dd77958b5ac302b4e2d3ee39ce2da55a7e481980" ></svachat-widget> -->
+  <svachat-widget token="bc299d3e4f64d6a8e4812d53ee142604170ebe38" ></svachat-widget>
   <!-- built files will be auto injected -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <div class="footer" style="background-color: lightsteelblue">
-    &copy; Svachat Technologies 2020
+  <div class="footer">
+    &copy; Svachat Technologies <span id="year"></span>
   </div>
 </body>
 
 </html>
+<script>
+  document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
