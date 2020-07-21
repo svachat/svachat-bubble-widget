@@ -84,7 +84,7 @@ export default {
   },
   mounted() {
     this.userLang = navigator.language || navigator.userLanguage; 
-    alert(this.userLang)
+    
     if ("es-ES" != this.userLang) {
       this.placeHolder = "Write your question"
     }
