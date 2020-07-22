@@ -251,7 +251,6 @@ export default {
   transition: 0.5s;
   /* height: 75vh; */
   height: 565px ;
-  /*width: 30rem;  Width of the chat-box */
   width: 340px; /* Width of the chat-box */
   background-color: white;
   margin-left: auto;
