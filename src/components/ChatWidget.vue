@@ -457,7 +457,8 @@ export default {
 }
 .powered-badge {
   padding-top:2px ;
-  z-index: 9999999999999;
+  z-index: 9;
+  background-color: white;
   color: lightslategray;
   font-size: 12px;
   text-align: center;
@@ -495,6 +496,7 @@ export default {
 
   .chat-message-container {
     bottom: 8%;
+    z-index: -1;
     max-height: 80%;
   }
 .send-button {
