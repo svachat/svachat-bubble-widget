@@ -60,10 +60,8 @@ export default {
       sessionStarted: false,
       placeHolder: "Escribe una pregunta...",
       message: '',
-      userLang: String,
       writing: false,
       assitent:{},
-      placeHolder: "Escribe una pregunta...",
       headerClasses: "",
       currentWelcome: String,
       currentLook: String,
@@ -374,8 +372,6 @@ export default {
 }
 
 .close-icon:hover {
-  /* border: 1px solid white;
-  border-radius: 10px; */
   cursor: pointer;
 }
 
@@ -454,40 +450,14 @@ export default {
 }
 
 .chat-profile-name {
-  /* position: absolute;
-  padding: 0;
-  margin-left: 7rem;
-  margin-top: 2rem;
-  font-size: 26px; */
   font-size: 22px;
   margin: 0;
   margin-top: 14px;
   color: white;
 }
-
-/* .chat-profile-status {
-  position: absolute;
-  margin-top: 4.3rem;
-  margin-left: 4.7rem;
-  width: 1rem;
-  height: 1rem;
-  background-color: rgb(0, 211, 0);
-  border-radius: 50%;
-  border-width: 2px;
-  border-color: var(--main-color);
-  border-style: solid;
-} */
-
-/* h2.chat-profile-status-text {
-  position: absolute;
-  margin-top: 4rem;
-  margin-left: 7.2rem;
-  font-size: 16px;
-  color: #eee;
-} */
-
 .powered-badge {
   padding-top:2px ;
+  z-index: 9999999999999;
   color: lightslategray;
   font-size: 12px;
   text-align: center;
@@ -508,62 +478,6 @@ export default {
   text-decoration: none;
 }
 
-/*@media (max-width: 700px) {
-   .bottom {
-    position: fixed;
-    bottom: 0vh;
-    left: auto;
-    right: 2rem;
-    bottom: 2rem;
-  }
-
-  .chat-box {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    border-radius: 0px;
-  }*/
-  /*.chat-box.opened {
-    transition: 0.5s;
-    top: 0;
-    bottom: 0;
-    height: auto;
-    width: 100vw; /* Ancho del chat-box *//*
-    background-color: rgb(255, 255, 255);
-    margin-left: auto;
-    margin-right: 0;
-  }
-  .chat-header {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-  .chat-footer {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-  .chat-message-container {
-    overflow-x: hidden;
-    transition: 0s;
-    max-height: calc(100% - 11.5rem);
-    /*max-height: calc(100vh - 12.5rem);
-  } 
-}*/
-
-/*@media (min-width: 700px) {
-
-   #chat-widget {
-    position: fixed;
-    bottom: 0vh;
-    left: auto;
-    right: 2rem;
-    bottom: 2rem;
-  }
-
-  div.container {
-    width: 60% !important;
-  } 
-
-}*/
 
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
@@ -579,10 +493,6 @@ export default {
     width: 100%;
   }
 
-  /* .chat-button.opened {
-    width: 2rem;
-    height: 2rem;
-  } */
   .chat-message-container {
     bottom: 8%;
     max-height: 80%;
@@ -607,32 +517,6 @@ export default {
   .chat-header {
     border-radius: 0;
   }
-
-  
-
-
-  /* .chat-profile-status {
-      position: absolute;
-      margin-top: 2.7rem;
-      margin-left: 3rem;
-      width: .7rem;
-      height: 0.7rem;
-      background-color: rgb(0, 211, 0);
-      border-radius: 50%;
-      border-width: 2px;
-      border-color: var(--main-color);
-      border-style: solid;
-  } */
-  
-  /* .chat-profile-name {
-      margin-left: 6rem;
-      margin-top: 1rem;
-  } */
-
-  /* .chat-profile-status-text {
-    margin-top: 3rem !important;
-    margin-left: 7.2rem !important;
-  } */
   
 }
 .classic {
