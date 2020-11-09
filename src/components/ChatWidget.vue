@@ -70,7 +70,7 @@ export default {
       currentTitleName: String,
       currentClient: Number,
       userLang: String,
-      apiUrl: 'https://api.svachat.com/bot/'
+      apiUrl: 'https://svachat-backend.eu-de.mybluemix.net/bot/'
     };
   },
   props: {
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://api.svachat.com/chatbot/' + this.token).then(response => {
+      axios.get('https://svachat-backend.eu-de.mybluemix.net/chatbot/' + this.token).then(response => {
           this.assitent = response.data;
           this.currentLook=  response.data.look;
           this.currentColor=  response.data.brand_color;
