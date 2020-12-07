@@ -67,7 +67,7 @@ export default {
       currentLook: String,
       currentColor: String,
       currentIcon: String,
-      currentTitleName: String,
+      //currentTitleName: String,
       currentClient: Number,
       userLang: String,
       apiUrl: 'https://svachat-backend.eu-de.mybluemix.net/bot/'
@@ -80,7 +80,8 @@ export default {
     // icon: String,
     // titleName: String,
     // client: Number,
-    token: String
+    token: String,
+    currentTitleName: String
   },
   computed: {
     cssProps() { 
