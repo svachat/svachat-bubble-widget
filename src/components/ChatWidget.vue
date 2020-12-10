@@ -10,7 +10,7 @@
         </div>
         <div class="powered-badge" :class="[currentLook]">
             <p class="statement">
-              ⚡ Powered ⚡ by
+              {{poweredByText}}
               <a class="powered-link" href="https://svachat.com" target="_blank">Svachat</a>
             </p>
           </div>
@@ -59,6 +59,7 @@ export default {
       opened: false,
       sessionStarted: false,
       placeHolder: "Escribe una pregunta...",
+      poweredByText : '⚡ Accionado ⚡ por ',
       message: '',
       writing: false,
       assitent:{},
@@ -70,6 +71,7 @@ export default {
       //currentTitleName: String,
       currentClient: Number,
       userLang: String,
+      startChatText: 'Chat',
       apiUrl: 'https://svachat-backend.eu-de.mybluemix.net/bot/'
     };
   },
@@ -95,7 +97,9 @@ export default {
     this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage; 
     if ("es-ES" != this.userLang) {
-      this.placeHolder = "Write your question"
+      this.placeHolder = "Write your question";
+      this.startChatText="Chat";
+      this.poweredByText="⚡ Powered ⚡ by ";     
     }
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
