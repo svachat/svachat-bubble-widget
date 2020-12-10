@@ -96,6 +96,8 @@ export default {
   mounted() {
     this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage; 
+    console.log('userLang: '+ this.userLang );
+    console.log('url: '+ window.location.pathname );
     if ("es-ES" != this.userLang) {
       this.placeHolder = "Write your question";
       this.startChatText="Chat";
