@@ -97,7 +97,7 @@ export default {
     this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage; 
     localStorage.setItem('userLang',this.userLang);
-    localStorage.setItem('url', window.location.pathname);   
+    localStorage.setItem('url',window.location.href);   
     if ("es-ES" != this.userLang) {
       this.placeHolder = "Write your question";
       this.startChatText="Chat";
