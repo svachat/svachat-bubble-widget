@@ -520,7 +520,7 @@ export default {
   .chat-message-container {
     bottom: 8%;
     z-index: -1;
-    max-height: 80%;    
+    max-height: 100%;    
      /*z-index: -1;  
      max-height: 216px;*/
   }
