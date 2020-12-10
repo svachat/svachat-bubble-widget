@@ -518,9 +518,12 @@ export default {
   }
 
   .chat-message-container {
-    bottom: 8%;
+   /* bottom: 8%;
     z-index: -1;
     max-height: 80%;
+    */
+     z-index: -1;  
+     max-height: 216px;
   }
 .send-button {
   right: 2.5%;
