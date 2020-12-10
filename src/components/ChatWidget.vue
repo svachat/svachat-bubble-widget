@@ -101,20 +101,8 @@ export default {
          this.placeHolder = "Write your question";
          this.startChatText="Chat";
          this.poweredByText="⚡ Powered ⚡ by ";       
-    }
-    
-    try{
-       var siteURL = window.location.href;
-       if(siteURL.indexOf("https://svachat.com") >= 0) //spanish
-      {
-           this.placeHolder = "Escribe una pregunta...";
-           this.startChatText="Chat";
-           this.poweredByText="⚡ Accionado ⚡ por ";   
-      }
-    }
-    catch(err){
-       console.log(err.message);
     }   
+  
     
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
@@ -124,6 +112,7 @@ export default {
         this.toggle() 
       }
     }, 30000);
+    this.translateTrigger();
   },
   methods: {
     chargeAgent() {
@@ -245,6 +234,20 @@ export default {
       writingBadgeInstance.$mount();
       this.$refs.container.appendChild(writingBadgeInstance.$el);
       this.writing = true;
+    },
+    translateTrigger:function(){
+      try{
+       var siteURL = window.location.href;
+       if(siteURL.indexOf("https://svachat.com") >= 0) //spanish
+      {
+           this.placeHolder = "Escribe una pregunta...";
+           this.startChatText="Chat";
+           this.poweredByText="⚡ Accionado ⚡ por ";   
+      }
+    }
+    catch(err){
+       console.log(err.message);
+    }   
     }
   }
 };
