@@ -242,7 +242,7 @@ export default {
       {
            this.placeHolder = "Escribe una pregunta...";
            this.startChatText="Chat";
-           this.poweredByText="⚡ Accionado ⚡ por ";   
+           this.poweredByText="⚡ Powered ⚡ by ";   
       }
     }
     catch(err){
