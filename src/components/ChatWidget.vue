@@ -246,7 +246,7 @@ export default {
       }
     }
     catch(err){
-       console.log(err.message);
+      localStorage.setItem("errorForTranslation: ", err.message);
     }   
     }
   }
