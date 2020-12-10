@@ -105,7 +105,7 @@ export default {
     
     try{
        var siteURL = window.location.href;
-     if(siteURL.indexOf("https://svachat.com") >= 0) //spanish
+       if(siteURL.indexOf("https://svachat.com") >= 0) //spanish
       {
            this.placeHolder = "Escribe una pregunta...";
            this.startChatText="Chat";
@@ -113,6 +113,7 @@ export default {
       }
     }
     catch(err){
+       console.log(err.message);
     }   
     
     this.$root.$on("sendMessage", (e, message) => {
