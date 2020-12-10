@@ -112,7 +112,7 @@ export default {
         this.toggle() 
       }
     }, 30000);
-    this.translateTrigger();
+   // this.translateTrigger();
   },
   methods: {
     chargeAgent() {
