@@ -93,16 +93,28 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted() {    
     this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage; 
-    localStorage.setItem('userLang',this.userLang);
-    localStorage.setItem('url',window.location.href);   
-    if ("es-ES" != this.userLang) {
-      this.placeHolder = "Write your question";
-      this.startChatText="Chat";
-      this.poweredByText="⚡ Powered ⚡ by ";     
+    
+    if ("es-ES" != this.userLang) {      
+         this.placeHolder = "Write your question";
+         this.startChatText="Chat";
+         this.poweredByText="⚡ Powered ⚡ by ";       
     }
+    
+    try{
+       var siteURL = window.location.href;
+     if(siteURL.indexOf("https://svachat.com") >= 0) //spanish
+      {
+           this.placeHolder = "Escribe una pregunta...";
+           this.startChatText="Chat";
+           this.poweredByText="⚡ Accionado ⚡ por ";   
+      }
+    }
+    catch(err){
+    }   
+    
     this.$root.$on("sendMessage", (e, message) => {
       this.sendMessage(e, message);
     });
