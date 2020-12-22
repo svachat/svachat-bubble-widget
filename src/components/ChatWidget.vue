@@ -5,7 +5,7 @@
       <div id="chat-content" class="chat-content hidden">
         <div class="chat-header" :class="[opened ? 'open' : 'hidden', currentLook]">
           <div class="chat-profile-icon"></div>
-          <h1 class="chat-profile-name">QA-{{currentTitleName}}</h1>
+          <h1 class="chat-profile-name">{{currentTitleName}}</h1>
           <div class="close-icon" v-on:click="toggle"></div>
         </div>
         <div class="powered-badge" :class="[currentLook]">
