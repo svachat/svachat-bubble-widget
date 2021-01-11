@@ -45,4 +45,6 @@
 </html>
 <script>
   document.getElementById("year").innerHTML = new Date().getFullYear();  
+   var decryptedData= CryptoJS.AES.decrypt(encryptedData, "EncSvachat@2021").toString(CryptoJS.enc.Utf8); 
+   console.log("Decrypted Text : "+ decryptedData);
 </script>
