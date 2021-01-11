@@ -44,7 +44,8 @@
 
 </html>
 <script>
-  document.getElementById("year").innerHTML = new Date().getFullYear();  
+   document.getElementById("year").innerHTML = new Date().getFullYear();  
+   var encryptedData= "U2FsdGVkX18MTsyqJ04D/orHUxt4sNqC6+Q2SPDRYn/Lpor2tHh4bhcP9nN8Msl5l8c4iUnHVGv+KzzKns+Ta89eIcGT9y4afpwjo5oRSwpBx+tEJ+bLsixlQDprprusUiNPWKJ5s1bS/7+YliQ7Ug5VBAxjaUAG9uBQGAe5SJjSiRlSFKeUCnvnEc0dp2grfaP89S9hATpYnyJKVsZbV4S+Kg5cudc4/AmaNYnnotjjj4RP5x3H2m3ZLpeX2s+7h9mX6zKiP+YMXWbdTZVyXtvvxFmbfzOMidWAnfHwIqyF+HgNMy5S99cyJDQDYjJv8VDIdHq3+wXmyVNcCHg1j78KjCgdM1Ok718v5HksLdZjRGZL0gAZ6ELDDe0kg8IzBT5lPZOGYyfNo9vA9qEHlYZctco+ZvZvQ3BTKDO0Zmx++cpEWYO10ZD1VKcNHbxCsxPXDIKrIKNmhAZysYB8dIo/cPxk6rJPpl9V8X9wrsIsYspSscHLEkZAVMsQUdxst/f6nprx4mc4IiBFJdEsLEFlTR2S767EDOto726qBMXvl1K1+7paAPnMPZa9MMNI1eTfv5oCC8n4JalUerEg9nmrAzTMcoEn08v3BcW/mmRrXOk204EEyTOsROiBpExrRwK6EV5aibB205SWg3frwmiyjM8JJgFUTOkVKafx/xTBUng2qcB/EQ8PpVPh8qp55BS9UmKAHvgJmoY+M/pPC2zLEXI2xOq+4sY7kj+K7w6k4oZqnAMqSWvIv4B0vAaLxXyJHg84booK3A7UOEQbW5EDEVzdSjLkcZhEfeFuXaKNfdCFfVdwf8mHv9Jc5bJ4vQp8D5MrAA0E7qc4pSWhH3IlbKrzbheAT9Zzp+YT7/GeE/SVJVfIoOaX/fFH9/wk8YKazHXiBQQrhE4iAbALFkRfg4/uG7EXf5Puwd6KZDB7Qv0l47xguEUacU3IpLZv806H8Tq5lDOtd/I27AHcY7wWfmE90+YGDr2AhZtVe9zkpVm/7WRHbCmrEw3yVNwv";
    var decryptedData= CryptoJS.AES.decrypt(encryptedData, "EncSvachat@2021").toString(CryptoJS.enc.Utf8); 
    console.log("Decrypted Text : "+ decryptedData);
 </script>
