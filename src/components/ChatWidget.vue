@@ -123,6 +123,7 @@ export default {
   methods: {
     chargeAgent() {
       axios.get('https://svachat-backend.eu-de.mybluemix.net/chatbot/' + this.token).then(response => {
+          console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
           this.currentColor=  response.data.brand_color;
