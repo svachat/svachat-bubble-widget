@@ -227,8 +227,22 @@ export default {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
         axios.get(this.apiUrl + this.currentClient).then(response => {
-           console.log('startSession,message='+response.data.message);
-          this.receiveMessage(response.data.message);
+          var welcome_msg = response.data.message;
+          console.log('startSession,message='+welcome_msg);
+          if(welcome_msg.indexOf('primary_msg:')!=-1)
+          {
+           var json_parsed_wm = JSON.parse(welcome_msg);
+           console.log(json_parsed_wm)
+           var primary_welcome_msg =json_parsed_wm["primary_msg"];           
+           console.log(primary_welcome_msg)
+           var additional_msgs=[];
+           additional_msgs=json_parsed_wm["additional_msgs"];
+           console.log(additional_msgs)
+          }
+          else
+          {
+              this.receiveMessage(response.data.message);
+          }          
           this.sessionStarted = true;
         });
       } 
