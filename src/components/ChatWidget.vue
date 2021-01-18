@@ -74,8 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/',
-      encDecryptKey : process.env.ENC_DECRYPT_KEY
+      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/'    
     };
   },
   props: {
@@ -98,7 +97,8 @@ export default {
   },
   mounted() {    
     this.chargeAgent();
-    this.userLang = navigator.language || navigator.userLanguage; 
+    this.userLang = navigator.language || navigator.userLanguage;      
+    console.log('Browser Language: '+this.userLang )
     
     if ("es-ES" != this.userLang) {      
          this.placeHolder = "Write your question";
