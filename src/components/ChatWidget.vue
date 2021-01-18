@@ -228,8 +228,8 @@ export default {
         // TODO: Make env param friendly
         axios.get(this.apiUrl + this.currentClient).then(response => {
           var welcome_msg = response.data.message;
-          console.log('startSession,message='+welcome_msg);
-          if(welcome_msg.indexOf('primary_msg:')!=-1)
+          console.log('startSession,message='+welcome_msg);          
+          if(welcome_msg.indexOf('primary_msg')!=-1)
           {
            var json_parsed_wm = JSON.parse(welcome_msg);
            console.log(json_parsed_wm)
