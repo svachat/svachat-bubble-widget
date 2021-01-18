@@ -231,14 +231,10 @@ export default {
           console.log('startSession,message='+welcome_msg);          
           if(welcome_msg.indexOf('primary_msg')!=-1)
           {
-           var json_parsed_wm = JSON.parse(welcome_msg);
-           console.log(json_parsed_wm)
-           var primary_welcome_msg =json_parsed_wm["primary_msg"];
-           var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
-           console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
-           var additional_msgs=[];
-           additional_msgs=json_parsed_wm["additional_msgs"];
-           console.log(additional_msgs)
+             var json_parsed_wm = JSON.parse(welcome_msg);
+             console.log(json_parsed_wm);
+             this.sendPrimaryWelcomeMsg(json_parsed_wm);
+             this.sendAdditionalWelcomeMsgs(json_parsed_wm);
           }
           else
           {
@@ -277,8 +273,39 @@ export default {
      return decryptedMsg;    
       }
     catch(err){
-      console.log("getDecryptedMessage()=.Error: "+ err);
+      console.log("getDecryptedMessage()=>Error: "+ err);
     } 
+    },
+    sendPrimaryWelcomeMsg:function(encWelcomeMsgJson){
+       try{          
+           var primary_welcome_msg =json_parsed_wm["primary_msg"];
+           var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
+           console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
+           this.receiveMessage(decrypted_wm);          
+       }
+       catch(err){
+          console.log("sendPrimaryWelcomeMsg()=>Error: "+ err);
+       }
+    },
+    sendAdditionalWelcomeMsgs:function(encWelcomeMsgJson){
+      try
+      {      
+           var additional_msgs=[];
+           additional_msgs=json_parsed_wm["additional_msgs"];
+           
+           for(var i=0;i<additional_msgs.length;i++)
+           {
+              console.log("Encrypted message at "+i+"=>"+ additional_msgs[i]);
+              var decrypted_msg = this.getDecryptedMessage(additional_msgs[i]);
+              console.log("Decrypted message at "+i+"=>"+ decrypted_msg);
+              this.receiveMessage(decrypted_msg);     
+           }           
+           
+      }
+      catch(err){
+          console.log("sendAdditionalWelcomeMsgs()=>Error: "+ err);
+      }
+    
     }
   }
 };
