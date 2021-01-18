@@ -234,8 +234,8 @@ export default {
            var json_parsed_wm = JSON.parse(welcome_msg);
            console.log(json_parsed_wm)
            var primary_welcome_msg =json_parsed_wm["primary_msg"];
-           var decrypted_wm = this.getDecryptMessage(primary_welcome_msg);
-           console.log('primary_welcome_msg_encrypted=>'+primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+decrypted_wm);
+           var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
+           console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
            var additional_msgs=[];
            additional_msgs=json_parsed_wm["additional_msgs"];
            console.log(additional_msgs)
@@ -269,14 +269,15 @@ export default {
       localStorage.setItem("errorForTranslation: ", err.message);
     }   
     },
-    getDecryptMessage:function(encryptedMessage){
+    getDecryptedMessage:function(encryptedMessage){
     try{
+     console.log("Inside  getDecryptedMessage()=>encryptedMessage:"+ encryptedMessage);
      var decryptedMsg= this.CryptoJS.AES.decrypt(encryptedMessage, "EncSvachat@2021").toString(this.CryptoJS.enc.Utf8); 
      console.log("Decrypted Text : "+ decryptedData);
      return decryptedMsg;    
       }
     catch(err){
-      localStorage.setItem("errorForTranslation: ", err.message);
+      console.log("getDecryptedMessage()=.Error: "+ err);
     } 
     }
   }
