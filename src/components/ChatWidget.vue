@@ -276,9 +276,10 @@ export default {
       console.log("getDecryptedMessage()=>Error: "+ err);
     } 
     },
-    sendPrimaryWelcomeMsg:function(encWelcomeMsgJson){
+    sendPrimaryWelcomeMsg:function(parsedJSON){
        try{          
-           var primary_welcome_msg =json_parsed_wm["primary_msg"];
+           console.log("Inside sendPrimaryWelcomeMsg(),parsedJSON="+ parsedJSON);
+           var primary_welcome_msg =parsedJSON["primary_msg"];
            var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
            console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
            this.receiveMessage(decrypted_wm);          
@@ -287,11 +288,13 @@ export default {
           console.log("sendPrimaryWelcomeMsg()=>Error: "+ err);
        }
     },
-    sendAdditionalWelcomeMsgs:function(encWelcomeMsgJson){
+    sendAdditionalWelcomeMsgs:function(parsedJSON){
       try
       {      
            var additional_msgs=[];
-           additional_msgs=json_parsed_wm["additional_msgs"];
+           console.log("Inside sendAdditionalWelcomeMsgs(),parsedJSON="+ parsedJSON);
+           additional_msgs=parsedJSON["additional_msgs"];          
+           console.log("additional_msgs: "+ additional_msgs);
            
            for(var i=0;i<additional_msgs.length;i++)
            {
