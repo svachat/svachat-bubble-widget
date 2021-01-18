@@ -273,7 +273,7 @@ export default {
     try{
      console.log("Inside  getDecryptedMessage()=>encryptedMessage:"+ encryptedMessage);
      var decryptedMsg= this.CryptoJS.AES.decrypt(encryptedMessage, "EncSvachat@2021").toString(this.CryptoJS.enc.Utf8); 
-     console.log("Decrypted Text : "+ decryptedData);
+     console.log("Decrypted Text : "+ decryptedMsg);
      return decryptedMsg;    
       }
     catch(err){
