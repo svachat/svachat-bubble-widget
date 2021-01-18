@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: process.env.API_URL_PREFIX_DEV +'bot/'
+      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/'
     };
   },
   props: {
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get(process.env.API_URL_PREFIX_DEV+'chatbot/' + this.token).then(response => {
+      axios.get('https://0d26b4750a2b.ngrok.io/chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
