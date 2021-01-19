@@ -288,57 +288,15 @@ export default {
              console.log(json_parsed_wm);
              this.sendPrimaryWelcomeMsg(json_parsed_wm);
              this.sendAdditionalWelcomeMsgs(json_parsed_wm);
+             this.showAvlLeadData();
           }
           else
           {
               this.receiveMessage(response.data.message);
           }          
           this.sessionStarted = true;         
-        });
-        
-        //Display user name and email messages if available in session to prevent from re-entry of name and email in same session
-        if(sessionStorage.getItem('user_name')!=null && this.welcomeMessageCount>1)
-        {
-           var MessageClass = Vue.extend(MessageBubble);
-            var msgInstance = new MessageClass({
-              propsData: {
-                mine: true,
-                msg: sessionStorage.getItem('user_name'),
-                color: this.currentColor
-              }
-            });
-        
-
-          if (this.writing) {
-            this.$refs.container.removeChild(this.$refs.container.lastChild);
-          }
-
-          msgInstance.$mount();
-          this.$refs.container.appendChild(msgInstance.$el);    
-          
-         let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+sessionStorage.getItem('user_name')+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+sessionStorage.getItem('user_name')+"! What is your business email address?";
-         this.receiveMessage(askForEmailMsg);  
-         
-         if(sessionStorage.getItem('user_email')!=null){
-          var msgInstance = new MessageClass({
-              propsData: {
-                mine: true,
-                msg: sessionStorage.getItem('user_email'),
-                color: this.currentColor
-              }
-            });
-        
-
-          if (this.writing) {
-            this.$refs.container.removeChild(this.$refs.container.lastChild);
-          }
-
-          msgInstance.$mount();
-          this.$refs.container.appendChild(msgInstance.$el);  
-         }
-          
-        }
-         
+        });      
+    
       } 
     },
      beginWriting: function() {
@@ -429,6 +387,52 @@ export default {
           sessionStorage.setItem('is_user_lead_data_saved',null);
       }
     
+    },
+    showAvlLeadData:function(){
+        console.log('Inside showAvlLeadData()=>user_name='+sessionStorage.getItem('user_name')+',user_email:'+sessionStorage.getItem('user_email'));
+        //Display user name and email messages if available in session to prevent from re-entry of name and email in same session
+        if(sessionStorage.getItem('user_name')!=null && this.welcomeMessageCount>1)
+        {
+           var MessageClass = Vue.extend(MessageBubble);
+            var msgInstance = new MessageClass({
+              propsData: {
+                mine: true,
+                msg: sessionStorage.getItem('user_name'),
+                color: this.currentColor
+              }
+            });
+        
+
+          if (this.writing) {
+            this.$refs.container.removeChild(this.$refs.container.lastChild);
+          }
+
+          msgInstance.$mount();
+          this.$refs.container.appendChild(msgInstance.$el);    
+          
+         let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+sessionStorage.getItem('user_name')+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+sessionStorage.getItem('user_name')+"! What is your business email address?";
+         this.receiveMessage(askForEmailMsg);  
+         
+         if(sessionStorage.getItem('user_email')!=null){
+          var msgInstance = new MessageClass({
+              propsData: {
+                mine: true,
+                msg: sessionStorage.getItem('user_email'),
+                color: this.currentColor
+              }
+            });
+        
+
+          if (this.writing) {
+            this.$refs.container.removeChild(this.$refs.container.lastChild);
+          }
+
+          msgInstance.$mount();
+          this.$refs.container.appendChild(msgInstance.$el);  
+         }
+          
+        }
+         
     }
   }
 };
