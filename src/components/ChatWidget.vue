@@ -176,7 +176,8 @@ export default {
         console.log('session_user_name: '+sessionUserName);
         if(this.userMessageCount==1 && this.welcomeMessageCount>1 && sessionUserName==null)
         {
-           sessionStorage.setItem('user_name', inputString);           
+           sessionStorage.setItem('user_name', inputString);    
+           console.log('session_user_name_updated: '+ sessionStorage.getItem('user_name'));
         }
       
         var MessageClass = Vue.extend(MessageBubble);
@@ -270,8 +271,7 @@ export default {
           {
               this.receiveMessage(response.data.message);
           }          
-          this.sessionStarted = true;
-          this.$session.start();
+          this.sessionStarted = true;         
         });
       } 
     },
