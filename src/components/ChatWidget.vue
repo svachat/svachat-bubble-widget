@@ -430,6 +430,11 @@ export default {
           msgInstance.$mount();
           this.$refs.container.appendChild(msgInstance.$el);  
          }
+         
+         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
+          axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
+          this.receiveMessage(response.data.text);    
+        });     
           
         }
          
