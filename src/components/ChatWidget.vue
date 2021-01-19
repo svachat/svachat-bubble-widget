@@ -191,7 +191,7 @@ export default {
         }
         
         //Save the user name and email only once in DB and if both are not empty only
-        console.log('this.welcomeMessageCount:'+this.userMessageCount+',sessionUserName:'+sessionUserName+',sessionUserEmail:'+sessionUserEmail+',isUserLeadDataSaved'+isUserLeadDataSaved);
+        console.log('this.welcomeMessageCount:'+this.userMessageCount+',sessionUserName:'+sessionStorage.getItem('user_name')+',sessionUserEmail:'+sessionStorage.getItem('user_email')+',isUserLeadDataSaved'+isUserLeadDataSaved);
         if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && isUserLeadDataSaved==false)
         {
           this.saveLeadData(sessionUserName,sessionUserEmail);
