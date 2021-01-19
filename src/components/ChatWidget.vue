@@ -169,6 +169,8 @@ export default {
         this.userMessageCount +=1;     
         console.log('this.userMessageCount: '+ this.userMessageCount);
         
+        var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
+        
         //Save name as session value only for multiple welcome messages  
         var sessionUserName =  sessionStorage.getItem('user_name');
         console.log('session_user_name: '+sessionUserName);
@@ -187,8 +189,8 @@ export default {
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
         }
         
-        //Save the user name and email in DB if not empty
-        if(sessionUserName!=null && sessionUserEmail!=null)
+        //Save the user name and email only once in DB and if both are not empty only
+        if(sessionUserName!=null && sessionUserEmail!=null && !isUserLeadDataSaved)
         {
           this.saveLeadData(sessionUserName,sessionUserEmail);
         }
@@ -366,12 +368,15 @@ export default {
        var leadDataObj = {"user_name":userName,"user_email":userEmail,"logged_user_id":loggedUserId};
        axios.put('https://4e93d39ce2c3.ngrok.io/user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
           console.log(response);         
+          sessionStorage.setItem('is_user_lead_data_saved','true');
         },error=>{
          console.log('saveLeadData()=>PUT error occurred:'+ error);
+          sessionStorage.setItem('is_user_lead_data_saved',null);
         });
      }
       catch(err){
           console.log("saveLeadData()=>Error: "+ error);
+          sessionStorage.setItem('is_user_lead_data_saved',null);
       }
     
     }
