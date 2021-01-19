@@ -170,6 +170,7 @@ export default {
         console.log('this.userMessageCount: '+ this.userMessageCount);
         
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
+        console.log('isUserLeadDataSaved:'+isUserLeadDataSaved);
         
         //Save name as session value only for multiple welcome messages  
         var sessionUserName =  sessionStorage.getItem('user_name');
@@ -219,25 +220,21 @@ export default {
         this.beginWriting();
 
         var container = this.$el.querySelector("#msg-container");
-        container.scrollTop = container.scrollHeight;
+        container.scrollTop = container.scrollHeight;       
+    
+         // TODO: Make env param friendly
+        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
         
         if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
-          let askForEmailMsg = "Thanks,"+inputString+"!What is your business email address?";
-          
-          setTimeout(() => { 
-     this.receiveMessage(askForEmailMsg);
-    }, 2000);
-         
+          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"!What is your business email address?";
+          this.receiveMessage(askForEmailMsg);
         }
         else{
-         // TODO: Make env param friendly
-        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
-          this.receiveMessage(response.data.text);
-        });
-        
-        }     
-
+         this.receiveMessage(response.data.text);
+        }
+         
+        });      
         this.message = "";
       }
     },
