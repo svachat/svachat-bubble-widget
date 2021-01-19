@@ -214,7 +214,7 @@ export default {
         container.scrollTop = container.scrollHeight;       
         
         console.log('this.userMessageCount just before response:'+sessionStorage.getItem('user_msg_count'));
-        if(parseInt(sessionStorage.getItem('user_msg_count')==1 && this.welcomeMessageCount>1)
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
           let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"! What is your business email address?";
@@ -223,7 +223,7 @@ export default {
           this.receiveMessage(askForEmailMsg);    
         });           
         }
-        else if(parseInt(sessionStorage.getItem('user_msg_count')==2 && this.welcomeMessageCount>1){
+        else if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1){
          console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
          let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
          axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
