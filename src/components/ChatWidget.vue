@@ -182,7 +182,7 @@ export default {
          //Save name as session value only for multiple welcome messages  
         var sessionUserEmail =  sessionStorage.getItem('user_email');
         console.log('session_user_name: '+sessionUserName);
-        if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionUserEmail==null))
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionUserEmail==null)
         {
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
