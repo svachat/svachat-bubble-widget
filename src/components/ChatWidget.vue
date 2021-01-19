@@ -165,7 +165,7 @@ export default {
       var validInput = inputString != "";
 
       if (validInput) {      
-        userMsgSessionCount = sessionStorage.getItem('user_msg_count');
+        var userMsgSessionCount = sessionStorage.getItem('user_msg_count');
         sessionStorage.setItem('userMsgSessionCount',userMsgSessionCount);        
         this.userMessageCount += sessionStorage.getItem('user_msg_count')==null?1: parseInt(sessionStorage.getItem('user_msg_count')); 
         console.log('this.userMessageCount:'+  this.userMessageCount);
