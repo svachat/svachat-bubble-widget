@@ -74,7 +74,8 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/'    
+      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/',
+      encDecryptKey:process.env.ENC_DECRYPT_KEY
     };
   },
   props: {
@@ -116,6 +117,8 @@ export default {
       }
     }, 30000);
    // this.translateTrigger(); 
+   
+   console.log('encDecryptKey: '+encDecryptKey);
   },
   methods: {
     chargeAgent() {
