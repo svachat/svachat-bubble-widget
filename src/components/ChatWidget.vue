@@ -194,7 +194,7 @@ export default {
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
         
-        if(userMessageCount==1 && this.welcomeMessageCount>1)
+        if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
           let askForEmailMsg = "Thanks,"+inputString+"!What is your business email address?";
           this.receiveMessage(askForEmailMsg);
@@ -205,9 +205,7 @@ export default {
           this.receiveMessage(response.data.text);
         });
         
-        }
-
-       
+        }     
 
         this.message = "";
       }
