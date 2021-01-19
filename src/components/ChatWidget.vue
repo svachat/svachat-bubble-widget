@@ -350,8 +350,9 @@ export default {
            var additional_msgs=[];
            console.log("Inside sendAdditionalWelcomeMsgs(),parsedJSON="+ parsedJSON);
            additional_msgs=parsedJSON["additional_msgs"];          
-           console.log("additional_msgs: "+ additional_msgs);
+           console.log("additional_msgs: "+ additional_msgs,"\nadditional_msgs_length:"+additional_msgs.length+"\nCurrent Welocome message count:"+ this.welcomeMessageCount);
            this.welcomeMessageCount+=additional_msgs.length;
+           console.log("Updated welcome message count:"+ this.welcomeMessageCount);
            
            for(var i=0;i<additional_msgs.length;i++)
            {
