@@ -166,13 +166,14 @@ export default {
 
       if (validInput) {
       
-        this.userMessageCount +=1;   
+        this.userMessageCount += sessionStorage.getItem('user_msg_count')==null?1: parseInt(sessionStorage.getItem('user_msg_count')); 
+        sessionStorage.setItem('user_msg_count',this.userMessageCount.ToString());
+        
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
                
-        //Save name as session value only for multiple welcome messages  
-        var sessionUserName =  sessionStorage.getItem('user_name');
-        console.log('session_user_name: '+sessionUserName);
-        if(this.userMessageCount==1 && this.welcomeMessageCount>1 && sessionUserName==null)
+        //Save name as session value only for multiple welcome messages       
+        console.log('session_user_name: '+sessionStorage.getItem('user_name'));
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')==null)
         {
            sessionStorage.setItem('user_name', inputString);    
            console.log('session_user_name_updated: '+ sessionStorage.getItem('user_name'));
@@ -181,7 +182,7 @@ export default {
          //Save name as session value only for multiple welcome messages  
         var sessionUserEmail =  sessionStorage.getItem('user_email');
         console.log('session_user_name: '+sessionUserName);
-        if(this.userMessageCount==2 && this.welcomeMessageCount>1 && sessionUserEmail==null)
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionUserEmail==null)
         {
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
@@ -212,8 +213,8 @@ export default {
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;       
         
-        console.log('this.userMessageCount just before response:'+this.userMessageCount);
-        if(this.userMessageCount==1 && this.welcomeMessageCount>1)
+        console.log('this.userMessageCount just before response:'+sessionStorage.getItem('user_msg_count'));
+        if(parseInt(sessionStorage.getItem('user_msg_count')==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
           let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"! What is your business email address?";
@@ -222,7 +223,7 @@ export default {
           this.receiveMessage(askForEmailMsg);    
         });           
         }
-        else if(this.userMessageCount==2 && this.welcomeMessageCount>1){
+        else if(parseInt(sessionStorage.getItem('user_msg_count')==2 && this.welcomeMessageCount>1){
          console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
          let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
          axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
@@ -336,7 +337,8 @@ export default {
            console.log("Inside sendPrimaryWelcomeMsg(),parsedJSON="+ parsedJSON);
            var primary_welcome_msg =parsedJSON["primary_msg"];
            var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
-           this.welcomeMessageCount+=1;
+           this.welcomeMessageCount += sessionStorage.getItem('wm_msg_count')==null?1: parseInt(sessionStorage.getItem('wm_msg_count')); 
+           sessionStorage.setItem('wm_msg_count',this.welcomeMessageCount.ToString());          
            console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
            this.receiveMessage(decrypted_wm);          
        }
@@ -351,7 +353,7 @@ export default {
            console.log("Inside sendAdditionalWelcomeMsgs(),parsedJSON="+ parsedJSON);
            additional_msgs=parsedJSON["additional_msgs"];          
            console.log("additional_msgs: "+ additional_msgs,"\nadditional_msgs_length:"+additional_msgs.length+"\nCurrent Welocome message count:"+ this.welcomeMessageCount);
-           this.welcomeMessageCount+=additional_msgs.length;
+           this.welcomeMessageCount +=  additional_msgs.length;          
            console.log("Updated welcome message count:"+ this.welcomeMessageCount);
            
            for(var i=0;i<additional_msgs.length;i++)
