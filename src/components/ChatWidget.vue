@@ -75,7 +75,9 @@ export default {
       userLang: String,
       startChatText: 'Chat',
       apiUrl: 'https://2b6bfc85bf12.ngrok.io/bot/',
-      encDecryptKey:process.env.ENC_DECRYPT_KEY
+      welcomeMessageCount : 0,
+      userMessageCount : 0
+     
     };
   },
   props: {
@@ -157,13 +159,17 @@ export default {
 
       if (message == null) {
         inputString = this.message;
-      } else {
+      } else {       
+       
         inputString = message;
       }
 
       var validInput = inputString != "";
 
       if (validInput) {
+      
+        this.userMessageCount +=1;       
+      
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
           propsData: {
@@ -187,11 +193,21 @@ export default {
 
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
-
-        // TODO: Make env param friendly
+        
+        if(userMessageCount==1 && this.welcomeMessageCount>1)
+        {
+          let askForEmailMsg = "Thanks,"+inputString+"!What is your business email address?";
+          this.receiveMessage(askForEmailMsg);
+        }
+        else{
+         // TODO: Make env param friendly
         axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);
         });
+        
+        }
+
+       
 
         this.message = "";
       }
@@ -284,6 +300,7 @@ export default {
            console.log("Inside sendPrimaryWelcomeMsg(),parsedJSON="+ parsedJSON);
            var primary_welcome_msg =parsedJSON["primary_msg"];
            var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
+           this.welcomeMessageCount+=1;
            console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
            this.receiveMessage(decrypted_wm);          
        }
@@ -298,6 +315,7 @@ export default {
            console.log("Inside sendAdditionalWelcomeMsgs(),parsedJSON="+ parsedJSON);
            additional_msgs=parsedJSON["additional_msgs"];          
            console.log("additional_msgs: "+ additional_msgs);
+           this.welcomeMessageCount+=additional_msgs.length;
            
            for(var i=0;i<additional_msgs.length;i++)
            {
