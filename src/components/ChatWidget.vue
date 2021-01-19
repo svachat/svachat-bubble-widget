@@ -168,7 +168,13 @@ export default {
 
       if (validInput) {
       
-        this.userMessageCount +=1;       
+        this.userMessageCount +=1;      
+        
+        //Save name as session value only for multiple welcome messages
+        if(this.userMessageCount==1 && this.welcomeMessageCount>1 && this.$session.get('user_name')!=null)
+        {
+           this.$session.set('user_name', inputString);
+        }
       
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
