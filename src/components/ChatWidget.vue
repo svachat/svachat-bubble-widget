@@ -224,12 +224,15 @@ export default {
          // TODO: Make env param friendly
         axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
         
+        console.log('this.userMessageCount just before response:'+this.userMessageCount);
         if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
+          console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
           let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"!What is your business email address?";
           this.receiveMessage(askForEmailMsg);
         }
         else if(this.userMessageCount==2 && this.welcomeMessageCount>1){
+         console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
          let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";
          this.receiveMessage(initiateChatMsg);
         }
