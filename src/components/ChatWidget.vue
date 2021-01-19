@@ -337,8 +337,7 @@ export default {
            console.log("Inside sendPrimaryWelcomeMsg(),parsedJSON="+ parsedJSON);
            var primary_welcome_msg =parsedJSON["primary_msg"];
            var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
-           this.welcomeMessageCount += sessionStorage.getItem('wm_msg_count')==null?1: parseInt(sessionStorage.getItem('wm_msg_count')); 
-           sessionStorage.setItem('wm_msg_count',this.welcomeMessageCount.ToString());          
+           this.welcomeMessageCount+=1;
            console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
            this.receiveMessage(decrypted_wm);          
        }
