@@ -188,14 +188,8 @@ export default {
         {
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
-        }
-        
-        //Save the user name and email only once in DB and if both are not empty only
-        console.log('this.welcomeMessageCount:'+this.userMessageCount+',sessionUserName:'+sessionStorage.getItem('user_name')+',sessionUserEmail:'+sessionStorage.getItem('user_email')+',isUserLeadDataSaved'+isUserLeadDataSaved);
-        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && isUserLeadDataSaved==false)
-        {
-          this.saveLeadData(sessionUserName,sessionUserEmail);
-        }      
+        }       
+      
         
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
@@ -225,7 +219,7 @@ export default {
         if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
-          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"!What is your business email address?";
+          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"! What is your business email address?";
             // TODO: Make env param friendly
           axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(askForEmailMsg);    
@@ -241,11 +235,19 @@ export default {
         });          
         }
         else{
+        console.log('Inside sendMessage()=> else)');
         axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);    
         });    
         }              
         this.message = "";
+        
+        //Save the user name and email only once in DB and if both are not empty only
+        console.log('this.welcomeMessageCount:'+this.userMessageCount+',sessionUserName:'+sessionStorage.getItem('user_name')+',sessionUserEmail:'+sessionStorage.getItem('user_email')+',isUserLeadDataSaved'+isUserLeadDataSaved);
+        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && isUserLeadDataSaved==false)
+        {
+          this.saveLeadData(sessionUserName,sessionUserEmail);
+        }      
       }
     },
     receiveMessage: function(text) {
