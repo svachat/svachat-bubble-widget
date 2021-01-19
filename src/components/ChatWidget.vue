@@ -166,12 +166,9 @@ export default {
 
       if (validInput) {
       
-        this.userMessageCount +=1;     
-        console.log('this.userMessageCount: '+ this.userMessageCount);
-        
+        this.userMessageCount +=1;   
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
-        console.log('isUserLeadDataSaved:'+isUserLeadDataSaved);
-        
+               
         //Save name as session value only for multiple welcome messages  
         var sessionUserName =  sessionStorage.getItem('user_name');
         console.log('session_user_name: '+sessionUserName);
@@ -242,10 +239,10 @@ export default {
         
         //Save the user name and email only once in DB and if both are not empty only
         console.log('Save User Lead in DB=>this.welcomeMessageCount:'+this.welcomeMessageCount+',sessionUserName:'+sessionStorage.getItem('user_name')+',sessionUserEmail:'+sessionStorage.getItem('user_email')+',isUserLeadDataSaved:'+isUserLeadDataSaved);
-        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && isUserLeadDataSaved==false)
+        if(this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')!=null && sessionStorage.getItem('user_email')!=null && isUserLeadDataSaved==false)
         {
           console.log('Just before save user lead..');
-          this.saveLeadData(sessionUserName,sessionUserEmail);
+          this.saveLeadData(sessionStorage.getItem('user_name'),sessionStorage.getItem('user_email'));
         }      
       }
     },
