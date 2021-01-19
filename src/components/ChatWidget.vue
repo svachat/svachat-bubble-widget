@@ -385,8 +385,7 @@ export default {
       catch(err){
           console.log("saveLeadData()=>Error: "+ error);
           sessionStorage.setItem('is_user_lead_data_saved',null);
-      }
-    
+      }    
     },
     showAvlLeadData:function(){
         console.log('Inside showAvlLeadData()=>user_name='+sessionStorage.getItem('user_name')+',user_email:'+sessionStorage.getItem('user_email'));
@@ -434,10 +433,8 @@ export default {
          let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
           axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
           this.receiveMessage(response.data.text);    
-        });     
-          
+         });            
         }
-         
     }
   }
 };
