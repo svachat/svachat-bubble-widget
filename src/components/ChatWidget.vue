@@ -191,11 +191,10 @@ export default {
         }
         
         //Save the user name and email only once in DB and if both are not empty only
-        if(sessionUserName!=null && sessionUserEmail!=null && !isUserLeadDataSaved)
+        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && !isUserLeadDataSaved)
         {
           this.saveLeadData(sessionUserName,sessionUserEmail);
-        }
-        
+        }        
         
       
         var MessageClass = Vue.extend(MessageBubble);
@@ -229,6 +228,10 @@ export default {
         {
           let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"!What is your business email address?";
           this.receiveMessage(askForEmailMsg);
+        }
+        else if(this.userMessageCount==2 && this.welcomeMessageCount>1){
+         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";
+         this.receiveMessage(initiateChatMsg);
         }
         else{
          this.receiveMessage(response.data.text);
