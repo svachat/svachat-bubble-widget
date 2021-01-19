@@ -165,11 +165,11 @@ export default {
       var validInput = inputString != "";
 
       if (validInput) {      
-        var userMsgSessionCount = sessionStorage.getItem('user_msg_count');
-        sessionStorage.setItem('userMsgSessionCount',userMsgSessionCount);  
+        var userMsgSessionCount = sessionStorage.getItem('user_msg_count');        
         console.log('userMsgSessionCount:'+  userMsgSessionCount);
-        this.userMessageCount += userMsgSessionCount==null?1: parseInt(userMsgSessionCount); 
-        console.log('this.userMessageCount:'+  this.userMessageCount);
+        var userMessageCountPre = userMsgSessionCount==null?1: parseInt(userMsgSessionCount); 
+        this.userMessageCount += userMessageCountPre;
+        console.log('this.userMessageCount:'+this.userMessageCount);
         sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
         
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
