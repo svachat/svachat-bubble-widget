@@ -168,10 +168,13 @@ export default {
 
       if (validInput) {
       
-        this.userMessageCount +=1;      
+        this.userMessageCount +=1;     
+        console.log('this.userMessageCount: '+ this.userMessageCount);
         
-        //Save name as session value only for multiple welcome messages       
-        if(this.userMessageCount==1 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')!=null)
+        //Save name as session value only for multiple welcome messages  
+        var sessionUserName =  sessionStorage.getItem('user_name');
+        console.log('session_user_name: '+sessionUserName);
+        if(this.userMessageCount==1 && this.welcomeMessageCount>1 && sessionUserName==null)
         {
            sessionStorage.setItem('user_name', inputString);           
         }
