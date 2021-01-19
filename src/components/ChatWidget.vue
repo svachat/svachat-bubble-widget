@@ -200,7 +200,7 @@ export default {
           
           setTimeout(() => { 
      this.receiveMessage(askForEmailMsg);
-    }, 20000);
+    }, 2000);
          
         }
         else{
