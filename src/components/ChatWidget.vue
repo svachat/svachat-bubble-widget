@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://4e93d39ce2c3.ngrok.io/bot/',
+      apiUrl: 'https://73a7cee2a49e.ngrok.io/bot/',
       welcomeMessageCount : 0,
       userMessageCount : 0
      
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://4e93d39ce2c3.ngrok.io/chatbot/' + this.token).then(response => {
+      axios.get('https://73a7cee2a49e.ngrok.io/chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
@@ -363,7 +363,7 @@ export default {
        console.log('Inside saveLeadData()=>userName='+userName+',userEmail='+userEmail);
        var loggedUserId = parseInt(this.currentClient);
        var leadDataObj = {"user_name":userName,"user_email":userEmail,"logged_user_id":loggedUserId};
-       axios.put('https://4e93d39ce2c3.ngrok.io/user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
+       axios.put('https://73a7cee2a49e.ngrok.io/user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
           console.log(response);         
           sessionStorage.setItem('is_user_lead_data_saved','true');
         },error=>{
