@@ -191,12 +191,12 @@ export default {
         }
         
         //Save the user name and email only once in DB and if both are not empty only
-        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && !isUserLeadDataSaved)
+        console.log('this.welcomeMessageCount:'+this.userMessageCount+',sessionUserName:'+sessionUserName+',sessionUserEmail:'+sessionUserEmail+',isUserLeadDataSaved'+isUserLeadDataSaved);
+        if(this.welcomeMessageCount>1 && sessionUserName!=null && sessionUserEmail!=null && isUserLeadDataSaved==false)
         {
           this.saveLeadData(sessionUserName,sessionUserEmail);
-        }        
+        }      
         
-      
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
           propsData: {
@@ -220,27 +220,31 @@ export default {
 
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;       
-    
-         // TODO: Make env param friendly
-        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
         
         console.log('this.userMessageCount just before response:'+this.userMessageCount);
         if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
           let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"!What is your business email address?";
+            // TODO: Make env param friendly
+          axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(askForEmailMsg);    
+        });  
+          
           this.receiveMessage(askForEmailMsg);
         }
         else if(this.userMessageCount==2 && this.welcomeMessageCount>1){
          console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
-         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";
-         this.receiveMessage(initiateChatMsg);
+         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
+         axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
+          this.receiveMessage(response.data.text);    
+        });          
         }
         else{
-         this.receiveMessage(response.data.text);
-        }
-         
-        });      
+        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(response.data.text);    
+        });    
+        }              
         this.message = "";
       }
     },
