@@ -223,9 +223,7 @@ export default {
             // TODO: Make env param friendly
           axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(askForEmailMsg);    
-        });  
-          
-          this.receiveMessage(askForEmailMsg);
+        });           
         }
         else if(this.userMessageCount==2 && this.welcomeMessageCount>1){
          console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
