@@ -197,7 +197,11 @@ export default {
         if(this.userMessageCount==1 && this.welcomeMessageCount>1)
         {
           let askForEmailMsg = "Thanks,"+inputString+"!What is your business email address?";
-          this.receiveMessage(askForEmailMsg);
+          
+          setTimeout(() => { 
+     this.receiveMessage(askForEmailMsg);
+    }, 20000);
+         
         }
         else{
          // TODO: Make env param friendly
