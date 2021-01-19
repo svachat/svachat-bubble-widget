@@ -118,9 +118,7 @@ export default {
         this.toggle() 
       }
     }, 30000);
-   // this.translateTrigger(); 
-   
-   console.log('encDecryptKey: '+encDecryptKey);
+   // this.translateTrigger();   
   },
   methods: {
     chargeAgent() {
@@ -179,6 +177,23 @@ export default {
            sessionStorage.setItem('user_name', inputString);    
            console.log('session_user_name_updated: '+ sessionStorage.getItem('user_name'));
         }
+        
+         //Save name as session value only for multiple welcome messages  
+        var sessionUserEmail =  sessionStorage.getItem('user_email');
+        console.log('session_user_name: '+sessionUserName);
+        if(this.userMessageCount==2 && this.welcomeMessageCount>1 && sessionUserEmail==null)
+        {
+           sessionStorage.setItem('user_email', inputString);    
+           console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
+        }
+        
+        //Save the user name and email in DB if not empty
+        if(sessionUserName!=null && sessionUserEmail!=null)
+        {
+          this.saveLeadData(sessionUserName,sessionUserEmail);
+        }
+        
+        
       
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
@@ -340,6 +355,23 @@ export default {
       }
       catch(err){
           console.log("sendAdditionalWelcomeMsgs()=>Error: "+ err);
+      }
+    
+    },
+    saveLeadData:function(userName,userEmail)
+    {
+     try{
+       console.log('Inside saveLeadData()=>userName='+userName+',userEmail='+userEmail);
+       var loggedUserId = parseInt(this.currentClient);
+       var leadDataObj = {"user_name":userName,"user_email":userEmail,"logged_user_id":loggedUserId};
+       axios.put('https://4e93d39ce2c3.ngrok.io/user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
+          console.log(response);         
+        },error=>{
+         console.log('saveLeadData()=>PUT error occurred:'+ error);
+        });
+     }
+      catch(err){
+          console.log("saveLeadData()=>Error: "+ error);
       }
     
     }
