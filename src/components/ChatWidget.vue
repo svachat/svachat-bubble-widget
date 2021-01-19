@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://0d26b4750a2b.ngrok.io/bot/',
+      apiUrl: 'https://2b6bfc85bf12.ngrok.io/bot/',
       encDecryptKey:process.env.ENC_DECRYPT_KEY
     };
   },
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://0d26b4750a2b.ngrok.io/chatbot/' + this.token).then(response => {
+      axios.get('https://2b6bfc85bf12.ngrok.io/chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
