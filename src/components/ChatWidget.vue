@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://2b6bfc85bf12.ngrok.io/bot/',
+      apiUrl: 'https://4e93d39ce2c3.ngrok.io/bot/',
       welcomeMessageCount : 0,
       userMessageCount : 0
      
@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://2b6bfc85bf12.ngrok.io/chatbot/' + this.token).then(response => {
+      axios.get('https://4e93d39ce2c3.ngrok.io/chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
