@@ -77,7 +77,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://14d9685588ee.ngrok.io/',
+      apiUrl: 'https://4708627cedc1.ngrok.io/',
       welcomeMessageCount : 0,
       userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
       errorMsg : (sessionStorage.getItem('error_msg')==null||sessionStorage.getItem('error_msg')=='null')?'':sessionStorage.getItem('error_msg')
