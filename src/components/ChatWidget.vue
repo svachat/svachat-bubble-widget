@@ -205,7 +205,7 @@ export default {
              this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
              console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
              sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
-             return false;
+             return;
            }           
         }      
       
