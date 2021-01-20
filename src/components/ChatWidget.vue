@@ -165,8 +165,9 @@ export default {
       var validInput = inputString != "";
 
       if (validInput) {      
-        this.userMessageCount += this.userMessageCount==null?1:parseInt(this.userMessageCount);        
-        console.log('userMsgSessionCount:'+  this.userMessageCount);       
+        console.log('userMsgSessionCount(Before update):'+  this.userMessageCount);  
+        this.userMessageCount += parseInt(this.userMessageCount);        
+        console.log('userMsgSessionCount(After update):'+  this.userMessageCount);       
         sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
         
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
