@@ -175,6 +175,10 @@ export default {
         sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
         
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
+        
+        /*NOTE : For multiple welcome messages, the 1st response((sessionStorage.getItem('user_msg_count'))==1) from the user is assumed to be the name while
+          the second response((sessionStorage.getItem('user_msg_count'))==2) from the user is assumed to be the email
+          */
                
         //Save name as session value only for multiple welcome messages       
         console.log('session_user_name: '+sessionStorage.getItem('user_name'));
@@ -198,7 +202,12 @@ export default {
            else
            {
              this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';
-             sessionStorage.setItem('error_msg', this.errorMsg);           
+             sessionStorage.setItem('error_msg', this.errorMsg);        
+             console.log('userMsgSessionCount(Email validation error=>Before update):'+  this.userMessageCount);  
+             this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
+             console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
+             sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
+             return false;
            }
            
         }       
