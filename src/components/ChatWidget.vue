@@ -166,7 +166,7 @@ export default {
 
       if (validInput) {      
         console.log('userMsgSessionCount(Before update):'+  this.userMessageCount);  
-        this.userMessageCount += parseInt(this.userMessageCount);        
+        this.userMessageCount += 1;        
         console.log('userMsgSessionCount(After update):'+  this.userMessageCount);       
         sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
         
@@ -238,8 +238,7 @@ export default {
         }              
         this.message = "";
         
-        //Save the user name and email only once in DB and if both are not empty only
-        console.log('Save User Lead in DB=>this.welcomeMessageCount:'+this.welcomeMessageCount+',sessionUserName:'+sessionStorage.getItem('user_name')+',sessionUserEmail:'+sessionStorage.getItem('user_email')+',isUserLeadDataSaved:'+isUserLeadDataSaved);
+        //Save the user name and email only once in DB and if both name and email are not empty only    
         if(this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')!=null && sessionStorage.getItem('user_email')!=null && isUserLeadDataSaved==false)
         {
           console.log('Just before save user lead..');
