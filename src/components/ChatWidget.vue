@@ -383,11 +383,12 @@ export default {
         });
      }
       catch(err){
-          console.log("saveLeadData()=>Error: "+ error);
+          console.log("saveLeadData()=>Error: "+ err);
           sessionStorage.setItem('is_user_lead_data_saved',null);
       }    
     },
     showAvlLeadData:function(){
+       try{
         console.log('Inside showAvlLeadData()=>user_name='+sessionStorage.getItem('user_name')+',user_email:'+sessionStorage.getItem('user_email'));
         //Display user name and email messages if available in session to prevent from re-entry of name and email in same session
         if(sessionStorage.getItem('user_name')!=null && this.welcomeMessageCount>1)
@@ -435,6 +436,20 @@ export default {
          });     
            }        
         }
+       }
+       catch(err){
+       console.log("showAvlLeadData()=>Error: "+ err);
+       }       
+    },
+    validateEmail:function(email)
+    {
+    try{
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+     }
+    catch(err){
+       console.log("validateEmail()=>Error: "+ err);
+     }          
     }
   }
 };
