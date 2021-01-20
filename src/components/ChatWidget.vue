@@ -19,8 +19,8 @@
         </div>
         <div class="chat-footer" :class="[currentLook]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
-           <div class="alert alert-danger" role="alert">
-              Invalid email..
+           <div v-if="this.errorMsg!=''" class="alert alert-danger" role="alert">
+              {{errorMsg}}
             </div>
             <input
               id="text-input"
@@ -79,7 +79,8 @@ export default {
       startChatText: 'Chat',
       apiUrl: 'https://14d9685588ee.ngrok.io/',
       welcomeMessageCount : 0,
-      userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count'))
+      userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
+      errorMsg : (sessionStorage.getItem('error_msg')==null||sessionStorage.getItem('error_msg')=='null')?'':sessionStorage.getItem('error_msg')
      
     };
   },
@@ -188,12 +189,16 @@ export default {
         if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_email')==null)
         {
            //validate email first
-           if(this.isValidEmail){
+           if(this.isValidEmail(inputString)){
+           this.errorMsg = '';
+           sessionStorage.setItem('error_msg', null)
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
            }
            else
            {
+             this.errorMsg = 'Invalid email';
+             sessionStorage.setItem('error_msg', this.errorMsg)
              alert('Invalid email..!');
            }
            
