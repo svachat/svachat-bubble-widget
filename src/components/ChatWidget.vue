@@ -76,7 +76,7 @@ export default {
       startChatText: 'Chat',
       apiUrl: 'https://14d9685588ee.ngrok.io/bot/',
       welcomeMessageCount : 0,
-      userMessageCount : sessionStorage.getItem('user_msg_count')
+      userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count'))
      
     };
   },
