@@ -80,7 +80,7 @@ export default {
       apiUrl: 'https://4708627cedc1.ngrok.io/',
       welcomeMessageCount : 0,
       userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
-      errorMsg : (sessionStorage.getItem('error_msg')==null||sessionStorage.getItem('error_msg')=='null')?'':sessionStorage.getItem('error_msg')
+      errorMsg : ''
      
     };
   },
@@ -180,7 +180,7 @@ export default {
           the second response((sessionStorage.getItem('user_msg_count'))==2) from the user is assumed to be the email
           */
                
-        //Save name as session value only for multiple welcome messages       
+        //Save name as session value for multiple welcome message scenario only    
         console.log('session_user_name: '+sessionStorage.getItem('user_name'));
         if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')==null)
         {
@@ -188,29 +188,26 @@ export default {
            console.log('session_user_name_updated: '+ sessionStorage.getItem('user_name'));
         }
         
-         //Save name as session value only for multiple welcome messages 
+        //Save e-mail as session value for multiple welcome message scenario only
         console.log('session_user_email: '+sessionStorage.getItem('user_email'));
         if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_email')==null)
         {
            //validate email first
            if(this.isValidEmail(inputString)){
-           this.errorMsg = '';
-           sessionStorage.setItem('error_msg', null)
+           this.errorMsg = '';          
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
            }
            else
            {
-             this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';
-             sessionStorage.setItem('error_msg', this.errorMsg);        
+             this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';                  
              console.log('userMsgSessionCount(Email validation error=>Before update):'+  this.userMessageCount);  
              this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
              console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
              sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
              return false;
-           }
-           
-        }       
+           }           
+        }      
       
         
         var MessageClass = Vue.extend(MessageBubble);
