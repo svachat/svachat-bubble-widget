@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://14d9685588ee.ngrok.io/bot/',
+      apiUrl: 'https://14d9685588ee.ngrok.io/',
       welcomeMessageCount : 0,
       userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count'))
      
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://14d9685588ee.ngrok.io/chatbot/' + this.token).then(response => {
+      axios.get(this.apiUrl +'chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
@@ -232,7 +232,7 @@ export default {
         }
         else{
         console.log('Inside sendMessage()=> else)');
-        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
+        axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(response.data.text);    
         });    
         }              
@@ -279,7 +279,7 @@ export default {
     startSession: function () {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
-        axios.get(this.apiUrl + this.currentClient).then(response => {
+        axios.get(this.apiUrl+'bot/' + this.currentClient).then(response => {
           var welcome_msg = response.data.message;
           console.log('startSession,message='+welcome_msg);          
           if(welcome_msg.indexOf('primary_msg')!=-1)
@@ -430,7 +430,7 @@ export default {
           this.$refs.container.appendChild(msgInstance.$el);  
           
           let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
-          axios.get(this.apiUrl + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
+          axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
           this.receiveMessage(response.data.text);    
          });     
            }        
