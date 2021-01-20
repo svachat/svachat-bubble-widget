@@ -74,9 +74,9 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://08cdc094e942.ngrok.io/bot/',
+      apiUrl: 'https://14d9685588ee.ngrok.io/bot/',
       welcomeMessageCount : 0,
-      userMessageCount : 0
+      userMessageCount : sessionStorage.getItem('user_msg_count')
      
     };
   },
@@ -122,7 +122,7 @@ export default {
   },
   methods: {
     chargeAgent() {
-      axios.get('https://08cdc094e942.ngrok.io/chatbot/' + this.token).then(response => {
+      axios.get('https://14d9685588ee.ngrok.io/chatbot/' + this.token).then(response => {
           console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
@@ -165,12 +165,8 @@ export default {
       var validInput = inputString != "";
 
       if (validInput) {      
-        var userMsgSessionCount = sessionStorage.getItem('user_msg_count');        
-        console.log('userMsgSessionCount:'+  userMsgSessionCount);
-        var userMessageCountPre = 1;
-        userMessageCountPre += userMsgSessionCount==null?1: parseInt(userMsgSessionCount); 
-        this.userMessageCount = userMessageCountPre;
-        console.log('this.userMessageCount:'+this.userMessageCount);
+        this.userMessageCount += this.userMessageCount==null?1:parseInt(this.userMessageCount);        
+        console.log('userMsgSessionCount:'+  userMsgSessionCount);       
         sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
         
         var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
@@ -378,7 +374,7 @@ export default {
        console.log('Inside saveLeadData()=>userName='+userName+',userEmail='+userEmail);
        var loggedUserId = parseInt(this.currentClient);
        var leadDataObj = {"user_name":userName,"user_email":userEmail,"logged_user_id":loggedUserId};
-       axios.put('https://08cdc094e942.ngrok.io/user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
+       axios.put(this.apiUrl+'user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
           console.log(response);         
           sessionStorage.setItem('is_user_lead_data_saved','true');
         },error=>{
