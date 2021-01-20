@@ -19,7 +19,7 @@
         </div>
         <div class="chat-footer" :class="[currentLook]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
-           <div v-if="this.errorMsg!=''" class="alert alert-danger" role="alert">
+           <div v-if="this.errorMsg!=''" class="chat-container-alert chat-container-alert-danger" role="alert">
               {{errorMsg}}
             </div>
             <input
@@ -785,5 +785,18 @@ element.style {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
+}
+.chat-container-alert
+{
+    position: relative!important;
+    padding: .75rem 1.25rem!important;
+    margin-bottom: 1rem!important;
+    border: 1px solid transparent!important;
+    border-radius: .25rem!important;
+}
+.chat-container-alert-danger{
+    color: #721c24!important;
+    background-color: #f8d7da!important;
+    border-color: #f5c6cb!important;
 }
 </style>
