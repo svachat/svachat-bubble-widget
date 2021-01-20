@@ -19,6 +19,9 @@
         </div>
         <div class="chat-footer" :class="[currentLook]">
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
+           <div class="alert alert-danger" role="alert">
+              Invalid email..
+            </div>
             <input
               id="text-input"
               class="chat-text-input"
@@ -184,8 +187,16 @@ export default {
         console.log('session_user_email: '+sessionStorage.getItem('user_email'));
         if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_email')==null)
         {
+           //validate email first
+           if(this.isValidEmail){
            sessionStorage.setItem('user_email', inputString);    
            console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
+           }
+           else
+           {
+             alert('Invalid email..!');
+           }
+           
         }       
       
         
@@ -441,7 +452,7 @@ export default {
        console.log("showAvlLeadData()=>Error: "+ err);
        }       
     },
-    validateEmail:function(email)
+    isValidEmail:function(email)
     {
     try{
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
