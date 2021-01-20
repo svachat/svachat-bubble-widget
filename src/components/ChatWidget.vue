@@ -197,9 +197,8 @@ export default {
            }
            else
            {
-             this.errorMsg = 'Invalid email';
-             sessionStorage.setItem('error_msg', this.errorMsg)
-             alert('Invalid email..!');
+             this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';
+             sessionStorage.setItem('error_msg', this.errorMsg);           
            }
            
         }       
@@ -776,4 +775,15 @@ export default {
     border-top-right-radius: 10px;
 }
 
+
+element.style {
+}
+.bd-example>.alert+.alert, .bd-example>.nav+.nav, .bd-example>.navbar+.navbar, .bd-example>.progress+.btn, .bd-example>.progress+.progress {
+    margin-top: 1rem;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
 </style>
