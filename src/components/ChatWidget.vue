@@ -228,7 +228,7 @@ export default {
         if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
-          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+inputString+"! What is your business email address?";
+          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks, "+inputString+"! What is your business email address?";
             // TODO: Make env param friendly
           axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(askForEmailMsg);    
