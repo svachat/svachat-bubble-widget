@@ -53,6 +53,7 @@ export default {
     padding: 16px;
     font-size: .9rem;       
     white-space: pre-wrap;
+    word-wrap: break-word;
     width: max-content;
     text-align:justify;
     max-width: 262px;
