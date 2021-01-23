@@ -161,7 +161,7 @@ export default {
        
         inputString = message;
       }
-      var validInput = inputString.replace(" ","") != "";
+      var validInput = inputString.trim().replace(" ","") != "";
       if (validInput) {      
         console.log('userMsgSessionCount(Before update):'+  this.userMessageCount);  
         this.userMessageCount += 1;        
