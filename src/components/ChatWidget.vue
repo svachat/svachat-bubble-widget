@@ -256,6 +256,9 @@ export default {
           this.saveLeadData(sessionStorage.getItem('user_name'),sessionStorage.getItem('user_email'));
         }      
       }
+      else{
+         event.preventDefault();
+      }
     },
     receiveMessage: function(text) {
       var inputString = text;
