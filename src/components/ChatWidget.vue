@@ -750,6 +750,7 @@ export default {
   .chat-header {
     border-radius: 0;
   }
+  }
   
 .chat-container-alert
 {
