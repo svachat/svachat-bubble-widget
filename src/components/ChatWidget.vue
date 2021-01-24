@@ -711,6 +711,20 @@ export default {
   text-decoration: none;
 }
 
+.chat-container-alert
+{
+    position: relative!important;
+    padding: .75rem 1.25rem!important;
+    margin-bottom: 1rem!important;
+    border: 1px solid transparent!important;
+    border-radius: .25rem!important;
+}
+.chat-container-alert-danger{
+    color: #721c24!important;
+    background-color: #f8d7da!important;
+    border-color: #f5c6cb!important;
+}
+
 
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
