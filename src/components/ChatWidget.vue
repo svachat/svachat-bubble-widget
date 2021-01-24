@@ -18,6 +18,9 @@
 
         </div>
         <div class="chat-footer" :class="[currentLook]">
+         <div v-if="this.errorMsg!=''" class="chat-container-alert chat-container-alert-danger" role="alert">
+              {{errorMsg}}
+          </div>
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
             <input
               id="text-input"
@@ -46,8 +49,9 @@ import MessageBubble from "./MessageBubble.vue";
 import WritingBadge from "./WritingBadge.vue";
 import GalleryMessage from "./GalleryMessage.vue";
 import Vue from "vue";
-import axios from 'axios'
-
+import axios from 'axios';
+import VueCryptojs from 'vue-cryptojs';
+Vue.use(VueCryptojs);
 export default {
   name: "ChatWidget",
   components: {
@@ -72,7 +76,11 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://api.svachat.com/bot/'
+      apiUrl: 'https://devapi.eu-de.mybluemix.net/',
+      welcomeMessageCount : 0,
+      userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
+      errorMsg : ''
+     
     };
   },
   props: {
@@ -95,7 +103,8 @@ export default {
   },
   mounted() {    
     this.chargeAgent();
-    this.userLang = navigator.language || navigator.userLanguage; 
+    this.userLang = navigator.language || navigator.userLanguage;      
+    console.log('Browser Language: '+this.userLang )
     
     if ("es-ES" != this.userLang) {      
          this.placeHolder = "Write your question";
@@ -112,11 +121,12 @@ export default {
         this.toggle() 
       }
     }, 30000);
-   // this.translateTrigger();
+   // this.translateTrigger();   
   },
   methods: {
     chargeAgent() {
-      axios.get('https://api.svachat.com/chatbot/' + this.token).then(response => {
+      axios.get(this.apiUrl +'chatbot/' + this.token).then(response => {
+          console.log(response.data);
           this.assitent = response.data;
           this.currentLook=  response.data.look;
           this.currentColor=  response.data.brand_color;
@@ -141,22 +151,60 @@ export default {
         document.getElementById("chat-content").className = "chat-content";
       }
       this.opened = !this.opened;
-
       this.startSession();
-
     },
     sendMessage: function(event, message) {
       var inputString;
-
       if (message == null) {
         inputString = this.message;
-      } else {
+      } else {       
+       
         inputString = message;
       }
-
-      var validInput = inputString != "";
-
-      if (validInput) {
+      var validInput = inputString.trim().replace(" ","") != "";
+      if (validInput) {      
+        console.log('userMsgSessionCount(Before update):'+  this.userMessageCount);  
+        this.userMessageCount += 1;        
+        console.log('userMsgSessionCount(After update):'+  this.userMessageCount);       
+        sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
+        
+        var isUserLeadDataSaved = (sessionStorage.getItem('is_user_lead_data_saved')==null||sessionStorage.getItem('is_user_lead_data_saved')=='null')?false:true;
+        
+        /*NOTE : For multiple welcome messages, the 1st response((sessionStorage.getItem('user_msg_count'))==1) from the user is assumed to be the name while
+          the second response((sessionStorage.getItem('user_msg_count'))==2) from the user is assumed to be the email
+          */
+               
+        //Save name as session value for multiple welcome message scenario only    
+        console.log('session_user_name: '+sessionStorage.getItem('user_name'));
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')==null)
+        {
+           sessionStorage.setItem('user_name', inputString);    
+           console.log('session_user_name_updated: '+ sessionStorage.getItem('user_name'));
+        }
+        
+        //Save e-mail as session value for multiple welcome message scenario only
+        console.log('session_user_email: '+sessionStorage.getItem('user_email'));
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1 && sessionStorage.getItem('user_email')==null)
+        {
+           //validate email first
+           if(this.isValidEmail(inputString)){
+           this.errorMsg = '';          
+           sessionStorage.setItem('user_email', inputString);    
+           console.log('session_user_email_updated: '+ sessionStorage.getItem('user_email'));
+           }
+           else
+           {
+             this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';                  
+             console.log('userMsgSessionCount(Email validation error=>Before update):'+  this.userMessageCount);  
+             this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
+             console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
+             sessionStorage.setItem('user_msg_count',this.userMessageCount.toString());
+             event.preventDefault();
+             return false;
+           }           
+        }      
+      
+        
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
           propsData: {
@@ -166,35 +214,57 @@ export default {
           }
         });
         
-
         if (this.writing) {
           this.$refs.container.removeChild(this.$refs.container.lastChild);
         }
-
         msgInstance.$mount();
         this.$refs.container.appendChild(msgInstance.$el);
         event.preventDefault();
         event.returnValue = false;
-
         this.beginWriting();
-
         var container = this.$el.querySelector("#msg-container");
-        container.scrollTop = container.scrollHeight;
-
-        // TODO: Make env param friendly
-        axios.get(this.apiUrl + this.currentClient + '/query?message=' + this.message).then(response => {
-          this.receiveMessage(response.data.text);
-        });
-
+        container.scrollTop = container.scrollHeight;       
+        
+        console.log('this.userMessageCount just before response:'+sessionStorage.getItem('user_msg_count'));
+        if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1)
+        {
+          console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
+          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks, "+inputString+"! What is your business email address?";
+            // TODO: Make env param friendly
+          axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(askForEmailMsg);    
+        });           
+        }
+        else if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1){
+         console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
+         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
+         axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
+          this.receiveMessage(response.data.text);    
+        });          
+        }
+        else{
+        console.log('Inside sendMessage()=> else)');
+        axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {
+          this.receiveMessage(response.data.text);    
+        });    
+        }              
         this.message = "";
+        
+        //Save the user name and email only once in DB and if both name and email are not empty only    
+        if(this.welcomeMessageCount>1 && sessionStorage.getItem('user_name')!=null && sessionStorage.getItem('user_email')!=null && isUserLeadDataSaved==false)
+        {
+          console.log('Just before save user lead..');
+          this.saveLeadData(sessionStorage.getItem('user_name'),sessionStorage.getItem('user_email'));
+        }      
+      }
+      else{
+         event.preventDefault();
       }
     },
     receiveMessage: function(text) {
       var inputString = text;
       
-
       var validInput = inputString != '';
-
       if (validInput) {
         var MessageClass = Vue.extend(MessageBubble);
         var msgInstance = new MessageClass({
@@ -204,7 +274,6 @@ export default {
           }
         });
         this.message = "";
-
         if (this.writing) {
           this.$refs.container.removeChild(this.$refs.container.lastChild);
         }
@@ -213,7 +282,6 @@ export default {
         this.$refs.container.appendChild(msgInstance.$el);
         event.preventDefault();
         event.returnValue = false;
-
         var container = this.$el.querySelector("#msg-container");
         container.scrollTop = container.scrollHeight;
         this.writing = false;
@@ -222,10 +290,24 @@ export default {
     startSession: function () {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
-        axios.get(this.apiUrl + this.currentClient).then(response => {
-          this.receiveMessage(response.data.message);
-          this.sessionStarted = true;
-        });
+        axios.get(this.apiUrl+'bot/' + this.currentClient).then(response => {
+          var welcome_msg = response.data.message;
+          console.log('startSession,message='+welcome_msg);          
+          if(welcome_msg.indexOf('primary_msg')!=-1)
+          {
+             var json_parsed_wm = JSON.parse(welcome_msg);
+             console.log(json_parsed_wm);
+             this.sendPrimaryWelcomeMsg(json_parsed_wm);
+             this.sendAdditionalWelcomeMsgs(json_parsed_wm);
+             this.showAvlLeadData();
+          }
+          else
+          {
+              this.receiveMessage(response.data.message);
+          }          
+          this.sessionStarted = true;         
+        });      
+    
       } 
     },
      beginWriting: function() {
@@ -248,6 +330,133 @@ export default {
     catch(err){
       localStorage.setItem("errorForTranslation: ", err.message);
     }   
+    },
+    getDecryptedMessage:function(encryptedMessage){
+    try{
+     console.log("Inside  getDecryptedMessage()=>encryptedMessage:"+ encryptedMessage);
+     var decryptedMsg= this.CryptoJS.AES.decrypt(encryptedMessage, "EncSvachat@2021").toString(this.CryptoJS.enc.Utf8); 
+     console.log("Decrypted Text : "+ decryptedMsg);
+     return decryptedMsg;    
+      }
+    catch(err){
+      console.log("getDecryptedMessage()=>Error: "+ err);
+    } 
+    },
+    sendPrimaryWelcomeMsg:function(parsedJSON){
+       try{          
+           console.log("Inside sendPrimaryWelcomeMsg(),parsedJSON="+ parsedJSON);
+           var primary_welcome_msg =parsedJSON["primary_msg"];
+           var decrypted_wm = this.getDecryptedMessage(primary_welcome_msg);
+           this.welcomeMessageCount+=1;
+           console.log('primary_welcome_msg_encrypted=>'+ primary_welcome_msg+'\n'+'primary_welcome_msg_decrypted=>'+ decrypted_wm);
+           this.receiveMessage(decrypted_wm);          
+       }
+       catch(err){
+          console.log("sendPrimaryWelcomeMsg()=>Error: "+ err);
+       }
+    },
+    sendAdditionalWelcomeMsgs:function(parsedJSON){
+      try
+      {      
+           var additional_msgs=[];
+           console.log("Inside sendAdditionalWelcomeMsgs(),parsedJSON="+ parsedJSON);
+           additional_msgs=parsedJSON["additional_msgs"];          
+           console.log("additional_msgs: "+ additional_msgs,"\nadditional_msgs_length:"+additional_msgs.length+"\nCurrent Welcome message count:"+ this.welcomeMessageCount);
+           this.welcomeMessageCount +=  additional_msgs.length;          
+           console.log("Updated welcome message count:"+ this.welcomeMessageCount);
+           
+           for(var i=0;i<additional_msgs.length;i++)
+           {
+              console.log("Encrypted message at "+i+"=>"+ additional_msgs[i]);
+              var decrypted_msg = this.getDecryptedMessage(additional_msgs[i]);
+              console.log("Decrypted message at "+i+"=>"+ decrypted_msg);
+              this.receiveMessage(decrypted_msg);     
+           }           
+           
+      }
+      catch(err){
+          console.log("sendAdditionalWelcomeMsgs()=>Error: "+ err);
+      }
+    
+    },
+    saveLeadData:function(userName,userEmail)
+    {
+     try{
+       console.log('Inside saveLeadData()=>userName='+userName+',userEmail='+userEmail);
+       var loggedUserId = parseInt(this.currentClient);
+       var leadDataObj = {"user_name":userName,"user_email":userEmail,"logged_user_id":loggedUserId};
+       axios.put(this.apiUrl+'user_lead/' + this.token+'/'+loggedUserId,leadDataObj).then(response => {
+          console.log(response);         
+          sessionStorage.setItem('is_user_lead_data_saved','true');
+        },error=>{
+         console.log('saveLeadData()=>PUT error occurred:'+ error);
+          sessionStorage.setItem('is_user_lead_data_saved',null);
+        });
+     }
+      catch(err){
+          console.log("saveLeadData()=>Error: "+ err);
+          sessionStorage.setItem('is_user_lead_data_saved',null);
+      }    
+    },
+    showAvlLeadData:function(){
+       try{
+        console.log('Inside showAvlLeadData()=>user_name='+sessionStorage.getItem('user_name')+',user_email:'+sessionStorage.getItem('user_email'));
+        //Display user name and email messages if available in session to prevent from re-entry of name and email in same session
+        if(sessionStorage.getItem('user_name')!=null && this.welcomeMessageCount>1)
+        {
+           var MessageClass = Vue.extend(MessageBubble);
+            var msgInstance = new MessageClass({
+              propsData: {
+                mine: true,
+                msg: sessionStorage.getItem('user_name'),
+                color: this.currentColor
+              }
+            });
+        
+          if (this.writing) {
+            this.$refs.container.removeChild(this.$refs.container.lastChild);
+          }
+          msgInstance.$mount();
+          this.$refs.container.appendChild(msgInstance.$el);    
+          
+         let askForEmailMsg =this.userLang!="en-US"?"¡Gracias,"+sessionStorage.getItem('user_name')+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks,"+sessionStorage.getItem('user_name')+"! What is your business email address?";
+         this.receiveMessage(askForEmailMsg);  
+         
+         if(sessionStorage.getItem('user_email')!=null){
+          var msgInstance = new MessageClass({
+              propsData: {
+                mine: true,
+                msg: sessionStorage.getItem('user_email'),
+                color: this.currentColor
+              }
+            });
+        
+          if (this.writing) {
+            this.$refs.container.removeChild(this.$refs.container.lastChild);
+          }
+          msgInstance.$mount();
+          this.$refs.container.appendChild(msgInstance.$el);  
+          
+          let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
+          axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
+          this.receiveMessage(response.data.text);    
+         });     
+           }        
+        }
+       }
+       catch(err){
+       console.log("showAvlLeadData()=>Error: "+ err);
+       }       
+    },
+    isValidEmail:function(email)
+    {
+    try{
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+     }
+    catch(err){
+       console.log("validateEmail()=>Error: "+ err);
+     }          
     }
   }
 };
