@@ -754,6 +754,20 @@ export default {
     border-radius: 0;
   }
   
+.chat-container-alert
+{
+    position: relative!important;
+    padding: .75rem 1.25rem!important;
+    margin-bottom: 1rem!important;
+    border: 1px solid transparent!important;
+    border-radius: .25rem!important;
+}
+.chat-container-alert-danger{
+    color: #721c24!important;
+    background-color: #f8d7da!important;
+    border-color: #f5c6cb!important;
+}
+  
 }
 .classic {
   border-radius: 0px !important;
@@ -765,6 +779,20 @@ export default {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.chat-container-alert
+{
+    position: relative!important;
+    padding: .75rem 1.25rem!important;
+    margin-bottom: 1rem!important;
+    border: 1px solid transparent!important;
+    border-radius: .25rem!important;
+}
+.chat-container-alert-danger{
+    color: #721c24!important;
+    background-color: #f8d7da!important;
+    border-color: #f5c6cb!important;
 }
 
 </style>
