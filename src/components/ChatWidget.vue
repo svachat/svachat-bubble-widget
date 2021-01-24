@@ -18,9 +18,7 @@
 
         </div>
         <div class="chat-footer" :class="[currentLook]">
-         <div v-if="this.errorMsg!=''" class="chat-container-alert chat-container-alert-danger" role="alert">
-              {{errorMsg}}
-          </div>
+         <div v-if="this.errorMsg!=''" class="chat-container-alert chat-container-alert-danger" role="alert">{{errorMsg}} </div>             
           <form autocomplete="off" action="#" v-on:submit="sendMessage">
             <input
               id="text-input"
