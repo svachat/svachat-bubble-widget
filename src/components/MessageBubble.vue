@@ -45,7 +45,6 @@ export default {
 .container.mine {
     margin-right: 0;
 }
-
 .message-bubble {
 	border-radius: 1rem;
     margin-top:  10px;
@@ -53,20 +52,19 @@ export default {
     padding: 16px;
     font-size: .9rem;       
     white-space: pre-wrap;
+    word-wrap: break-word;
     width: max-content;
     text-align:justify;
     max-width: 262px;
         /* max-width: 25rem; */
     text-align: left;
 }
-
 .message-bubble.they {
    
 	background: #e8e8e8;
     margin-left: 20px;
     border-top-left-radius: 0px;
 }
-
 .message-bubble.mine {
     color: white;
     font-weight: 800;
@@ -75,18 +73,15 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-
 p {
     margin: 0;
 }
-
 .options {
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: white;
     text-align: center;
 }
-
 .option {
     background-color: var(--main-color);
     border-radius: 30px;
@@ -99,7 +94,6 @@ p {
     font-weight: bolder;
     min-width: 4rem;
 }
-
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   [class*="col-"] {
