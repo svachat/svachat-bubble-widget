@@ -463,7 +463,6 @@ export default {
 </script>
 
 <style scoped>
-
 .chat-box {
   padding: 0;
   position: fixed;
@@ -476,7 +475,6 @@ export default {
   -moz-box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
   box-shadow: 2px 4px 32px -14px rgba(0, 0, 0, 0.45);
 }
-
 .chat-box.opened {
   transition: 0.5s;
   /* height: 75vh; */
@@ -488,12 +486,10 @@ export default {
   bottom: 50px;
   z-index: 99999 !important;
 }
-
 .chat-box.closed {
   transition: 0.5s;
   visibility: hidden;
 }
-
 .chat-button.opened {
   transition: 0.5s;
   width: 110px;
@@ -529,7 +525,6 @@ export default {
   height: 26px;
   margin-top: 9px;
 }
-
 #bubbleText {
   color: white;
   font-weight: 600;
@@ -537,14 +532,12 @@ export default {
   margin-top: 12px;
   margin-left: 2px;
 }
-
 .chat-button.closed {
   transition: 0.5s;
   width: 0;
   height: 0;
   border-radius: 50%;
   }
-
 .bottom {
   position: fixed;
   right: 20px;
@@ -552,13 +545,11 @@ export default {
   text-align: right;
   z-index: 999999 !important;
 }
-
 .chat-button:hover {
   transition: 0.5s;
   opacity: 0.6; 
   cursor: pointer;
 }
-
 .chat-icon {
   display: inline-block;
   margin: 0px;
@@ -566,7 +557,6 @@ export default {
   vertical-align: text-bottom;
   width: 3rem;
 }
-
 .chat-message-container {
   transition: 0.5s;
   position: absolute;
@@ -578,15 +568,12 @@ export default {
   overflow: scroll;
   vertical-align: bottom;
 }
-
 .chat-message-container::-webkit-scrollbar {
   width: 0 !important;
 }
-
 .hidden {
   display: none;
 }
-
 .close-icon {
   /* width: 1rem;
   height: 1rem; */
@@ -602,11 +589,9 @@ export default {
   transition: 0.3s;
   position: relative;
 }
-
 .close-icon:hover {
   cursor: pointer;
 }
-
 .chat-header {
   top: 0;
   right: auto;
@@ -617,14 +602,12 @@ export default {
   border-top-left-radius: 10px;
   z-index: 9999;
 }
-
 .chat-header.open {
   transition: 0.5s;
   width: 100%;
   height: 50px;
   background-color: var(--main-color);
 }
-
 .chat-footer {
   position: absolute;
   bottom: 0;
@@ -635,7 +618,6 @@ export default {
   border-bottom-right-radius: 10px;
   text-align: left;
 }
-
 .chat-text-input {
   height: 15px;
   width: 250px;
@@ -649,12 +631,10 @@ export default {
   border-bottom-left-radius: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
 .chat-text-input:hover {
   transition: 0.5s;
   border-color: rgb(104, 115, 125) !important;
 }
-
 .send-button {
   position: absolute;
   height: 22px;
@@ -668,7 +648,6 @@ export default {
   background-position: center;
   cursor: pointer;
 }
-
 .chat-profile-icon, .chat-profile-icon2 {
   width: 35px;
   height: 35px;
@@ -680,7 +659,6 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
 }
-
 .chat-profile-name {
   font-size: 22px;
   margin: 0;
@@ -695,37 +673,29 @@ export default {
   font-size: 12px;
   text-align: center;
 }
-
 .statement {
   margin-bottom: 0;
   margin-top: 3px;
 }
-
 .bullet {
   margin-top: 0;
   font-size: 9px;
 }
-
 .powered-link {
   color: #008afe;
   text-decoration: none;
 }
-
-
 /* Mozilla Firefox only*/
 @-moz-document url-prefix() {
   .chat-message-container {
     scrollbar-width: none;
   }
 }
-
-
 @media only screen and (max-width: 478px) {
   /* For mobile phones: */
   [class*="col-"] {
     width: 100%;
   }
-
   .chat-message-container {
     bottom: 8%;
     z-index: -1;
@@ -749,12 +719,11 @@ export default {
     position: fixed;
     top: 0%;
   }
-
   .chat-header {
     border-radius: 0;
   }
   
-.chat-container-alert
+ .chat-container-alert
 {
     position: relative!important;
     padding: .75rem 1.25rem!important;
@@ -765,22 +734,21 @@ export default {
 .chat-container-alert-danger{
     color: #721c24!important;
     background-color: #f8d7da!important;
-    border-color: #f5c6cb!important;
-}
+ 
   
 }
+  }  
+
 .classic {
   border-radius: 0px !important;
   font-family: "Times New Roman", Times, serif;
 }
-
 .classic-text {
     font-family: "Times New Roman",Times,serif;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 }
-
 .chat-container-alert
 {
     position: relative!important;
@@ -794,5 +762,6 @@ export default {
     background-color: #f8d7da!important;
     border-color: #f5c6cb!important;
 }
+
 
 </style>
