@@ -750,7 +750,6 @@ export default {
   .chat-header {
     border-radius: 0;
   }
-  }
   
 .chat-container-alert
 {
@@ -762,10 +761,12 @@ export default {
 }
 .chat-container-alert-danger{
     color: #721c24!important;
-    background-color: #f8d7da!important;
- 
+    background-color: #f8d7da!important; 
   
 }
+  }
+  
+
 .classic {
   border-radius: 0px !important;
   font-family: "Times New Roman", Times, serif;
