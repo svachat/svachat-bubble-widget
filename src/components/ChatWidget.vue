@@ -192,7 +192,7 @@ export default {
            }
            else
            {
-             this.errorMsg = this.userLang!="en-US"?'Correo electrónico inválido':'Invalid email';                  
+             this.errorMsg = (this.userLang!="en-US && this.userLang!="en")?'Correo electrónico inválido':'Invalid email';                  
              console.log('userMsgSessionCount(Email validation error=>Before update):'+  this.userMessageCount);  
              this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
              console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
@@ -227,7 +227,7 @@ export default {
         if(parseInt(sessionStorage.getItem('user_msg_count'))==1 && this.welcomeMessageCount>1)
         {
           console.log('Inside sendMessage()=>if(this.userMessageCount==1 && this.welcomeMessageCount>1)');
-          let askForEmailMsg =this.userLang!="en-US"?"¡Gracias, "+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks, "+inputString+"! What is your business email address?";
+          let askForEmailMsg =(this.userLang!="en-US" && this.userLang!="en")?"¡Gracias, "+inputString+"! ¿Cuál es la dirección de correo electrónico de tu empresa?":"Thanks, "+inputString+"! What is your business email address?";
             // TODO: Make env param friendly
           axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + this.message).then(response => {
           this.receiveMessage(askForEmailMsg);    
