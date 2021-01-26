@@ -192,7 +192,7 @@ export default {
            }
            else
            {
-             this.errorMsg = (this.userLang!="en-US && this.userLang!="en")?'Correo electrónico inválido':'Invalid email';                  
+             this.errorMsg = (this.userLang!="en-US" && this.userLang!="en")?'Correo electrónico inválido':'Invalid email';                  
              console.log('userMsgSessionCount(Email validation error=>Before update):'+  this.userMessageCount);  
              this.userMessageCount = 1; //Reset user messagec count to 1 (Next immedite message should be message number 2)       
              console.log('userMsgSessionCount(Email validation error=>After update):'+  this.userMessageCount);       
