@@ -235,7 +235,7 @@ export default {
         }
         else if(parseInt(sessionStorage.getItem('user_msg_count'))==2 && this.welcomeMessageCount>1){
          console.log('Inside sendMessage()=> else if(this.userMessageCount==2 && this.welcomeMessageCount>1)');
-         let initiateChatMsg = this.userLang!="en-US"?"Hola!":"Hi!";         
+         let initiateChatMsg = (this.userLang!="en-US" && this.userLang!="en")?"Hola!":"Hi!";         
          axios.get(this.apiUrl+'bot/' + this.currentClient + '/query?message=' + initiateChatMsg).then(response => {
           this.receiveMessage(response.data.text);    
         });          
