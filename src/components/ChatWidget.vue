@@ -10,7 +10,7 @@
         </div>
         <div class="powered-badge" :class="[currentLook]">
             <p class="statement">
-              {{poweredByText}}
+              "⚡ Powered ⚡ by "
               <a class="powered-link" href="https://svachat.com" target="_blank">Svachat</a>
             </p>
           </div>
