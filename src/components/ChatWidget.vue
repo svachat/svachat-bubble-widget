@@ -10,8 +10,8 @@
         </div>
         <div class="powered-badge" :class="[currentLook]">
             <p class="statement">
-              "⚡ Powered ⚡ by "
-              <a class="powered-link" href="https://svachat.com" target="_blank">Svachat</a>
+             {{poweredByText}}
+              <a class="powered-link" href="https://svachat.com/landing-page" target="_blank">Svachat</a>
             </p>
           </div>
         <div id="msg-container" :class="[currentLook == 'sport' ? 'chat-message-container' : 'classic-text chat-message-container']" ref="container">
