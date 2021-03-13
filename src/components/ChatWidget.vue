@@ -10,7 +10,7 @@
         </div>
         <div class="powered-badge" :class="[currentLook]">
             <p class="statement">
-              🚫 {{poweredByText}} 🚫
+               {{poweredByText}}
               <a class="powered-link" href="https://svachat.com/landing-page" target="_blank">Svachat</a>
             </p>
           </div>
@@ -107,7 +107,7 @@ export default {
     if ("es-ES" != this.userLang) {      
          this.placeHolder = "Write your question";
          this.startChatText="Chat";
-         this.poweredByText="&#x26A1 Powered &#x26A1 by ";       
+         this.poweredByText='⚡ Powered ⚡ by ';       
     }   
   
     
