@@ -120,6 +120,12 @@ export default {
       }
     }, 30000);
    // this.translateTrigger();   
+   
+    var elements = document.querySelectorAll('.powered-badge');
+    console.log(elements);
+    for ( var i=elements.length; i--; ) {
+        elements[i].textContent = elements[i].textContent.replace('âš¡','⚡');
+    }
   },
   methods: {
     chargeAgent() {
