@@ -107,7 +107,7 @@ export default {
     if ("es-ES" != this.userLang) {      
          this.placeHolder = "Write your question";
          this.startChatText="Chat";
-         this.poweredByText="⚡ Powered ⚡ by ";       
+         this.poweredByText="&#x26A1; Powered &#x26A1; by ";       
     }   
   
     
