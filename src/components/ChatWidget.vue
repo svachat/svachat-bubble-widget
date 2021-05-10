@@ -260,9 +260,8 @@ export default {
       }
     },
     receiveMessage: function(text) {
-       debugger;
-      let updatedResult = this.convertEmailToLink(text);
-      console.log('receiveMessage>updatedResult:'+ updatedResult);
+       debugger;    
+      
       var inputString = text;
       
       var validInput = inputString != '';
@@ -306,6 +305,7 @@ export default {
           else
           {
               let updatedResult = this.convertEmailToLink(welcome_msg);
+              debugger;
               this.receiveMessage(updatedResult);
           }          
           this.sessionStarted = true;         
