@@ -468,7 +468,7 @@ export default {
         var emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/g;         
         var matchedEmails = htmlText.match(emailPattern);
         if (matchedEmails!== null) {         
-          $.each(matched_str, function (index, value) {
+          $.each(matchedEmails, function (index, value) {
               htmlText = htmlText.replace(value,"<a href='mailto:"+value+"'>"+value+"</a>");
           });
          return htmlText;
