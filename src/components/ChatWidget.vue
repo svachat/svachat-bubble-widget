@@ -260,6 +260,8 @@ export default {
       }
     },
     receiveMessage: function(text) {
+      let updatedResult = this.convertEmailToLink(text);
+      console.log('receiveMessage>updatedResult:'+ updatedResult);
       var inputString = text;
       
       var validInput = inputString != '';
@@ -301,7 +303,8 @@ export default {
           }
           else
           {
-              this.receiveMessage(response.data.message);
+              let updatedResult = this.convertEmailToLink(response.data.message);
+              this.receiveMessage(updatedResult);
           }          
           this.sessionStarted = true;         
         });      
@@ -455,6 +458,23 @@ export default {
     catch(err){
        console.log("validateEmail()=>Error: "+ err);
      }          
+    },
+    convertEmailToLink:function(htmlText)
+    {
+      try
+      {        
+        var emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/g;         
+        var matchedEmails = htmlText.match(emailPattern);
+        if (matchedEmails!=null && matchedEmails.length>0) {         
+          $.each(matched_str, function (index, value) {
+              htmlText = htmlText.replace(value,"<a href='mailto:"+value+"'>"+value+"</a>");
+          });
+         return htmlText;
+      }    
+      }
+      catch(err){
+       console.log("convertEmailToLink()=>Error: "+ err);
+      }    
     }
   }
 };
