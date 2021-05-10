@@ -463,7 +463,8 @@ export default {
     convertEmailToLink:function(htmlText)
     {
       try
-      {        
+      {
+        debugger;
         var emailPattern = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/g;         
         var matchedEmails = htmlText.match(emailPattern);
         if (matchedEmails!=null && matchedEmails.length>0) {         
