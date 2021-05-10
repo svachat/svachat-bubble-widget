@@ -465,15 +465,9 @@ export default {
       try
       {
         debugger;
-        var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;         
-        var matchedEmails = htmlText.match(emailPattern);
-        if (typeof(matchedEmails)!=='undefined') {  
-        for(var i= 0; i<matchedEmails.length;i++)
-        {
-           let value = matchedEmails[i].value;
-           htmlText = htmlText.replace(value,"<a href='mailto:"+value+"'>"+value+"</a>");
-        }         
-         return htmlText;
+        var email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;       
+        var result = htmlText.replace(email_regex,'<a href="mailto:$1">$1</a>');
+        return result;
       }    
       }
       catch(err){
