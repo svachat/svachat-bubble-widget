@@ -469,7 +469,6 @@ export default {
         var result = htmlText.replace(email_regex,'<a href="mailto:$1">$1</a>');
         return result;
       }    
-      }
       catch(err){
        console.log("convertEmailToLink()=>Error: "+ err);
       }    
