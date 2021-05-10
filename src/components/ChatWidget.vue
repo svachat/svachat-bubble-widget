@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://qa.api.svachat.qualitapps.com/',
+      apiUrl: 'https://88e8dcbeb71c.ngrok.io/',
       welcomeMessageCount : 0,
       userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
       errorMsg : ''
