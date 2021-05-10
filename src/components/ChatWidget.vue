@@ -243,6 +243,7 @@ export default {
         else{
         console.log('Inside sendMessage()=> else)');
         axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {
+          let updatedResult = this.convertEmailToLink(response.data.text);
           this.receiveMessage(response.data.text);    
         });    
         }              
@@ -305,7 +306,6 @@ export default {
           else
           {
               let updatedResult = this.convertEmailToLink(welcome_msg);
-              debugger;
               this.receiveMessage(updatedResult);
           }          
           this.sessionStarted = true;         
