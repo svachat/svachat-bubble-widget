@@ -260,6 +260,7 @@ export default {
       }
     },
     receiveMessage: function(text) {
+       debugger;
       let updatedResult = this.convertEmailToLink(text);
       console.log('receiveMessage>updatedResult:'+ updatedResult);
       var inputString = text;
@@ -291,6 +292,7 @@ export default {
       if (!this.sessionStarted) {
         // TODO: Make env param friendly
         axios.get(this.apiUrl+'bot/' + this.currentClient).then(response => {
+        debugger;
           var welcome_msg = response.data.message;
           console.log('startSession,message='+welcome_msg);          
           if(welcome_msg.indexOf('primary_msg')!=-1)
@@ -303,12 +305,11 @@ export default {
           }
           else
           {
-              let updatedResult = this.convertEmailToLink(response.data.message);
+              let updatedResult = this.convertEmailToLink(welcome_msg);
               this.receiveMessage(updatedResult);
           }          
           this.sessionStarted = true;         
-        });      
-    
+        });          
       } 
     },
      beginWriting: function() {
