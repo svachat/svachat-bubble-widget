@@ -246,7 +246,7 @@ export default {
         else{
         console.log('Inside sendMessage()=> else)');
         axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {
-          //let updatedResult = this.convertEmailToLink(response.data.text);
+          let updatedResult = response.data.text;//this.convertEmailToLink(response.data.text);
           this.receiveMessage(updatedResult);    
         });    
         }              
