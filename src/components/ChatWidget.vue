@@ -49,7 +49,10 @@ import GalleryMessage from "./GalleryMessage.vue";
 import Vue from "vue";
 import axios from 'axios';
 import VueCryptojs from 'vue-cryptojs';
+import linkify from 'vue-linkify';
 Vue.use(VueCryptojs);
+Vue.use(linkify);
+
 export default {
   name: "ChatWidget",
   components: {
@@ -306,6 +309,7 @@ export default {
           else
           {
               let updatedResult = this.convertEmailToLink(welcome_msg);
+              updatedResult = this.linkifyHTMLText(updatedResult);
               this.receiveMessage(updatedResult);
           }          
           this.sessionStarted = true;         
@@ -472,6 +476,20 @@ export default {
       catch(err){
        console.log("convertEmailToLink()=>Error: "+ err);
       }    
+    },
+    linkifyHTMLText:function(htmlText)
+    {
+     try
+     {
+        debugger;
+       let result =  htmlText.linkify({ nl2br: true});
+       console.log(result);
+       return result;
+     }
+     catch(error)
+     {
+       console.log("linkifyHTMLText()=>Error: "+ err);
+     }
     }
   }
 };
