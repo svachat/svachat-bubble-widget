@@ -13,7 +13,9 @@
     "document-register-element": "^1.14.3",
     "vue": "^2.6.10",
     "vue-custom-element": "^3.2.10",
-    "webpack": "^4.41.0"
+    "webpack": "^4.41.0",
+    "vue-cryptojs":"^2.1.5",
+    "vue-linkify":"^1.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
@@ -23,7 +25,8 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.10",
-    "vue-cryptojs":"^2.1.5"
+    "vue-cryptojs":"^2.1.5",
+    "vue-linkify":"^1.0.1"
   },
   "eslintConfig": {
     "root": true,
