@@ -26,7 +26,7 @@
               :class="[currentLook]"
               type="text"
               v-model="message"
-              :placeholder="placeHolder" v-linkified />
+              :placeholder="placeHolder" v-linkified:options={target:'_blank'}" />
             <div class="send-button" v-on:click="sendMessage"></div>
           </form>
         </div>
