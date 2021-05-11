@@ -245,9 +245,8 @@ export default {
         }
         else{
         console.log('Inside sendMessage()=> else)');
-        axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {
-          let updatedResult = response.data.text;//this.convertEmailToLink(response.data.text);
-          this.receiveMessage(updatedResult);    
+        axios.get(this.apiUrl +'bot/'+ this.currentClient + '/query?message=' + this.message).then(response => {         
+          this.receiveMessage(response.data.text);    
         });    
         }              
         this.message = "";
@@ -307,9 +306,8 @@ export default {
              this.showAvlLeadData();
           }
           else
-          {
-              let updatedResult = this.convertEmailToLink(welcome_msg);              
-              this.receiveMessage(updatedResult);
+          {                  
+              this.receiveMessage(welcome_msg);
           }          
           this.sessionStarted = true;         
         });          
@@ -462,20 +460,7 @@ export default {
     catch(err){
        console.log("validateEmail()=>Error: "+ err);
      }          
-    },
-    convertEmailToLink:function(htmlText)
-    {
-      try
-      {
-        debugger;
-        var email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;       
-        var result = htmlText.replace(email_regex,'<a href="mailto:$1">$1</a>');
-        return result;
-      }    
-      catch(err){
-       console.log("convertEmailToLink()=>Error: "+ err);
-      }    
-    }   
+    }     
   }
 };
 </script>
