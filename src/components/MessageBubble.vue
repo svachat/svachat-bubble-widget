@@ -1,3 +1,6 @@
+import linkify from 'vue-linkify';
+Vue.directive('linkified', linkify);
+
 <template>
 <div class="container" :class="mine ? 'mine' : 'they'" :style="cssProps">
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
@@ -10,9 +13,6 @@
 </template>
 
 <script>
-import linkify from 'vue-linkify';
-Vue.directive('linkified', linkify);
-
 export default {
     name: 'MessageBubble',
     data: function() {
