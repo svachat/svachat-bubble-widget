@@ -49,9 +49,7 @@ import GalleryMessage from "./GalleryMessage.vue";
 import Vue from "vue";
 import axios from 'axios';
 import VueCryptojs from 'vue-cryptojs';
-import linkify from 'vue-linkify';
 Vue.use(VueCryptojs);
-Vue.directive('linkified', linkify);
 
 export default {
   name: "ChatWidget",
