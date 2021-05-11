@@ -1,7 +1,7 @@
 <template>
 <div class="container" :class="mine ? 'mine' : 'they'" :style="cssProps">
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
-      <p v-html="msg">dsdsds{{msg}}</p>
+      <p v-html="msg" v-linkified>dsdsds{{msg}}</p>
   </div>
   <div class="options" v-if="optionClicked == false">
       <p v-for="option in options" :key="option" class="option" v-on:click="sendOption( $event, option)">{{option}}</p>
@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import linkify from 'vue-linkify';
+Vue.directive('linkified', linkify);
+
 export default {
     name: 'MessageBubble',
     data: function() {
