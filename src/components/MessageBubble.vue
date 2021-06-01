@@ -80,6 +80,9 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
+message-bubble.mine.a{
+ color: white!important;
+}
 p {
     margin: 0;
 }
