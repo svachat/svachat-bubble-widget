@@ -67,8 +67,7 @@ export default {
     text-align: left;
 }
 .message-bubble.they {
-   
-	background: #e8e8e8;
+   background: #e8e8e8;
     margin-left: 20px;
     border-top-left-radius: 0px;
 }
@@ -81,7 +80,8 @@ export default {
     border-top-right-radius: 0px;
 }
 message-bubble.mine.linkified.a{
- color: white!important;
+    background-color: white!important;
+    padding: 0 5px!important;
 }
 p {
     margin: 0;
