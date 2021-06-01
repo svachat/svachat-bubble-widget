@@ -79,7 +79,7 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine a{
+.message-bubble.mine a.linkified{
     background-color: white!important;
     padding: 0 5px!important;
 }
