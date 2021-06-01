@@ -73,7 +73,7 @@ export default {
     border-top-left-radius: 0px;
 }
 .message-bubble.mine {
-    color: white;
+    color: white!important;
     font-weight: 800;
     background: var(--light-color);/*rgb(217, 225, 242);*/
     margin-left: auto;
