@@ -80,7 +80,7 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-message-bubble.mine.a{
+message-bubble.mine.linkified{
  color: white!important;
 }
 p {
