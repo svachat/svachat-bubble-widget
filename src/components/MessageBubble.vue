@@ -79,9 +79,8 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine p a{
-    background: #ffffff!important;
-    padding: 0 5px!important;
+.message-bubble.mine p a[data-v-0bc4f2f8]{
+    colour:#fff!important;    
 }
 .vlinkified-link{
  background: #ffffff!important;
