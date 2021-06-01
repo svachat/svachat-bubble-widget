@@ -10,6 +10,12 @@
 </template>
 
 <script>
+
+import Vue from "vue";
+import linkify from 'vue-linkify';
+Vue.directive('linkified', linkify);
+
+
 export default {
     name: 'MessageBubble',
     data: function() {
