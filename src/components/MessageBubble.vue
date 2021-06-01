@@ -79,13 +79,10 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine p a[data-v-0bc4f2f8]{
+.message-bubble.mine p a{
     colour:#fff!important;    
 }
-.vlinkified-link{
- background: #ffffff!important;
-    padding: 0 5px!important;
-}
+
 p {
     margin: 0;
 }
