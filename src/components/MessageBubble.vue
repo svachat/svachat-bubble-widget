@@ -79,9 +79,7 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine p a.linkified-text[data-v-*] {
-	color: #fff!important
-}
+
 
 p {
     margin: 0;
