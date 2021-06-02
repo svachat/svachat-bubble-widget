@@ -79,7 +79,7 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine p a{
+.message-bubble.mine p a::v-deep .linkified{
     colour:#fff!important;    
 }
 
