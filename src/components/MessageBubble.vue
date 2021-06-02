@@ -79,9 +79,10 @@ export default {
     margin-right: 20px;
     border-top-right-radius: 0px;
 }
-.message-bubble.mine p a::v-deep{
-    colour:#fff!important;    
-}
+
+#message-bubble.mine a::v-deep{
+    color: white!important;
+ }
 
 p {
     margin: 0;
