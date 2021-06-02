@@ -1,7 +1,7 @@
 <template>
 <div class="container" :class="mine ? 'mine' : 'they'" :style="cssProps">
   <div id="message-bubble" class="message-bubble" :class="mine ? 'mine' : 'they'">
-      <p v-html="msg" v-linkified:options="{target:'_blank'}" :class="mine ? 'linkified-text' : 'non-linkified-text'">dsdsds{{msg}}</p>
+      <p v-html="msg" v-linkified:options="{target:'_blank'}" :class="mine ? 'linkified-text' : ''">dsdsds{{msg}}</p>
   </div>
   <div class="options" v-if="optionClicked == false">
       <p v-for="option in options" :key="option" class="option" v-on:click="sendOption( $event, option)">{{option}}</p>
@@ -80,15 +80,9 @@ export default {
     border-top-right-radius: 0px;
 }
 
-a.linkified-text {
+.message-bubble.mine p a.linkified-text {
     color: white!important;
- }
- 
- .non-linkified-text{
-    background: #e8e8e8;
-    margin-left: 20px;
-    border-top-left-radius: 0px;
- }
+}
 
 p {
     margin: 0;
