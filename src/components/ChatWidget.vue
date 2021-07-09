@@ -103,7 +103,7 @@ export default {
     this.chargeAgent();
     this.userLang = navigator.language || navigator.userLanguage;      
     console.log('Browser Language: '+this.userLang )
-    
+     console.log('Hello world' );
     if ("es-ES" != this.userLang) {      
          this.placeHolder = "Write your question";
          this.startChatText="Chat";
