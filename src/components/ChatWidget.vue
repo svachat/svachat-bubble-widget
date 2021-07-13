@@ -74,7 +74,7 @@ export default {
       currentClient: Number,
       userLang: String,
       startChatText: 'Chat',
-      apiUrl: 'https://qa.api.svachat.qualitapps.com/',
+      apiUrl:'https://svaapi-beta.azurewebsites.net/', //'https://qa.api.svachat.qualitapps.com/',
       welcomeMessageCount : 0,
       userMessageCount : sessionStorage.getItem('user_msg_count')==null?0:parseInt(sessionStorage.getItem('user_msg_count')),
       errorMsg : ''
